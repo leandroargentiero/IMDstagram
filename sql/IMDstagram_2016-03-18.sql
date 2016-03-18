@@ -6,8 +6,8 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.42)
-# Database: IMDstagram
-# Generation Time: 2016-03-17 17:12:53 +0000
+# Database: imdstagram
+# Generation Time: 2016-03-18 08:00:50 +0000
 # ************************************************************
 
 
@@ -50,7 +50,11 @@ CREATE TABLE `follows` (
   `requestUserID` int(11) NOT NULL,
   `targetUserID` int(11) NOT NULL,
   `accepted` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`followID`)
+  PRIMARY KEY (`followID`),
+  KEY `requestUserID` (`requestUserID`),
+  KEY `targetUserID` (`targetUserID`),
+  CONSTRAINT `targetUserID` FOREIGN KEY (`targetUserID`) REFERENCES `users` (`userID`),
+  CONSTRAINT `requestUserID` FOREIGN KEY (`requestUserID`) REFERENCES `users` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
