@@ -8,6 +8,6 @@
     <title>Imdstagram</title>
 </head>
 <body>
-
+	
 </body>
 </html>
