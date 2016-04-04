@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,7 +22,7 @@
             </div>
         </div>
         <div class="signup-form">
-            <form action="">
+            <form action="" method="post">
                 <input type="email" name="email" id="email" placeholder="Email">
                 <input type="text" name="fullname" id="fullname" placeholder="Full Name">
                 <input type="text" name="username" id="username" placeholder="Username">
