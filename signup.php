@@ -1,5 +1,13 @@
 <?php
+    include_once ("classes/users.class.php");
 
+    if(!empty( $_POST ) ){
+        $users = new Users();
+        $users->Email = $_POST['email'];
+        $users->Fullname = $_POST['fullname'];
+        $users->Username = $_POST['username'];
+        $users->Password = $_POST['password'];
+    }
 ?><!DOCTYPE html>
 <html lang="en">
 

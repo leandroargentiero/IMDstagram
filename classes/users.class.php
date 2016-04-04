@@ -17,7 +17,7 @@ class Users{
             case "Email":
                 $this->m_sEmail = $p_vValue;
                 break;
-            case "fullname":
+            case "Fullname":
                 $this->m_sFullname = $p_vValue;
                 break;
             case "Username":
@@ -45,6 +45,17 @@ class Users{
                 return $this->m_sPassword;
                 break;
         }
+    }
+
+    public function Save(){
+        $conn = new PDO('mysql:host=localhost; dbname=IMDstagram', 'root', 'root');
+        $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
+                                    :username, :password)");
+        $statement->bindValue(":email", $this->Email);
+        $statement->bindValue(":fullname", $this->Fullname);
+        $statement->bindValue(":username", $this->Username);
+        $statement->bindValue(":password", $this->Password);
+        $result = $statement->execute();
     }
 
 }
