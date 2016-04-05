@@ -2,20 +2,44 @@
     include_once ("classes/users.class.php");
 
     if(!empty( $_POST ) ){
-        // password options
-        $options = $options = [
-            'cost'=> 12
-        ];
-        // bcrypting password
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+        $email = $_POST['email'];
+        $fullname = $_POST['fullname'];
+        $username = $_POST['username'];
 
-        // creating new object for 'users' on register
-        $users = new Users();
-        $users->Email = $_POST['email'];
-        $users->Fullname = $_POST['fullname'];
-        $users->Username = $_POST['username'];
-        $users->Password = $password;
-        $users->Save();
+        if ( empty( $email ) )
+        {
+            $error = "Sorry, something went wrong creating your account. Please try again soon.";
+        }
+        else if ( strlen(trim($fullname) ) === 0 )
+        {
+            $error = "Sorry, something went wrong creating your account. Please try again soon.";
+        }
+        else if ( strlen(trim($username) ) === 0 )
+        {
+            $error = "Sorry, something went wrong creating your account. Please try again soon.";
+        }
+        else if ( strlen(trim($_POST['password']) ) === 0 )
+        {
+            $error = "Sorry, something went wrong creating your account. Please try again soon.";
+        }
+        else
+        {
+            // password options
+            $options = $options = [
+                'cost'=> 12
+            ];
+            // bcrypting password
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+
+            // creating new object for 'users' on register
+            $users = new Users();
+            $users->Email = $email;
+            $users->Fullname = $fullname;
+            $users->Username = $username;
+            $users->Password = $password;
+            $users->Save();
+        }
+
     }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -46,6 +70,12 @@
                 <input type="password" name="password" id="password" placeholder="Password">
 				
                	<input type="submit" name="btnSignUp" id="btnSignup" value="Sign up" >
+
+                <?php
+                if( isset($error) ) {
+                    echo "<p class='error'>$error</p>";
+                }
+                ?>
             </form>
         </div>
         <footer>
