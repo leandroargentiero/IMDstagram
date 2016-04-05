@@ -47,14 +47,20 @@ class Users{
         }
     }
 
-    public function Save(){
+    public function Register(){
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
                                                         :username, :password)");
         $statement->bindValue(":email", $this->Email);
         $statement->bindValue(":fullname", $this->Fullname);
         $statement->bindValue(":username", $this->Username);
-        $statement->bindValue(":password", $this->Password);
+        // password options
+        $options = [
+            'cost'=> 12
+        ];
+        // bcrypting password
+        $password = password_hash($this->Password, PASSWORD_DEFAULT, $options);
+        $statement->bindValue(":password", $password);
         $statement->execute();
     }
 

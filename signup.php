@@ -5,6 +5,7 @@
         $email = $_POST['email'];
         $fullname = $_POST['fullname'];
         $username = $_POST['username'];
+        $password = $_POST['password'];
 
         if ( empty( $email ) )
         {
@@ -18,18 +19,13 @@
         {
             $error = "Sorry, something went wrong creating your account. Please try again soon.";
         }
-        else if ( strlen(trim($_POST['password']) ) === 0 )
+        else if ( strlen(trim($password) ) === 0 )
         {
             $error = "Sorry, something went wrong creating your account. Please try again soon.";
         }
         else
         {
-            // password options
-            $options = $options = [
-                'cost'=> 12
-            ];
-            // bcrypting password
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+
 
             // creating new object for 'users' on register
             $users = new Users();
@@ -37,7 +33,7 @@
             $users->Fullname = $fullname;
             $users->Username = $username;
             $users->Password = $password;
-            $users->Save();
+            $users->Register();
         }
 
     }
@@ -63,7 +59,7 @@
             </div>
         </div>
         <div class="signup-form">
-            <form action="" method="post">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <input type="email" name="email" id="email" placeholder="Email">
                 <input type="text" name="fullname" id="fullname" placeholder="Full Name">
                 <input type="text" name="username" id="username" placeholder="Username">
