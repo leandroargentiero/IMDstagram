@@ -48,14 +48,14 @@ class Users{
     }
 
     public function Save(){
-        $conn = new PDO('mysql:host=localhost; dbname=IMDstagram', 'root', 'root');
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
-                                    :username, :password)");
+                                                        :username, :password)");
         $statement->bindValue(":email", $this->Email);
         $statement->bindValue(":fullname", $this->Fullname);
         $statement->bindValue(":username", $this->Username);
         $statement->bindValue(":password", $this->Password);
-        $result = $statement->execute();
+        $statement->execute();
     }
 
 }

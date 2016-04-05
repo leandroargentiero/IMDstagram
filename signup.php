@@ -2,11 +2,20 @@
     include_once ("classes/users.class.php");
 
     if(!empty( $_POST ) ){
+        // password options
+        $options = $options = [
+            'cost'=> 12
+        ];
+        // bcrypting password
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+
+        // creating new object for 'users' on register
         $users = new Users();
         $users->Email = $_POST['email'];
         $users->Fullname = $_POST['fullname'];
         $users->Username = $_POST['username'];
-        $users->Password = $_POST['password'];
+        $users->Password = $password;
+        $users->Save();
     }
 ?><!DOCTYPE html>
 <html lang="en">
