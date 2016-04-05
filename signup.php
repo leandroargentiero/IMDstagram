@@ -11,7 +11,8 @@
         {
             $error = "Sorry, something went wrong creating your account. Please try again soon.";
         }
-        else
+
+        if( empty($error))
         {
             // creating new object for 'users' on register
             $users = new Users();
@@ -20,7 +21,10 @@
             $users->Username = $username;
             $users->Password = $password;
             $users->Register();
+
+            header('Location: login.php');
         }
+
 
     }
 ?><!DOCTYPE html>
