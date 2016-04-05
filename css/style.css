@@ -117,10 +117,18 @@ input[type="submit"]{
 	height: 40px;
 	font-size: .9em;
 	border-radius: 5px;
-	margin-bottom: 1em;
+	margin: 1em 0 1em 0;
  }
 input[type="submit"]:hover{
     background-color: #2065a2;
+}
+.error{
+	font-family: instaLight;
+	color: red;
+	text-align: center;
+	font-size: .9em;
+	margin-bottom: 1em;
+	line-height: 1.5em;
 }
 footer p{
 	font-family: instaLight;
