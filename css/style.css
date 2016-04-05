@@ -33,11 +33,11 @@ body {
 }
 .container {
     width: 80%;
-    margin: 1.5em auto 1.5em auto;
+    margin: 1.5em auto 3em auto;
 }
 .logo {
     display: block;
-    width: 60%;
+    width: 80%;
     margin: 0 auto 0 auto;
 }
 .introduction {
@@ -78,38 +78,42 @@ body {
 	margin: 0 auto 0 auto;
 	padding: 10px;
 }
-.signup-form{
+.form{
 	margin-top: 1em;
 }
-.signup-form input{
+.form input{
 	display: block;
-	width: 100%;
+	width: 99%;
 	height: 30px;
 	margin-bottom: 8px;
 	border: 1px solid #dddbd9;
-	padding-left: 1em;
 }
 ::-webkit-input-placeholder {
 	font-family: instaRegular;
 	font-size: 1.1em;
+	padding-left: 1em;
 }
 
 :-moz-placeholder { /* Firefox 18- */
 	font-family: instaRegular;
 	font-size: 1.1em;
+	padding-left: 1em;
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
 	font-family: instaRegular;
 	font-size: 1.1em;
+	padding-left: 1em;
 }
 
 :-ms-input-placeholder {  
 	font-family: instaRegular;
 	font-size: 1.1em;
+	padding-left: 1em;
 }
 
 input[type="submit"]{
+	width: 100%;
 	font-family: instaRegular;
 	font-weight: 900;
 	color: white;
@@ -136,6 +140,10 @@ footer p{
 	text-align: center;
 	font-size: .9em;
 	line-height: 1.5em;
+}
+footer a{
+	text-decoration: none;
+	color: #4E606A;
 }
 footer span{
 	color: #818380;

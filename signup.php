@@ -48,7 +48,7 @@
                 <p class="separator-or">OR</p>
             </div>
         </div>
-        <div class="signup-form">
+        <div class="form">
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <input type="email" name="email" id="email" placeholder="Email">
                 <input type="text" name="fullname" id="fullname" placeholder="Full Name">
