@@ -7,26 +7,12 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if ( empty( $email ) )
-        {
-            $error = "Sorry, something went wrong creating your account. Please try again soon.";
-        }
-        else if ( strlen(trim($fullname) ) === 0 )
-        {
-            $error = "Sorry, something went wrong creating your account. Please try again soon.";
-        }
-        else if ( strlen(trim($username) ) === 0 )
-        {
-            $error = "Sorry, something went wrong creating your account. Please try again soon.";
-        }
-        else if ( strlen(trim($password) ) === 0 )
+        if ( empty( $email ) || empty( $fullname ) || empty( $username ) || empty( $password ) )
         {
             $error = "Sorry, something went wrong creating your account. Please try again soon.";
         }
         else
         {
-
-
             // creating new object for 'users' on register
             $users = new Users();
             $users->Email = $email;
