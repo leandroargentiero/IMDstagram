@@ -63,6 +63,6 @@ class Users{
         $statement->bindValue(":password", $password);
         $statement->execute();
     }
-    
+
 
 }
