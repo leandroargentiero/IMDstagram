@@ -46,10 +46,9 @@
                	<input type="submit" name="btnLogin" id="btnLogin" value="Log in" >
 
                 <?php
-                if( isset($error) ) {
-                    echo "<p class='error'>$error</p>";
-                }
-
+                    if( isset($error) ) {
+                        echo "<p class='error'>$error</p>";
+                    }
                 ?>
             </form>
         </div>
