@@ -7,12 +7,18 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        if ( empty( $email ) || empty( $fullname ) || empty( $username ) || empty( $password ) )
+        if ( !filter_var($email, FILTER_VALIDATE_EMAIL) || strlen(trim($fullname)) === 0 || strlen(trim($username)) === 0
+            || strlen(trim($password)) === 0 )
         {
-            $error = "Sorry, something went wrong creating your account. Please try again soon.";
+            $errorMessage = "Sorry, something went wrong creating your account. Please try again soon.";
+            $error = true;
+        }
+        else{
+            $errorMessage = "";
+            $error = false;
         }
 
-        if( empty($error))
+        if( $error == false)
         {
             // creating new object for 'users' on register
             $users = new Users();
@@ -59,7 +65,7 @@
 
                 <?php
                 if( isset($error) ) {
-                    echo "<p class='error'>$error</p>";
+                    echo "<p class='error'>$errorMessage</p>";
                 }
                 ?>
             </form>
