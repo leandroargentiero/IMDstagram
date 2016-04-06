@@ -1,4 +1,5 @@
 <?php
+    include_once('includes/no-session.inc.php');
 
 
 ?><!doctype html>
@@ -8,6 +9,6 @@
     <title>Imdstagram</title>
 </head>
 <body>
-	
+    <a href="includes/logout.inc.php">logout</a>
 </body>
 </html>
