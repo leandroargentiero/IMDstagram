@@ -64,5 +64,27 @@ class Users{
         $statement->execute();
     }
 
+    public function canLogin(){
+
+        $p_password = $this->Password;
+
+        $conn = new mysqli("localhost", "root", "root", "imdstagram");
+        $sql = "select username, password from users where username = '".$this->Username."'";
+        $result = $conn->query($sql);
+
+        if($result->num_rows == 1){
+            $user = $result->fetch_assoc();
+            $hash = $user['password'];
+
+            if ( password_verify($p_password, $hash)) {
+                return true;
+;           }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
 
 }
