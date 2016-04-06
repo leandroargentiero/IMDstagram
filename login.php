@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once ("classes/users.class.php");
 
     if(!empty($_POST)){
@@ -11,6 +12,7 @@
         $users->canLogin();
 
         if($users->canLogin()){
+            $_SESSION['user'] = $username;
             header('Location: index.php');
         }
         else
