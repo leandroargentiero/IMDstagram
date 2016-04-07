@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.42)
 # Database: imdstagram
-# Generation Time: 2016-03-18 08:00:50 +0000
+# Generation Time: 2016-03-18 08:08:03 +0000
 # ************************************************************
 
 
@@ -75,6 +75,27 @@ CREATE TABLE `images` (
   PRIMARY KEY (`imageID`),
   KEY `userID_idx` (`imageUserID`),
   CONSTRAINT `userID` FOREIGN KEY (`imageUserID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table likes
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `likes`;
+
+CREATE TABLE `likes` (
+  `likeID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `likeImageID` int(11) DEFAULT NULL,
+  `likeSenderID` int(11) NOT NULL,
+  `likeReceiverID` int(11) NOT NULL,
+  PRIMARY KEY (`likeID`),
+  KEY `likeImageID` (`likeImageID`),
+  KEY `likeSenderID` (`likeSenderID`),
+  KEY `likeReceiverID` (`likeReceiverID`),
+  CONSTRAINT `likeReceiverID` FOREIGN KEY (`likeReceiverID`) REFERENCES `users` (`userID`),
+  CONSTRAINT `likeImageID` FOREIGN KEY (`likeImageID`) REFERENCES `images` (`imageID`),
+  CONSTRAINT `likeSenderID` FOREIGN KEY (`likeSenderID`) REFERENCES `users` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
