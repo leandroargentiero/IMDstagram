@@ -1,0 +1,240 @@
+@font-face {
+    font-family: 'instaThin';
+    src: url('../fonts/Montserrat-Hairline.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'instaLight';
+    src: url('../fonts/Montserrat-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'instaRegular';
+    src: url('../fonts/Montserrat-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'instaBold';
+    src: url('../fonts/Montserrat-Bold.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'instaBlack';
+    src: url('../fonts/Montserrat-Black.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: Montserrat, sans-serif;
+	background-color: #fbf9f7;
+	color: #4E606A;
+}
+
+.headerProfile {
+	height: 35px;
+	background-color: white;
+	color: #2065a2;
+	font-size: 0.7em;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px 10px 10px;
+	border-bottom: 1px solid #dddbd9;
+}
+
+.headerProfile img {
+	width: 100px;
+	height: auto;
+}
+
+.searchBar input {
+	border: 1px solid #dddbd9;
+	border-radius: 5px;
+}
+
+.profileInfo {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 15px;
+}
+
+.profileInfo img {
+	max-width: 80px;
+	height: auto;
+	border-radius: 50%;
+	float: left;
+}
+
+.profileDetails {
+	float:left;
+	padding-top: 15px;
+	margin-left: 35px;
+}
+
+.userName {
+	font-family: 'instaLight';
+	margin-right: 10px;
+}
+
+.editProfile {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+
+}
+
+.btnEditProfile {
+	background-color: #fbf9f7;
+	border:1px solid #4E606A;
+	font-family: 'instaLight';
+	color: #ACA9A4;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+
+}
+
+.btnEditProfile:hover {
+	color: #4E606A;
+}
+
+.userDescription {
+	font-size: 0.7em;
+	margin-bottom: 10px;
+}
+
+.userStats {
+	display: flex;
+	flex-direction: row;
+	font-size: 0.7em;
+}
+.userStats li {
+	margin-right: 10px;
+}
+
+.userStats span {
+	font-weight: bold;
+}
+
+.container {
+    width: 80%;
+    margin: 1.5em auto 3em auto;
+}
+.logo {
+    display: block;
+    width: 80%;
+    margin: 0 auto 0 auto;
+}
+.introduction {
+	color: #ACA9A4;
+	font-family: instaRegular;
+	font-weight: 600;
+	font-size: 1.1em;
+	text-align: center;
+	line-height: 1.1em;
+	margin: 0 0 2em 0;
+}
+.btnLoginFacebook{
+	display: block;
+	text-align: center;
+	color: white;
+	background-color: #3E90D9;
+	padding: .8em 0 .8em 0;
+	text-decoration: none;
+	font-size: .9em;
+	border-radius: 5px;
+	margin-bottom: 2em;
+}
+.btnLoginFacebook:hover{
+	background-color: #2065a2;
+}
+.separator-line{
+	display: block;
+	background-color: #ACA9A4;
+	height: 1px;
+	margin-bottom: -.6em;
+}
+.separator-or{
+	display: block;
+	color: #ACA9A4;
+	background-color: white;
+	text-align: center;
+	width: 50px;
+	margin: 0 auto 0 auto;
+	padding: 10px;
+}
+.form{
+	margin-top: 1em;
+}
+.form input{
+	display: block;
+	width: 99%;
+	height: 30px;
+	margin-bottom: 8px;
+	border: 1px solid #dddbd9;
+}
+::-webkit-input-placeholder {
+	font-family: instaRegular;
+	font-size: 1.1em;
+	padding-left: 1em;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+	font-family: instaRegular;
+	font-size: 1.1em;
+	padding-left: 1em;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+	font-family: instaRegular;
+	font-size: 1.1em;
+	padding-left: 1em;
+}
+
+:-ms-input-placeholder {  
+	font-family: instaRegular;
+	font-size: 1.1em;
+	padding-left: 1em;
+}
+
+input[type="submit"]{
+	width: 100%;
+	font-family: instaRegular;
+	font-weight: 900;
+	color: white;
+	background-color: #3E90D9;
+	height: 40px;
+	font-size: .9em;
+	border-radius: 5px;
+	margin: 1em 0 1em 0;
+ }
+input[type="submit"]:hover{
+    background-color: #2065a2;
+}
+.error{
+	font-family: instaLight;
+	color: red;
+	text-align: center;
+	font-size: .9em;
+	margin-bottom: 1em;
+	line-height: 1.5em;
+}
+footer p{
+	font-family: instaLight;
+	color: #ACA9A4;
+	text-align: center;
+	font-size: .9em;
+	line-height: 1.5em;
+}
+footer a{
+	text-decoration: none;
+	color: #4E606A;
+}
+footer span{
+	color: #818380;
+}
