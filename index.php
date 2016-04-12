@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <?php include_once("includes/search.inc.php"); ?>
+    <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="profileFeed">
 
