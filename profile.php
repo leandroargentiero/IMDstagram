@@ -11,7 +11,7 @@
     <?php include_once("includes/search.inc.php"); ?>
 
     <div class="profileInfo">
-        <img src="images/profile.jpg" alt="profile photo">
+        <img class="profilePhoto" src="images/profile.jpg" alt="profile photo">
         <div class="profileDetails">
             <div class="editProfile">
                 <p class="userName">kennymn</p>
@@ -33,7 +33,17 @@
 
     <div class="profileFeed">
 
-        <img src="" alt="">
+        <ul>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+        </ul>
 
 
 

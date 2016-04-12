@@ -1,5 +1,5 @@
 <?php
-    include_once('includes/no-session.inc.php');
+    //include_once('includes/no-session.inc.php');
 
 
 ?><!doctype html>
@@ -13,6 +13,24 @@
 <body>
 
     <?php include_once("includes/search.inc.php"); ?>
-    <a href="includes/logout.inc.php">logout</a>
+
+    <div class="profileFeed">
+
+        <ul>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+            <li><img src="images/m8.jpg" alt="post"></li>
+        </ul>
+
+
+
+    </div>
+    <!--<a href="includes/logout.inc.php">logout</a>-->
 </body>
 </html>
