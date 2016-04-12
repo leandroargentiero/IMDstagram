@@ -1,5 +1,5 @@
 <?php
-    //include_once('includes/no-session.inc.php');
+    include_once('includes/no-session.inc.php');
 
 
 ?><!doctype html>
@@ -12,7 +12,7 @@
 </head>
 <body>
 
-    <?php include_once("includes/search.inc.php"); ?>
+    <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="profileFeed">
 
