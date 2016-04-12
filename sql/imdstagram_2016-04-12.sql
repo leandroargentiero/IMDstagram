@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4529
+# Version 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.42)
 # Database: imdstagram
-# Generation Time: 2016-03-18 08:08:03 +0000
+# Generation Time: 2016-04-12 14:37:26 +0000
 # ************************************************************
 
 
@@ -35,7 +35,7 @@ CREATE TABLE `comments` (
   KEY `imageID_idx` (`commentImageID`),
   KEY `userID_idx` (`commentUserID`),
   CONSTRAINT `commentUserID` FOREIGN KEY (`commentUserID`) REFERENCES `users` (`userID`),
-  CONSTRAINT `imageID` FOREIGN KEY (`commentImageID`) REFERENCES `images` (`imageID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `imageID` FOREIGN KEY (`commentImageID`) REFERENCES `posts` (`imageID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -53,28 +53,8 @@ CREATE TABLE `follows` (
   PRIMARY KEY (`followID`),
   KEY `requestUserID` (`requestUserID`),
   KEY `targetUserID` (`targetUserID`),
-  CONSTRAINT `targetUserID` FOREIGN KEY (`targetUserID`) REFERENCES `users` (`userID`),
-  CONSTRAINT `requestUserID` FOREIGN KEY (`requestUserID`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table images
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `images`;
-
-CREATE TABLE `images` (
-  `imageID` int(11) NOT NULL AUTO_INCREMENT,
-  `file` varchar(45) NOT NULL,
-  `desc` varchar(300) NOT NULL,
-  `filter` varchar(45) DEFAULT NULL,
-  `imageUserID` int(11) NOT NULL,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `location` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`imageID`),
-  KEY `userID_idx` (`imageUserID`),
-  CONSTRAINT `userID` FOREIGN KEY (`imageUserID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `requestUserID` FOREIGN KEY (`requestUserID`) REFERENCES `users` (`userID`),
+  CONSTRAINT `targetUserID` FOREIGN KEY (`targetUserID`) REFERENCES `users` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -93,9 +73,29 @@ CREATE TABLE `likes` (
   KEY `likeImageID` (`likeImageID`),
   KEY `likeSenderID` (`likeSenderID`),
   KEY `likeReceiverID` (`likeReceiverID`),
+  CONSTRAINT `likeImageID` FOREIGN KEY (`likeImageID`) REFERENCES `posts` (`imageID`),
   CONSTRAINT `likeReceiverID` FOREIGN KEY (`likeReceiverID`) REFERENCES `users` (`userID`),
-  CONSTRAINT `likeImageID` FOREIGN KEY (`likeImageID`) REFERENCES `images` (`imageID`),
   CONSTRAINT `likeSenderID` FOREIGN KEY (`likeSenderID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table posts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `posts`;
+
+CREATE TABLE `posts` (
+  `imageID` int(11) NOT NULL AUTO_INCREMENT,
+  `post_file` blob NOT NULL,
+  `desc` varchar(300) NOT NULL,
+  `filter` varchar(45) DEFAULT NULL,
+  `imageUserID` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `location` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`imageID`),
+  KEY `userID_idx` (`imageUserID`),
+  CONSTRAINT `userID` FOREIGN KEY (`imageUserID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -115,6 +115,15 @@ CREATE TABLE `users` (
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`userID`, `email`, `fullname`, `username`, `password`, `private`)
+VALUES
+	(1,'hello@mail.com','Diederik','Swake','$2y$12$3x8Y8VWX9ZGbIGI0UaAE3Oz3Yt/p465R5CIkHmjvVQClvaVJSSQQm','no');
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 
