@@ -1,5 +1,27 @@
 <?php
-include_once('includes/no-session.inc.php');
+    include_once('includes/no-session.inc.php');
+    include_once ("classes/users.class.php");
+
+    if(!empty($_POST)){
+        $editEmail = $_POST['editEmail'];
+        $editUsername = $_POST['editUsername'];
+        $editBio = $_POST['editBio'];
+        $editPasswordFirst = $_POST[''];
+        // update details
+        if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editUsername)) != 0 )
+        {
+            $updateProfile = new Users();
+            $updateProfile->EditEmail = $editEmail;
+            $updateProfile->EditUsername = $editUsername;
+            $updateProfile->EditBio = $editBio;
+            $updateProfile->updateProfile();
+
+            $messageDetails = "Jouw gegevens zijn succesvol aangepast.";
+        }
+
+
+    }
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +39,7 @@ include_once('includes/no-session.inc.php');
 
         .editContainer h1 {
             color: #06365F;
-            font-family: 'instaRegular';
+            font-family: 'instaRegular', 'sans-serif';
             font-size: 1.3em;
             margin-bottom: 15px;
             margin-top: 30px;
@@ -55,6 +77,16 @@ include_once('includes/no-session.inc.php');
         .formDetails textarea {
             vertical-align: top;
         }
+
+        .messageUpdate{
+            font-family: 'instaLight', sans-serif;
+            background-color: #00D062;
+            font-size: .7em;
+            color: white;
+            padding: 1em;
+            width: 227px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -64,16 +96,22 @@ include_once('includes/no-session.inc.php');
         <div class="editDetails">
             <h1>Profiel bewerken</h1>
 
-            <form class="formDetails" action="">
+            <form class="formDetails" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
                 <label for="email">E-mailadres:</label>
-                <input type="email" name="email"></br>
+                <input type="email" name="editEmail"></br>
 
                 <label for="username">Gebruikersnaam:</label>
-                <input type="text" name="username"></br>
+                <input type="text" name="editUsername"></br>
 
                 <label for="bio">Biografie:</label>
-                <textarea name="bio" maxlength="150" id="bio" cols="30" rows="5"></textarea></br>
+                <textarea name="editBio" maxlength="150" id="bio" cols="30" rows="5"></textarea></br>
+
+                <?php
+                    if( isset($messageDetails) ) {
+                    echo "<p class='messageUpdate'>$messageDetails</p>";
+                    }
+                ?>
 
                 <input class="submitEdit" type="submit" value="Verzenden">
 
@@ -84,7 +122,7 @@ include_once('includes/no-session.inc.php');
         <div class="editPassword">
             <h1>Wachtwoord wijzigen</h1>
 
-            <form class="formPassword" action="">
+            <form class="formPassword" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
                 <label for="newpassword">Nieuw wachtwoord:</label>
                 <input type="password" name="newpassword"></br>
