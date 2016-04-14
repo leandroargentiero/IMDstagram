@@ -256,6 +256,28 @@ input[type="submit"]:hover{
 	margin-bottom: 1em;
 	line-height: 1.5em;
 }
+#floatingBtn {
+    color: white;
+    position: fixed;
+    text-align: center;
+    bottom: 20px;
+    right: 5%;
+    box-sizing: border-box;
+    padding-top: 20px;
+    line-height: 0px;
+    font-size: 1.6em;
+    background-color: #2065a2;
+    width: 45px;
+    height: 45px;
+    border: 0px;
+    border-radius: 100%;
+}
+#floatingBtn a:active,a:link,a:visited {
+    text-decoration: none;
+}
+#floatingBtn:hover {
+    bottom: 22px;
+}
 footer p{
 	font-family: instaLight;
 	color: #ACA9A4;
