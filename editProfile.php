@@ -48,15 +48,13 @@ include_once('includes/no-session.inc.php');
         .formDetails select, textarea {
             margin-bottom: 10px;
             border-radius: 5px;
+            width: 250px;
             border: 1px solid #dddbd9;
         }
 
         .formDetails textarea {
             vertical-align: top;
         }
-
-
-
     </style>
 </head>
 <body>
@@ -67,8 +65,6 @@ include_once('includes/no-session.inc.php');
             <h1>Profiel bewerken</h1>
 
             <form class="formDetails" action="">
-                <label for="name">Naam:</label>
-                <input type="text" name="name"></br>
 
                 <label for="email">E-mailadres:</label>
                 <input type="email" name="email"></br>
@@ -76,13 +72,8 @@ include_once('includes/no-session.inc.php');
                 <label for="username">Gebruikersnaam:</label>
                 <input type="text" name="username"></br>
 
-                <select name="gender" id="">
-                    <option value="male">Man</option>
-                    <option value="female">Vrouw</option>
-                </select></br>
-
                 <label for="bio">Biografie:</label>
-                <textarea name="bio" id="" cols="30" rows="10"></textarea></br>
+                <textarea name="bio" maxlength="150" id="bio" cols="30" rows="5"></textarea></br>
 
                 <input class="submitEdit" type="submit" value="Verzenden">
 
@@ -94,8 +85,6 @@ include_once('includes/no-session.inc.php');
             <h1>Wachtwoord wijzigen</h1>
 
             <form class="formPassword" action="">
-                <label for="oldpassword">Oud wachtwoord:</label>
-                <input type="password" name="oldpassword"></br>
 
                 <label for="newpassword">Nieuw wachtwoord:</label>
                 <input type="password" name="newpassword"></br>
