@@ -54,7 +54,12 @@ echo "Stored in: " . $_FILES["file"]["tmp_name"];
             <div class="form">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
                     <input type="file" name="file" id="fileUpload" />
+                    
+                    <label for="description">Description:</label>
+                     <br>
+                      <textarea rows="5" cols="40" id="comment"></textarea>
                     <br />
+                    
                     <input type="submit" name="submit" value="Upload Now!" />
 
                     <?php
