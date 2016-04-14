@@ -10,6 +10,9 @@ class Users{
     private $m_sFullname;
     private $m_sUsername;
     private $m_sPassword;
+    private $m_sEditEmail;
+    private $m_sEditUsername;
+    private $m_sEditBio;
 
     public function __set($p_sProperty, $p_vValue)
     {
@@ -25,6 +28,15 @@ class Users{
                 break;
             case "Password":
                 $this->m_sPassword = $p_vValue;
+                break;
+            case "EditEmail":
+                $this->m_sEditEmail = $p_vValue;
+                break;
+            case "EditUsername":
+                $this->m_sEditUsername = $p_vValue;
+                break;
+            case "EditBio":
+                $this->m_sEditBio = $p_vValue;
                 break;
         }
     }
@@ -43,6 +55,15 @@ class Users{
                 break;
             case "Password":
                 return $this->m_sPassword;
+                break;
+            case "EditEmail":
+                return $this->m_sEditEmail;
+                break;
+            case "EditUsername":
+                return $this->m_sEditUsername;
+                break;
+            case "EditBio":
+                return $this->m_sEditBio;
                 break;
         }
     }
@@ -72,7 +93,8 @@ class Users{
         $sql = "select username, password from users where username = '".$this->Username."'";
         $result = $conn->query($sql);
 
-        if($result->num_rows == 1){
+        if($result->num_rows == 1)
+        {
             $user = $result->fetch_assoc();
             $hash = $user['password'];
 
@@ -84,7 +106,17 @@ class Users{
                 return false;
             }
         }
+    }
 
+    public function updateProfile(){
+        $currentUser = $_SESSION['user'];
+
+        $conn = new mysqli("localhost", "root", "root", "imdstagram");
+        $sqlUpdate = "update users set username = '".$this->EditUsername."', email = '".$this->EditEmail."',
+                           bio = '".$this->EditBio."' where username = '".$currentUser."'";
+        $sqlUpdate = $conn->query($sqlUpdate);
+
+        $_SESSION['user'] = $this->EditUsername;
     }
 
 }
