@@ -248,6 +248,9 @@ input[type="submit"]{
 input[type="submit"]:hover{
     background-color: #2065a2;
 }
+input[type="file"]{
+    border: 0px;
+}
 .error{
 	font-family: instaLight;
 	color: red;
