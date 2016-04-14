@@ -74,10 +74,6 @@
                 <label for="username">Gebruikersnaam:</label>
                 <input type="text" name="username"></br>
 
-                <label for="phonenumber">Telefoonnummer:</label>
-                <input type="number" name="phonenumber"></br>
-
-                <label for="gender">Geslacht:</label>
                 <select name="gender" id="">
                     <option value="male">Man</option>
                     <option value="female">Vrouw</option>
@@ -85,9 +81,6 @@
 
                 <label for="bio">Biografie:</label>
                 <textarea name="bio" id="" cols="30" rows="10"></textarea></br>
-
-                <label for="website">Website:</label>
-                <input type="url" name="website"></br>
 
                 <input class="submitEdit" type="submit" value="Verzenden">
 
