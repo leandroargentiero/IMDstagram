@@ -6,25 +6,39 @@
         $editEmail = $_POST['editEmail'];
         $editUsername = $_POST['editUsername'];
         $editBio = $_POST['editBio'];
-
         $newPassword = $_POST['newPassword'];
         $confirmNewPassword = $_POST['confirmNewPassword'];
 
-
-        // edit details
-        if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editUsername)) != 0)
+        if(strlen(trim($editEmail)) != 0)
         {
-            $updateProfile = new Users();
-            $updateProfile->EditEmail = $editEmail;
-            $updateProfile->EditUsername = $editUsername;
-            $updateProfile->EditBio = $editBio;
-            $updateProfile->updateProfile();
+            $updateEmail = new Users();
+            $updateEmail->EditEmail = $editEmail;
+            $updateEmail->updateEmail();
 
-            $messageDetails = "Jouw gegevens werden succesvol aangepast.";
+            $messageDetails = "Je gegevens werden succesvol gewijzigd.";
         }
-        else if(strlen(trim($newPassword)) != 0 or strlen(trim($confirmNewPassword)) != 0)
+        elseif(strlen(trim($editUsername)) != 0)
+        {
+            $updateUsername = new Users();
+            $updateUsername->EditUsername = $editUsername;
+            $updateUsername->updateUsername();
+
+            $messageDetails = "Je gegevens werden succesvol gewijzigd.";
+        }
+        elseif(strlen(trim($editBio)) != 0)
+        {
+            $updateBio = new Users();
+            $updateBio->EditBio = $editBio;
+            $updateBio->updateBio();
+
+            $messageDetails = "Je gegevens werden succesvol gewijzigd.";
+        }
+        else if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
         {
             if(strcmp($newPassword, $confirmNewPassword) == 0){
+                $updatePassword = new Users();
+                $updatePassword->EditPassword = $confirmNewPassword;
+                $updatePassword->updatePassword();
 
                 $passwordSucces = "Jouw wachtwoord werd succesvol gewijzigd.";
             }
@@ -35,8 +49,9 @@
         }
         else
         {
-            $messageEmptySubmit = "Sorry, we hebben geen gegevens kunnen wijzigen. Gelieve minsten één veld in te vullen.";
+            $messageEmptySubmit = "Gelieve een veld in te vullen om te kunnen wijzigen.";
         }
+
     }
 
 ?><!doctype html>
@@ -46,7 +61,38 @@
     <title>Imdstagram</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#username").keyup(function()
+            {
+                var username = $(this).val();
 
+                if(username.length > 2)
+                {
+                    $("#availability").html('checking...');
+
+                    $.ajax({
+                        type : 'POST',
+                        url  : 'includes/username-check.inc.php',
+                        data : $(this).serialize(),
+                        success : function(data)
+                        {
+                            $("#availability").html(data);
+                        }
+                    });
+                    return false;
+
+                }
+                else
+                {
+                    $("#availability").html('');
+                }
+            });
+
+        });
+    </script>
     <style>
         .editContainer {
             width: 70%;
@@ -99,11 +145,16 @@
             font-size: .7em;
             color: white;
             padding: 1em;
-            width: 227px;
+            width: 43%;
             border-radius: 5px;
         }
         .error{
             background-color: #FE3554;
+        }
+        #availability{
+            display: block;
+            font-size: .7em;
+            margin: -10px 0 10px 0;
         }
     </style>
 </head>
@@ -120,7 +171,8 @@
                 <input type="email" name="editEmail"></br>
 
                 <label for="username">Gebruikersnaam:</label>
-                <input type="text" name="editUsername"></br>
+                <input id="username" type="text" name="editUsername"></br>
+                <span id="availability"></span>
 
                 <label for="bio">Biografie:</label>
                 <textarea name="editBio" maxlength="150" id="bio" cols="30" rows="5"></textarea></br>
