@@ -6,9 +6,13 @@
         $editEmail = $_POST['editEmail'];
         $editUsername = $_POST['editUsername'];
         $editBio = $_POST['editBio'];
-        $editPasswordFirst = $_POST[''];
-        // update details
-        if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editUsername)) != 0 )
+
+        $newPassword = $_POST['newPassword'];
+        $confirmNewPassword = $_POST['confirmNewPassword'];
+
+
+        // edit details
+        if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editUsername)) != 0)
         {
             $updateProfile = new Users();
             $updateProfile->EditEmail = $editEmail;
@@ -16,10 +20,23 @@
             $updateProfile->EditBio = $editBio;
             $updateProfile->updateProfile();
 
-            $messageDetails = "Jouw gegevens zijn succesvol aangepast.";
+            $messageDetails = "Jouw gegevens werden succesvol aangepast.";
         }
+        else if(strlen(trim($newPassword)) != 0 or strlen(trim($confirmNewPassword)) != 0)
+        {
+            if(strcmp($newPassword, $confirmNewPassword) == 0){
 
-
+                $passwordSucces = "Jouw wachtwoord werd succesvol gewijzigd.";
+            }
+            else
+            {
+                $passwordError = "Woops, wachtwoorden komen niet overeen. Probeer opnieuw!";
+            }
+        }
+        else
+        {
+            $messageEmptySubmit = "Sorry, we hebben geen gegevens kunnen wijzigen. Gelieve minsten één veld in te vullen.";
+        }
     }
 
 ?><!doctype html>
@@ -43,13 +60,12 @@
             font-size: 1.3em;
             margin-bottom: 15px;
             margin-top: 30px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dddbd9;
 
         }
 
         .editContainer form {
-            border-top: 1px solid #dddbd9;
-            border-bottom: 1px solid #dddbd9;
-            padding-top: 10px;
             margin-bottom: 50px;
         }
 
@@ -77,7 +93,6 @@
         .formDetails textarea {
             vertical-align: top;
         }
-
         .messageUpdate{
             font-family: 'instaLight', sans-serif;
             background-color: #00D062;
@@ -86,6 +101,9 @@
             padding: 1em;
             width: 227px;
             border-radius: 5px;
+        }
+        .error{
+            background-color: #FE3554;
         }
     </style>
 </head>
@@ -96,7 +114,7 @@
         <div class="editDetails">
             <h1>Profiel bewerken</h1>
 
-            <form class="formDetails" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form class="formDetails formPassword" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
                 <label for="email">E-mailadres:</label>
                 <input type="email" name="editEmail"></br>
@@ -113,34 +131,33 @@
                     }
                 ?>
 
-                <input class="submitEdit" type="submit" value="Verzenden">
-
-            </form>
-
-        </div>
-
-        <div class="editPassword">
-            <h1>Wachtwoord wijzigen</h1>
-
-            <form class="formPassword" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <h1>Wachtwoord wijzigen</h1>
 
                 <label for="newpassword">Nieuw wachtwoord:</label>
-                <input type="password" name="newpassword"></br>
+                <input type="password" name="newPassword"></br>
 
                 <label for="confirmnewpassword">Nieuw wachtwoord bevestigen:</label>
-                <input type="password" name="confirmnewpassword"></br>
+                <input type="password" name="confirmNewPassword"></br>
 
-                <input class="submitEdit" type="submit" value="Wachtwoord wijzigen">
+                <?php
+                if( isset($passwordSucces) )
+                {
+                    echo "<p class='messageUpdate'>$passwordSucces</p>";
+                }
+                else if( isset($passwordError) )
+                {
+                    echo "<p class='messageUpdate error'>$passwordError</p>";
+                }
+                else if( isset($messageEmptySubmit) )
+                {
+                    echo "<p class='messageUpdate error'>$messageEmptySubmit</p>";
+                }
+                ?>
 
-
-
+                <input class="submitEdit" type="submit" value="Gegevens wijzigen">
             </form>
 
         </div>
-
     </div>
-
-
-
 </body>
 </html>
