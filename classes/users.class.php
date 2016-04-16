@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Leandro
@@ -13,6 +14,7 @@ class Users{
     private $m_sEditEmail;
     private $m_sEditUsername;
     private $m_sEditBio;
+    private $m_sEditPassword;
 
     public function __set($p_sProperty, $p_vValue)
     {
@@ -37,6 +39,9 @@ class Users{
                 break;
             case "EditBio":
                 $this->m_sEditBio = $p_vValue;
+                break;
+            case "EditPassword":
+                $this->m_sEditPassword = $p_vValue;
                 break;
         }
     }
@@ -65,10 +70,14 @@ class Users{
             case "EditBio":
                 return $this->m_sEditBio;
                 break;
+            case "EditPassword":
+                return $this->m_sEditPassword;
+                break;
         }
     }
 
-    public function Register(){
+    public function Register()
+    {
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
                                                         :username, :password)");
@@ -85,18 +94,19 @@ class Users{
         $statement->execute();
     }
 
-    public function canLogin(){
-
+    public function canLogin()
+    {
         $p_password = $this->Password;
 
-        $conn = new mysqli("localhost", "root", "root", "imdstagram");
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $sql = "select username, password from users where username = '".$this->Username."'";
-        $result = $conn->query($sql);
+        $statement = $conn->prepare($sql);
+        $statement->execute();
 
-        if($result->num_rows == 1)
+        if($statement->rowCount() == 1)
         {
-            $user = $result->fetch_assoc();
-            $hash = $user['password'];
+            $currentUser = $statement->fetch(PDO::FETCH_ASSOC);
+            $hash = $currentUser['password'];
 
             if ( password_verify($p_password, $hash)) {
                 return true;
@@ -108,15 +118,45 @@ class Users{
         }
     }
 
-    public function updateProfile(){
+    public function updateProfile()
+    {
+        $currentUser = $_SESSION['user'];
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+
+        $sqlUpdate =
+            "UPDATE users
+                SET username = (case when '".$this->EditUsername."' = '' then username else '".$this->EditUsername."' end),
+                    email = (case when '".$this->EditEmail."' = '' then email else '".$this->EditEmail."' end),
+                    bio = (case when '".$this->EditBio."' = '' then bio else '".$this->EditBio."' end)
+                WHERE
+                    username = '".$currentUser."';
+            ";
+
+        $statementUpdate = $conn->prepare(($sqlUpdate));
+        $statementUpdate->execute();
+
+        if(strlen(trim($this->EditUsername)) != 0)
+        {
+            $_SESSION['user'] = $this->EditUsername;
+        }
+
+    }
+
+    public function updatePassword()
+    {
         $currentUser = $_SESSION['user'];
 
-        $conn = new mysqli("localhost", "root", "root", "imdstagram");
-        $sqlUpdate = "update users set username = '".$this->EditUsername."', email = '".$this->EditEmail."',
-                           bio = '".$this->EditBio."' where username = '".$currentUser."'";
-        $sqlUpdate = $conn->query($sqlUpdate);
+        // password options
+        $options = [
+            'cost'=> 12
+        ];
+        // bcrypting new password
+        $password = password_hash($this->EditPassword, PASSWORD_DEFAULT, $options);
 
-        $_SESSION['user'] = $this->EditUsername;
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $sqlUpdatePassword = "update users set password = '".$password."' where username = '".$currentUser."'";
+        $statement = $conn->prepare($sqlUpdatePassword);
+        $statement->execute();
     }
 
 }
