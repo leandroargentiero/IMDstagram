@@ -9,31 +9,26 @@
         $newPassword = $_POST['newPassword'];
         $confirmNewPassword = $_POST['confirmNewPassword'];
 
-        if(strlen(trim($editEmail)) != 0)
+        if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editBio)) != 0)
         {
-            $updateEmail = new Users();
-            $updateEmail->EditEmail = $editEmail;
-            $updateEmail->updateEmail();
+            $updateProfile = new Users();
+            $updateProfile->EditEmail = $editEmail;
+            if(!empty($editUsername))
+            {
+                $updateProfile->EditUsername = $editUsername;
+            }
+            $updateProfile->EditBio = $editBio;
+            $updateProfile->updateProfile();
 
-            $messageDetails = "Je gegevens werden succesvol gewijzigd.";
+            $messageUpdate = "Je gegevens werden succesvol gewijzigd.";
+
         }
-        elseif(strlen(trim($editUsername)) != 0)
+        else
         {
-            $updateUsername = new Users();
-            $updateUsername->EditUsername = $editUsername;
-            $updateUsername->updateUsername();
-
-            $messageDetails = "Je gegevens werden succesvol gewijzigd.";
+            $messageEmptySubmit = "Er werden geen gegevens gewijzigd. Probeer opnieuw!";
         }
-        elseif(strlen(trim($editBio)) != 0)
-        {
-            $updateBio = new Users();
-            $updateBio->EditBio = $editBio;
-            $updateBio->updateBio();
 
-            $messageDetails = "Je gegevens werden succesvol gewijzigd.";
-        }
-        else if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
+        if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
         {
             if(strcmp($newPassword, $confirmNewPassword) == 0){
                 $updatePassword = new Users();
@@ -47,13 +42,9 @@
                 $passwordError = "Woops, wachtwoorden komen niet overeen. Probeer opnieuw!";
             }
         }
-        else
-        {
-            $messageEmptySubmit = "Gelieve een veld in te vullen om te kunnen wijzigen.";
-        }
+
 
     }
-
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -140,16 +131,16 @@
             vertical-align: top;
         }
         .messageUpdate{
-            font-family: 'instaLight', sans-serif;
-            background-color: #00D062;
+            font-family: 'instaBold', 'sans-serif';
             font-size: .7em;
-            color: white;
-            padding: 1em;
-            width: 43%;
-            border-radius: 5px;
+            color: #00D062;
+            margin: 20px 0 0 0;
         }
-        .error{
-            background-color: #FE3554;
+        .messageUpdateError{
+            font-family: 'instaBold', 'sans-serif';
+            font-size: .7em;
+            margin: 20px 0 0 0;
+            color: #FE3554;
         }
         #availability{
             display: block;
@@ -178,8 +169,8 @@
                 <textarea name="editBio" maxlength="150" id="bio" cols="30" rows="5"></textarea></br>
 
                 <?php
-                    if( isset($messageDetails) ) {
-                    echo "<p class='messageUpdate'>$messageDetails</p>";
+                    if( isset($messageUpdate) ) {
+                    echo "<p class='messageUpdate'>$messageUpdate</p>";
                     }
                 ?>
 
@@ -198,11 +189,11 @@
                 }
                 else if( isset($passwordError) )
                 {
-                    echo "<p class='messageUpdate error'>$passwordError</p>";
+                    echo "<p class='messageUpdateError'>$passwordError</p>";
                 }
                 else if( isset($messageEmptySubmit) )
                 {
-                    echo "<p class='messageUpdate error'>$messageEmptySubmit</p>";
+                    echo "<p class='messageUpdateError'>$messageEmptySubmit</p>";
                 }
                 ?>
 
