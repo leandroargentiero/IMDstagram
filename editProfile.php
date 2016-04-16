@@ -147,6 +147,13 @@
             font-size: .7em;
             margin: -10px 0 10px 0;
         }
+        .avatar{
+            max-width: 100px;
+            height: auto;
+            border-radius: 50%;
+            margin: 20px 30px 0 20px;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -154,6 +161,9 @@
 
     <div class="editContainer">
         <div class="editDetails">
+            <h1>Avatar uploaden</h1>
+            <img class="avatar" src="images/profile.jpg" alt="avatar">
+
             <h1>Profiel bewerken</h1>
 
             <form class="formDetails formPassword" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
