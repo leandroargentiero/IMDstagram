@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dc445216-9610-43a3-afca-962c8d99cde5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editProfile.php" afterPath="$PROJECT_DIR$/editProfile.php" />
-    </list>
+    <list default="true" id="dc445216-9610-43a3-afca-962c8d99cde5" name="Default" comment="" />
     <ignored path="php1-project-imdstagram.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
