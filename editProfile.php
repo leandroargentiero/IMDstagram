@@ -151,8 +151,16 @@
             max-width: 100px;
             height: auto;
             border-radius: 50%;
-            margin: 20px 30px 0 20px;
-            display: block;
+            margin: 20px 35px 0 20px;
+            float: left;
+        }
+        .formUpload{
+            display: flex;
+            flex-direction: column;
+            margin-top: 80px;
+        }
+        .formUpload label{
+            margin-bottom:1em;
         }
     </style>
 </head>
@@ -163,6 +171,12 @@
         <div class="editDetails">
             <h1>Avatar uploaden</h1>
             <img class="avatar" src="images/profile.jpg" alt="avatar">
+
+            <form class="formUpload" action="" enctype="multipart/form-data">
+                <label for="file">Avatar uploaden:</label>
+                <input type="file" name="file" id="file">
+                <input type="submit" name="submit" value="Upload" />
+            </form>
 
             <h1>Profiel bewerken</h1>
 
