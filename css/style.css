@@ -33,6 +33,10 @@ body {
 	background-color: #fbf9f7;
 	color: #4E606A;
 }
+body a {
+	text-decoration: none;
+	color: #30618B;
+}
 
 .headerProfile {
 	height: 35px;

@@ -90,7 +90,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .editContainer h1 {
             color: #06365F;
             font-family: 'instaRegular', 'sans-serif';
@@ -99,9 +98,7 @@
             margin-top: 30px;
             padding-bottom: 10px;
             border-bottom: 1px solid #dddbd9;
-
         }
-
         .editContainer form {
             margin-bottom: 50px;
         }
@@ -110,16 +107,13 @@
             width: 150px;
             display: inline-block;
             font-size: 0.8em;
-
         }
-
         .editContainer input {
             margin-bottom: 10px;
             width: 250px;
             border-radius: 5px;
             border: 1px solid #dddbd9;
         }
-
         .formDetails select, textarea {
             margin-bottom: 10px;
             border-radius: 5px;
@@ -162,6 +156,11 @@
         .formUpload label{
             margin-bottom:1em;
         }
+        .formUpload input[type="submit"]{
+            font-family: instaLight;
+            width: 10%;
+            font-size: .8em;
+        }
     </style>
 </head>
 <body>
@@ -175,7 +174,7 @@
             <form class="formUpload" action="" enctype="multipart/form-data">
                 <label for="file">Avatar uploaden:</label>
                 <input type="file" name="file" id="file">
-                <input type="submit" name="submit" value="Upload" />
+                <input class="btnUpload" type="submit" name="submit" value="Upload" />
             </form>
 
             <h1>Profiel bewerken</h1>
