@@ -1,5 +1,6 @@
 <?php
     include_once('includes/no-session.inc.php');
+include_once('classes/post.class.php');
 
     
 if ($_FILES["file"]["error"] > 0)
@@ -17,20 +18,14 @@ echo $error . "<br />";
 } 
 else
 {
-echo "Upload: " . $_FILES["file"]["name"] . "<br />";
-echo "Type: " . $_FILES["file"]["type"] . "<br />";
-echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
-echo "Stored in: " . $_FILES["file"]["tmp_name"];
-    $filename = $_FILES["file"]["tmp_name"];
- $finfo = new finfo(FILEINFO_MIME_TYPE);
- $fileinfo = $finfo->file($filename);
-    $newfilename = "files/" . $_FILES["file"]["name"];
-    $_SESSION['image'] = $newfilename;
-    if(move_uploaded_file($_FILES["file"]["tmp_name"], $newfilename))
- {
-        echo "<br><a href='showImage.php'>Check image</a>";
-        echo $_SESSION['image'];
- }
+        $p = new Post();
+        $p->moveImage();
+        $p->Description = $_POST['desc'];
+        $p->saveImage();
+        
+        
+
+ 
 }
 ?>
 
@@ -57,7 +52,7 @@ echo "Stored in: " . $_FILES["file"]["tmp_name"];
                     
                     <label for="description">Description:</label>
                      <br>
-                      <textarea rows="5" cols="40" id="comment"></textarea>
+                      <textarea rows="5" cols="40" name="desc" id="comment"></textarea>
                     <br />
                     
                     <input type="submit" name="submit" value="Upload Now!" />
