@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4541
+# Version 4529
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.42)
-# Database: imdstagram
-# Generation Time: 2016-04-21 08:48:10 +0000
+# Database: IMDstagram
+# Generation Time: 2016-04-21 13:33:03 +0000
 # ************************************************************
 
 
@@ -55,6 +55,26 @@ CREATE TABLE `follows` (
   KEY `targetUserID` (`targetUserID`),
   CONSTRAINT `requestUserID` FOREIGN KEY (`requestUserID`) REFERENCES `users` (`userID`),
   CONSTRAINT `targetUserID` FOREIGN KEY (`targetUserID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Dump of table images
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `images`;
+
+CREATE TABLE `images` (
+  `imageID` int(11) NOT NULL AUTO_INCREMENT,
+  `file` varchar(45) NOT NULL,
+  `desc` varchar(300) NOT NULL,
+  `filter` varchar(45) DEFAULT NULL,
+  `imageUserID` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `location` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`imageID`),
+  KEY `userID_idx` (`imageUserID`),
+  CONSTRAINT `userID` FOREIGN KEY (`imageUserID`) REFERENCES `users` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -110,6 +130,7 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `private` varchar(45) NOT NULL DEFAULT 'no',
+  `bio` varchar(150) DEFAULT '',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
