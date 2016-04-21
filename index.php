@@ -26,9 +26,9 @@
             <li><img src="images/m8.jpg" alt="post"></li>
         </ul>
 
-
-
     </div>
+    
+        <a href="upload.php" id="floatingBtn">+</a>
     <!--<a href="includes/logout.inc.php">logout</a>-->
 </body>
 </html>

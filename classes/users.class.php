@@ -97,9 +97,8 @@ class Users{
     public function canLogin()
     {
         $p_password = $this->Password;
-
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $sql = "select username, password from users where username = '".$this->Username."'";
+        $sql = "select userID, username, password from users where username = '".$this->Username."'";
         $statement = $conn->prepare($sql);
         $statement->execute();
 
@@ -107,10 +106,12 @@ class Users{
         {
             $currentUser = $statement->fetch(PDO::FETCH_ASSOC);
             $hash = $currentUser['password'];
+            $_SESSION['userID'] = $currentUser['userID'];
+
 
             if ( password_verify($p_password, $hash)) {
                 return true;
-;           }
+           }
             else
             {
                 return false;
