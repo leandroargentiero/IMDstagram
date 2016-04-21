@@ -29,11 +29,17 @@ class Post{
     }
     
     public function moveImage() {
+        // Tijdelijke locatie van de upload opvragen
         $filename = $_FILES["file"]["tmp_name"];
+        // checken of het wel degelijk een afbeelding is.
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $fileinfo = $finfo->file($filename);
-        $m_sFilePath = "files/" . $_SESSION['userID'] . "_" . time().".jpg"; // userId_timestamp.jpg  //1_12345678.jpg
+        // nieuwe locatie en filename aanmaken
+        // files/userID_timestamp.jpg
+        $m_sFilePath = "files/" . $_SESSION['userID'] . "_" . time().".jpg";
+        // functie om de file te moven
         move_uploaded_file($_FILES["file"]["tmp_name"], $m_sFilePath);
+        // nieuwe locatie opslaan in variabele voor de query
         $this->m_sFilePath = $m_sFilePath;
     }
     
