@@ -2,7 +2,7 @@
     include_once('includes/no-session.inc.php');
 include_once('classes/post.class.php');
 
-    
+if(!empty($_POST)){    
 if ($_FILES["file"]["error"] > 0)
 {
 //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
@@ -21,11 +21,12 @@ else
         $p = new Post();
         $p->moveImage();
         $p->Description = $_POST['desc'];
-        $p->saveImage();
+        $p->savePost();
         
         
 
  
+}
 }
 ?>
 

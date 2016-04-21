@@ -32,18 +32,19 @@ class Post{
         $filename = $_FILES["file"]["tmp_name"];
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $fileinfo = $finfo->file($filename);
-        $m_sFilePath = "files/" . $_SESSION['user'] . time()."\.jpg"; // userId_timestamp.jpg  //1_12345678.jpg
-        $_SESSION['image'] = $m_sFilePath;
+        $m_sFilePath = "files/" . $_SESSION['user'] . "_" . time().".jpg"; // userId_timestamp.jpg  //1_12345678.jpg
         move_uploaded_file($_FILES["file"]["tmp_name"], $m_sFilePath);
-        
+        $this->m_sFilePath = $m_sFilePath;
     }
     
-    public function saveImage(){
+    public function savePost(){
+        
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $statement = $conn->prepare("insert into posts (filePath, desc) values (:filePath, :desc)");
-        $statement->bindValue(":filePath", $this->Image);
-        $statement->bindValue(":desc", $this->Description);
+        $statement = $conn->prepare("insert into posts (fileLocation, description) values (:fileLocation, :description)");
+        $statement->bindValue(":fileLocation", $this->m_sFilePath);
+        $statement->bindValue(":description", $this->m_sDescription);
         $statement->execute();
+        
     }
 }
 
