@@ -69,12 +69,13 @@ class Users{
         $p_password = $this->Password;
 
         $conn = new mysqli("localhost", "root", "root", "imdstagram");
-        $sql = "select username, password from users where username = '".$this->Username."'";
+        $sql = "select userID, username, password from users where username = '".$this->Username."'";
         $result = $conn->query($sql);
 
         if($result->num_rows == 1){
             $user = $result->fetch_assoc();
             $hash = $user['password'];
+            $_SESSION['userID'] = $user['userID'];
 
             if ( password_verify($p_password, $hash)) {
                 return true;
