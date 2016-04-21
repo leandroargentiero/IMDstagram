@@ -259,6 +259,14 @@ input[type="file"]{
 	margin-bottom: 1em;
 	line-height: 1.5em;
 }
+.success {
+    font-family: instaLight;
+	color: green;
+	text-align: center;
+	font-size: .9em;
+	margin-bottom: 1em;
+	line-height: 1.5em;
+}
 #floatingBtn {
     color: white;
     position: fixed;

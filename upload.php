@@ -23,7 +23,6 @@ else
         $p->Description = $_POST['desc'];
         $p->savePost();
         
-        
 
  
 }
