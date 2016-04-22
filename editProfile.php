@@ -2,11 +2,17 @@
     include_once('includes/no-session.inc.php');
     include_once ("classes/users.class.php");
 
+    $showavatar = new Users();
+    $showavatar->showAvatar();
+
     if(!empty($_POST)){
         if(isset($_POST['update'])){
             $editEmail = $_POST['editEmail'];
             $editUsername = $_POST['editUsername'];
             $editBio = $_POST['editBio'];
+            $newPassword = $_POST['newPassword'];
+            $confirmNewPassword = $_POST['confirmNewPassword'];
+            
             if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editBio)) != 0)
             {
                 $updateProfile = new Users();
@@ -28,8 +34,6 @@
 
             if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
             {
-                $newPassword = $_POST['newPassword'];
-                $confirmNewPassword = $_POST['confirmNewPassword'];
                 if(strcmp($newPassword, $confirmNewPassword) == 0){
                     $updatePassword = new Users();
                     $updatePassword->EditPassword = $confirmNewPassword;
@@ -44,9 +48,7 @@
             }
         }
 
-
         if(isset($_POST['upload'])){
-            echo "click";
             if ($_FILES["file"]["error"] > 0)
             {
             //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
@@ -58,7 +60,6 @@
                     default:
                         $errorImage = "Sorry, uw upload kon niet worden verwerkt.";
                 }
-                echo $errorImage . "<br />";
             }
             else
             {
@@ -167,8 +168,8 @@
         }
         .avatar{
             max-width: 100px;
-            height: auto;
-            border-radius: 50%;
+            height: 100px;
+            border-radius: 100%;
             margin: 20px 35px 0 20px;
             float: left;
         }
@@ -193,7 +194,7 @@
     <div class="editContainer">
         <div class="editDetails">
             <h1>Avatar uploaden</h1>
-            <img class="avatar" src="images/profile.jpg" alt="avatar">
+            <img class="avatar" src="<?php echo $_SESSION['avatar']; ?>" alt="avatar">
 
             <form class="formUpload" action="" enctype="multipart/form-data" method="post">
                 <label for="file">Avatar uploaden:</label>
