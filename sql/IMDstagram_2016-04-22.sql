@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4529
+# Version 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.42)
-# Database: IMDstagram
-# Generation Time: 2016-04-22 11:16:13 +0000
+# Database: imdstagram
+# Generation Time: 2016-04-22 11:21:24 +0000
 # ************************************************************
 
 
@@ -140,7 +140,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`userID`, `email`, `fullname`, `username`, `password`, `private`, `bio`, `avatar`)
 VALUES
-	(1,'argentiero.leo@mail.com','Leandro Argentiero','leaero','$2y$12$B1YDtwZvRgX/eQmKyRMM3Om1tnzntioxHamb9UOPrU03jhknPYZBy','no','leo','files/1_avatar.jpg');
+	(1,'argentiero.leo@mail.com','Leandro Argentiero','leaero','$2y$12$B1YDtwZvRgX/eQmKyRMM3Om1tnzntioxHamb9UOPrU03jhknPYZBy','no','leo','files/1_avatar.jpg'),
+	(2,'diederik127@hotmail.com','Diederik Craps','Diederik','$2y$12$Jf8r7Y1sIXiUHCkJK5jn7uUQml6szHvtE8FeKYnCjupfKtC77oLmG','no','Ik ben Diederik, hoe gaat het met jou?','files/2_avatar.jpg');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

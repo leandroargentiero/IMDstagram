@@ -63,7 +63,6 @@
             }
             else
             {
-                echo "file found";
                 $p = new Users();
                 $p->moveAvatar();
                 $p->saveAvatar();
