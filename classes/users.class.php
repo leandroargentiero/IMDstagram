@@ -167,7 +167,7 @@ class Users{
         $statement->execute();
     }
 
-    public function moveImage() {
+    public function moveAvatar() {
         // Tijdelijke locatie van de upload opvragen
         $filename = $_FILES["file"]["tmp_name"];
         // checken of het wel degelijk een afbeelding is.
@@ -180,20 +180,28 @@ class Users{
         move_uploaded_file($_FILES["file"]["tmp_name"], $m_sfilePath);
         // nieuwe locatie opslaan in variabele voor de query
         $this->m_sfilePath = $m_sfilePath;
-
     }
 
-    public function savePost()
+    public function saveAvatar()
     {
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("update users set avatar = :avatar where userID = '".$_SESSION['userID']."'");
         $statement->bindValue(":avatar", $this->m_sfilePath);
         $statement->execute();
+
+        $_SESSION['avatar'] = $this->m_sfilePath;
     }
 
     public function showAvatar()
     {
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $statement = $conn->prepare("select avatar from users where userID = '".$_SESSION['userID']."'");
+        $statement->execute();
 
+        if($statement->rowCount() == 1){
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['avatar'] = $result['avatar'];
+        }
     }
 
 }

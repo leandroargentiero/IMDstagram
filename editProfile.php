@@ -12,7 +12,7 @@
             $editBio = $_POST['editBio'];
             $newPassword = $_POST['newPassword'];
             $confirmNewPassword = $_POST['confirmNewPassword'];
-            
+
             if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editBio)) != 0)
             {
                 $updateProfile = new Users();
@@ -65,8 +65,8 @@
             {
                 echo "file found";
                 $p = new Users();
-                $p->moveImage();
-                $p->savePost();
+                $p->moveAvatar();
+                $p->saveAvatar();
             }
         }
     }
