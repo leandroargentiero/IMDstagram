@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.42)
 # Database: IMDstagram
-# Generation Time: 2016-04-21 13:33:03 +0000
+# Generation Time: 2016-04-22 11:16:13 +0000
 # ************************************************************
 
 
@@ -131,9 +131,19 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `private` varchar(45) NOT NULL DEFAULT 'no',
   `bio` varchar(150) DEFAULT '',
+  `avatar` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`userID`, `email`, `fullname`, `username`, `password`, `private`, `bio`, `avatar`)
+VALUES
+	(1,'argentiero.leo@mail.com','Leandro Argentiero','leaero','$2y$12$B1YDtwZvRgX/eQmKyRMM3Om1tnzntioxHamb9UOPrU03jhknPYZBy','no','leo','files/1_avatar.jpg');
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 

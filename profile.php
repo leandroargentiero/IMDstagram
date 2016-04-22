@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+include_once('includes/no-session.inc.php');
+?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,12 +13,12 @@
     <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="profileInfo">
-        <img class="profilePhoto" src="images/profile.jpg" alt="profile photo">
+        <img class="profilePhoto" src="<?php echo $_SESSION['avatar']; ?>" alt="profile photo">
         <div class="profileDetails">
             <div class="editProfile">
-                <p class="userName">kennymn</p>
+                <p class="userName"><?php echo $_SESSION['user']; ?></p>
 
-                <button class="btnEditProfile"> Profiel bewerken</button>
+                <a href="editProfile.php"><button class="btnEditProfile"> Profiel bewerken</button></a>
             </div>
 
             <p class="userDescription">25 year old - IMD student - Leuven</p>
@@ -44,12 +46,6 @@
             <li><img src="images/m8.jpg" alt="post"></li>
             <li><img src="images/m8.jpg" alt="post"></li>
         </ul>
-
-
-
     </div>
-
-
-
 </body>
 </html>
