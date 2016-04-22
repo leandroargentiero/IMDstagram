@@ -13,7 +13,7 @@ include_once('includes/no-session.inc.php');
     <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="profileInfo">
-        <img class="profilePhoto" src="images/profile.jpg" alt="profile photo">
+        <img class="profilePhoto" src="<?php echo $_SESSION['avatar']; ?>" alt="profile photo">
         <div class="profileDetails">
             <div class="editProfile">
                 <p class="userName"><?php echo $_SESSION['user']; ?></p>
@@ -46,12 +46,6 @@ include_once('includes/no-session.inc.php');
             <li><img src="images/m8.jpg" alt="post"></li>
             <li><img src="images/m8.jpg" alt="post"></li>
         </ul>
-
-
-
     </div>
-
-
-
 </body>
 </html>
