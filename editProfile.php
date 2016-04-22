@@ -3,47 +3,71 @@
     include_once ("classes/users.class.php");
 
     if(!empty($_POST)){
-        $editEmail = $_POST['editEmail'];
-        $editUsername = $_POST['editUsername'];
-        $editBio = $_POST['editBio'];
-        $newPassword = $_POST['newPassword'];
-        $confirmNewPassword = $_POST['confirmNewPassword'];
-
-        if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editBio)) != 0)
-        {
-            $updateProfile = new Users();
-            $updateProfile->EditEmail = $editEmail;
-            if(!empty($editUsername))
+        if(isset($_POST['update'])){
+            $editEmail = $_POST['editEmail'];
+            $editUsername = $_POST['editUsername'];
+            $editBio = $_POST['editBio'];
+            if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editBio)) != 0)
             {
-                $updateProfile->EditUsername = $editUsername;
-            }
-            $updateProfile->EditBio = $editBio;
-            $updateProfile->updateProfile();
+                $updateProfile = new Users();
+                $updateProfile->EditEmail = $editEmail;
+                if(!empty($editUsername))
+                {
+                    $updateProfile->EditUsername = $editUsername;
+                }
+                $updateProfile->EditBio = $editBio;
+                $updateProfile->updateProfile();
 
-            $messageUpdate = "Je gegevens werden succesvol gewijzigd.";
+                $messageUpdate = "Je gegevens werden succesvol gewijzigd.";
 
-        }
-        else
-        {
-            $messageEmptySubmit = "Er werden geen gegevens gewijzigd. Probeer opnieuw!";
-        }
-
-        if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
-        {
-            if(strcmp($newPassword, $confirmNewPassword) == 0){
-                $updatePassword = new Users();
-                $updatePassword->EditPassword = $confirmNewPassword;
-                $updatePassword->updatePassword();
-
-                $passwordSucces = "Jouw wachtwoord werd succesvol gewijzigd.";
             }
             else
             {
-                $passwordError = "Woops, wachtwoorden komen niet overeen. Probeer opnieuw!";
+                $messageEmptySubmit = "Er werden geen gegevens gewijzigd. Probeer opnieuw!";
+            }
+
+            if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
+            {
+                $newPassword = $_POST['newPassword'];
+                $confirmNewPassword = $_POST['confirmNewPassword'];
+                if(strcmp($newPassword, $confirmNewPassword) == 0){
+                    $updatePassword = new Users();
+                    $updatePassword->EditPassword = $confirmNewPassword;
+                    $updatePassword->updatePassword();
+
+                    $passwordSucces = "Jouw wachtwoord werd succesvol gewijzigd.";
+                }
+                else
+                {
+                    $passwordError = "Woops, wachtwoorden komen niet overeen. Probeer opnieuw!";
+                }
             }
         }
 
 
+        if(isset($_POST['upload'])){
+            echo "click";
+            if ($_FILES["file"]["error"] > 0)
+            {
+            //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
+                switch($_FILES["file"]["error"])
+                {
+                    case 1:
+                        $errorImage = "U mag maximaal 2MB opladen.";
+                        break;
+                    default:
+                        $errorImage = "Sorry, uw upload kon niet worden verwerkt.";
+                }
+                echo $errorImage . "<br />";
+            }
+            else
+            {
+                echo "file found";
+                $p = new Users();
+                $p->moveImage();
+                $p->savePost();
+            }
+        }
     }
 ?><!doctype html>
 <html lang="en">
@@ -171,10 +195,16 @@
             <h1>Avatar uploaden</h1>
             <img class="avatar" src="images/profile.jpg" alt="avatar">
 
-            <form class="formUpload" action="" enctype="multipart/form-data">
+            <form class="formUpload" action="" enctype="multipart/form-data" method="post">
                 <label for="file">Avatar uploaden:</label>
                 <input type="file" name="file" id="file">
-                <input class="btnUpload" type="submit" name="submit" value="Upload" />
+                <?php
+                if( isset($errorImage) ) {
+                    echo "<p class='messageUpdateError'>$errorImage</p>";
+                }
+                ?>
+
+                <input class="btnUpload" type="submit" name="upload" value="Upload">
             </form>
 
             <h1>Profiel bewerken</h1>
@@ -220,7 +250,7 @@
                 }
                 ?>
 
-                <input class="submitEdit" type="submit" value="Gegevens wijzigen">
+                <input class="submitEdit" name="update" type="submit" value="Gegevens wijzigen">
             </form>
 
         </div>

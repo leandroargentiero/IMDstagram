@@ -15,6 +15,7 @@ class Users{
     private $m_sEditUsername;
     private $m_sEditBio;
     private $m_sEditPassword;
+    private $m_sfilePath;
 
     public function __set($p_sProperty, $p_vValue)
     {
@@ -42,6 +43,9 @@ class Users{
                 break;
             case "EditPassword":
                 $this->m_sEditPassword = $p_vValue;
+                break;
+            case "Image":
+                $this->m_sfilePath = $p_vValue;
                 break;
         }
     }
@@ -72,6 +76,9 @@ class Users{
                 break;
             case "EditPassword":
                 return $this->m_sEditPassword;
+                break;
+            case "Image":
+                return $this->m_sfilePath;
                 break;
         }
     }
@@ -158,6 +165,35 @@ class Users{
         $sqlUpdatePassword = "update users set password = '".$password."' where username = '".$currentUser."'";
         $statement = $conn->prepare($sqlUpdatePassword);
         $statement->execute();
+    }
+
+    public function moveImage() {
+        // Tijdelijke locatie van de upload opvragen
+        $filename = $_FILES["file"]["tmp_name"];
+        // checken of het wel degelijk een afbeelding is.
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $fileinfo = $finfo->file($filename);
+        // nieuwe locatie en filename aanmaken
+        // files/userID_timestamp.jpg
+        $m_sfilePath = "files/" . $_SESSION['userID'] . "_avatar.jpg";
+        // functie om de file te moven
+        move_uploaded_file($_FILES["file"]["tmp_name"], $m_sfilePath);
+        // nieuwe locatie opslaan in variabele voor de query
+        $this->m_sfilePath = $m_sfilePath;
+
+    }
+
+    public function savePost()
+    {
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $statement = $conn->prepare("update users set avatar = :avatar where userID = '".$_SESSION['userID']."'");
+        $statement->bindValue(":avatar", $this->m_sfilePath);
+        $statement->execute();
+    }
+
+    public function showAvatar()
+    {
+
     }
 
 }
