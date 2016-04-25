@@ -1,5 +1,18 @@
 <?php
 include_once('includes/no-session.inc.php');
+
+
+
+if(!empty($_GET)){
+   $username = $_GET['user'];
+    $btnText = "Volgen";
+}
+else {
+   $username = $_SESSION['user'];
+    $btnText = "Profiel bewerken";
+}
+
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -16,9 +29,9 @@ include_once('includes/no-session.inc.php');
         <img class="profilePhoto" src="<?php echo $_SESSION['avatar']; ?>" alt="profile photo">
         <div class="profileDetails">
             <div class="editProfile">
-                <p class="userName"><?php echo $_SESSION['user']; ?></p>
+                <p class="userName"><?php echo $username; ?></p>
 
-                <a href="editProfile.php"><button class="btnEditProfile"> Profiel bewerken</button></a>
+                <a href="editProfile.php"><button class="btnEditProfile"><?php echo $btnText; ?></button></a>
             </div>
 
             <p class="userDescription">25 year old - IMD student - Leuven</p>
