@@ -1,6 +1,15 @@
 <?php
     include_once('includes/no-session.inc.php');
-?><!doctype html>
+
+    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $statement = $conn->prepare("select * from posts order by timestamp desc");
+        $statement->execute();
+        $rows_found = $statement->rowCount();
+        echo $rows_found;
+        $results = $statement->fetchAll();
+    
+?>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UT F-8">
@@ -13,17 +22,11 @@
     <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="profileFeed">
-
+            <?php foreach($results as $post): ?>
+            <li><img src="<?php echo $post['fileLocation']; ?>" alt=""></li>
+            <?php endforeach; ?>
         <ul>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
+               
         </ul>
 
     </div>
