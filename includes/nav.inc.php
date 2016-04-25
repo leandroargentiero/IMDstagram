@@ -2,7 +2,7 @@
     <div class="headerContent">
         <a href="index.php"><img src="images/logo.png" alt="logo"></a>
         <div class="searchBar">
-            <form>
+            <form name="formSearch" method="get" action="">
                 <span><input type="text"  placeholder="Search"></span>
             </form>
         </div>
