@@ -148,12 +148,14 @@ body a {
 
 .profileFeed ul li{
 	float: left;
+	max-width: 200px;
+	height: 200px;
+	padding: 5px 5px 5px 5px;
 }
 
 .profileFeed img {
-	max-width: 200px;
-	height: auto;
-	padding: 5px 5px 5px 5px;
+	width: 100%;
+	height: 100%;
 }
 
 .container {
