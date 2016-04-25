@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.42)
 # Database: IMDstagram
-# Generation Time: 2016-04-21 13:33:03 +0000
+# Generation Time: 2016-04-17 18:36:26 +0000
 # ************************************************************
 
 
@@ -35,7 +35,7 @@ CREATE TABLE `comments` (
   KEY `imageID_idx` (`commentImageID`),
   KEY `userID_idx` (`commentUserID`),
   CONSTRAINT `commentUserID` FOREIGN KEY (`commentUserID`) REFERENCES `users` (`userID`),
-  CONSTRAINT `imageID` FOREIGN KEY (`commentImageID`) REFERENCES `posts` (`imageID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `imageID` FOREIGN KEY (`commentImageID`) REFERENCES `images` (`imageID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -93,27 +93,9 @@ CREATE TABLE `likes` (
   KEY `likeImageID` (`likeImageID`),
   KEY `likeSenderID` (`likeSenderID`),
   KEY `likeReceiverID` (`likeReceiverID`),
-  CONSTRAINT `likeImageID` FOREIGN KEY (`likeImageID`) REFERENCES `posts` (`imageID`),
+  CONSTRAINT `likeImageID` FOREIGN KEY (`likeImageID`) REFERENCES `images` (`imageID`),
   CONSTRAINT `likeReceiverID` FOREIGN KEY (`likeReceiverID`) REFERENCES `users` (`userID`),
   CONSTRAINT `likeSenderID` FOREIGN KEY (`likeSenderID`) REFERENCES `users` (`userID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table posts
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `posts`;
-
-CREATE TABLE `posts` (
-  `imageID` int(11) NOT NULL AUTO_INCREMENT,
-  `fileLocation` varchar(300) NOT NULL DEFAULT '',
-  `description` varchar(300) NOT NULL DEFAULT '',
-  `filter` varchar(45) DEFAULT NULL,
-  `imageUserID` int(11) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `location` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`imageID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -129,8 +111,8 @@ CREATE TABLE `users` (
   `fullname` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `bio` varchar(150) NOT NULL,
   `private` varchar(45) NOT NULL DEFAULT 'no',
-  `bio` varchar(150) DEFAULT '',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

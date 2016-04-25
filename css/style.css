@@ -33,6 +33,10 @@ body {
 	background-color: #fbf9f7;
 	color: #4E606A;
 }
+body a {
+	text-decoration: none;
+	color: #30618B;
+}
 
 .headerProfile {
 	height: 35px;
@@ -72,8 +76,8 @@ body {
 
 .profilePhoto {
 	max-width: 100px;
-	height: auto;
-	border-radius: 50%;
+	height: 100px;
+	border-radius: 100%;
 	float: left;
 	margin-left: 50px;
 	margin-right: 30px;
