@@ -15,16 +15,23 @@ if(!empty($_GET)){
     $bioText = $profileInfo['bio'];
     $username = $profileInfo['username'];
     $btnText = "Volgen";
+    $btnClass = "btnFollow";
     $avatar = $profileInfo['avatar'];
+    
 }
 else {
     // alle profielinfo zit in $_SESSION
     // knop: profiel bewerken -> editProfile.php
+    
     // follows: info uit tabel 'follows'
+    
+    
    $username = $_SESSION['user'];
     $btnText = "Profiel bewerken";
+    $btnClass = "btnEditProfile";
    $bioText = $_SESSION['bio'];
     $avatar = $_SESSION['avatar'];
+    $userID = $_SESSION['userID'];
 }
 // get feed:
 // users -> getFeed(userID);
@@ -52,7 +59,7 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
             <div class="editProfile">
                 <p class="userName"><?php echo $username; ?></p>
 
-                <a href="editProfile.php"><button class="btnEditProfile"><?php echo $btnText; ?></button></a>
+                <button class="<?php echo $btnClass; ?>"><?php echo $btnText; ?></button>
             </div>
 
             <p class="userDescription"><?php echo $bioText; ?></p>
@@ -67,13 +74,17 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
 
     </div>
 
-    <div class="profileFeed">
+    <main class="feedContainer">
 
-        <ul>
+        <div class="profileFeed">
             <?php foreach($results as $post): ?>
-            <li><img src="<?php echo $post['fileLocation']; ?>" alt=""></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+            <div class="feedPic">
+               <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                </div>
+                <?php endforeach; ?>
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
