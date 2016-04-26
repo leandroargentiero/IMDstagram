@@ -4,10 +4,18 @@ include_once('includes/no-session.inc.php');
 
 // checken wiens account geladen moet worden
 if(!empty($_GET)){
+    $userID = $_GET['userID'];
     // select * from users where $userID = $_GET['userID']
+    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+    $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID = :userID");
+    $getProfile->bindValue(':userID', $userID);
+    $getProfile->execute();
+    $profileInfo = $getProfile->fetch(PDO::FETCH_ASSOC);
     // knop: volgen -> insert into follows
-   $username = $_GET['user'];
+    $bioText = $profileInfo['bio'];
+    $username = $profileInfo['username'];
     $btnText = "Volgen";
+    $avatar = $profileInfo['avatar'];
 }
 else {
     // alle profielinfo zit in $_SESSION
@@ -15,10 +23,16 @@ else {
     // follows: info uit tabel 'follows'
    $username = $_SESSION['user'];
     $btnText = "Profiel bewerken";
+   $bioText = $_SESSION['bio'];
+    $avatar = $_SESSION['avatar'];
 }
 // get feed:
 // users -> getFeed(userID);
-
+$conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+    $statement = $conn->prepare("select * from posts where imageUserID = :userID order by timestamp desc");
+    $statement->bindValue(':userID', $userID);
+    $statement->execute();
+    $results = $statement->fetchAll();
 
 ?><!doctype html>
 <html lang="en">
@@ -33,7 +47,7 @@ else {
     <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="profileInfo">
-        <img class="profilePhoto" src="<?php echo $_SESSION['avatar']; ?>" alt="profile photo">
+        <img class="profilePhoto" src="<?php echo $avatar; ?>" alt="profile photo">
         <div class="profileDetails">
             <div class="editProfile">
                 <p class="userName"><?php echo $username; ?></p>
@@ -41,7 +55,7 @@ else {
                 <a href="editProfile.php"><button class="btnEditProfile"><?php echo $btnText; ?></button></a>
             </div>
 
-            <p class="userDescription">25 year old - IMD student - Leuven</p>
+            <p class="userDescription"><?php echo $bioText; ?></p>
 
             <ul class="userStats">
                 <li><span>9</span> posts</li>
@@ -56,15 +70,9 @@ else {
     <div class="profileFeed">
 
         <ul>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
+            <?php foreach($results as $post): ?>
+            <li><img src="<?php echo $post['fileLocation']; ?>" alt=""></li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </body>

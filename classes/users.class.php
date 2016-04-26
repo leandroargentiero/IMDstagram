@@ -107,7 +107,7 @@ class Users{
     {
         $p_password = $this->Password;
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $sql = "select userID, username, password, avatar from users where username = '".$this->Username."'";
+        $sql = "select userID, username, password, bio, avatar from users where username = '".$this->Username."'";
         $statement = $conn->prepare($sql);
         $statement->execute();
 
@@ -117,6 +117,7 @@ class Users{
             $hash = $currentUser['password'];
             $_SESSION['userID'] = $currentUser['userID'];
             $_SESSION['avatar'] = $currentUser['avatar'];
+            $_SESSION['bio'] = $currentUser['bio'];
 
             if ( password_verify($p_password, $hash)) {
                 return true;
@@ -145,7 +146,6 @@ class Users{
 
         $statementUpdate = $conn->prepare(($sqlUpdate));
         $statementUpdate->execute();
-
         if(strlen(trim($this->EditUsername)) != 0)
         {
             $_SESSION['user'] = $this->EditUsername;

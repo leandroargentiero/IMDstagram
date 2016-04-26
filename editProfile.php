@@ -10,6 +10,7 @@
             $editEmail = $_POST['editEmail'];
             $editUsername = $_POST['editUsername'];
             $editBio = $_POST['editBio'];
+            $_SESSION['bio'] = $_POST['editBio'];
             $newPassword = $_POST['newPassword'];
             $confirmNewPassword = $_POST['confirmNewPassword'];
 
@@ -38,7 +39,7 @@
                     $updatePassword = new Users();
                     $updatePassword->EditPassword = $confirmNewPassword;
                     $updatePassword->updatePassword();
-
+                    
                     $passwordSucces = "Jouw wachtwoord werd succesvol gewijzigd.";
                 }
                 else
