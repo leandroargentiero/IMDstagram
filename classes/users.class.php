@@ -99,6 +99,8 @@ class Users{
         $password = password_hash($this->Password, PASSWORD_DEFAULT, $options);
         $statement->bindValue(":password", $password);
         $statement->execute();
+        // insertID opvragen
+        // insert into follows: insertID volgt insertID
     }
 
     public function canLogin()
@@ -204,5 +206,8 @@ class Users{
             $_SESSION['avatar'] = $result['avatar'];
         }
     }
+    
+    // getFeed(userID)
+    // select * from posts where imageUserID = $userID
 
 }

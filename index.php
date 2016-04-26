@@ -1,6 +1,13 @@
 <?php
     include_once('includes/no-session.inc.php');
 
+    // - Eerst zien wie de user volgt
+    // select * from follows where requestUserID = $_SESSION['userID']
+    // - Posts laden op basis van info uit follows
+    // select top $aantalPosts from posts where imageUserID like [a, b, c, d, ...]
+    // order by timestamp desc
+    // AJAX: $aantalPosts + 20
+
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("select * from posts order by timestamp desc");
         $statement->execute();

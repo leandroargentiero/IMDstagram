@@ -2,15 +2,22 @@
 include_once('includes/no-session.inc.php');
 
 
-
+// checken wiens account geladen moet worden
 if(!empty($_GET)){
+    // select * from users where $userID = $_GET['userID']
+    // knop: volgen -> insert into follows
    $username = $_GET['user'];
     $btnText = "Volgen";
 }
 else {
+    // alle profielinfo zit in $_SESSION
+    // knop: profiel bewerken -> editProfile.php
+    // follows: info uit tabel 'follows'
    $username = $_SESSION['user'];
     $btnText = "Profiel bewerken";
 }
+// get feed:
+// users -> getFeed(userID);
 
 
 ?><!doctype html>
