@@ -62,7 +62,7 @@ include_once('includes/no-session.inc.php');
     <h3 class="feedback countPosts"><?php if(isset($countPosts)){echo "<span>".$countPosts."</span>"." posts";} ?></h3>
     <ul>
         <?php foreach($results as $result): ?>
-            <li><a href="postDetail.php"><img src="<?php echo $result['fileLocation']; ?>" alt="post"></a></li>
+            <li><a href="postDetail.php?imageID=<?php echo $result['imageID']; ?>"><img src="<?php echo $result['fileLocation']; ?>" alt="post"></a></li>
         <?php endforeach;?>
     </ul>
 
