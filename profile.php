@@ -5,6 +5,7 @@ include_once('includes/no-session.inc.php');
 // checken wiens account geladen moet worden
 if(!empty($_GET)){
     $userID = $_GET['userID'];
+    $_SESSION['targetUserID'] = $_GET['userID'];
     // select * from users where $userID = $_GET['userID']
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
     $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID = :userID");
@@ -59,7 +60,7 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
             <div class="editProfile">
                 <p class="userName"><?php echo $username; ?></p>
 
-                <button class="<?php echo $btnClass; ?>"><?php echo $btnText; ?></button>
+                <button id="" class="<?php echo $btnClass; ?>"><?php echo $btnText; ?></button>
             </div>
 
             <p class="userDescription"><?php echo $bioText; ?></p>

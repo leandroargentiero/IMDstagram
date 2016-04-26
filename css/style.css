@@ -131,6 +131,12 @@ body a {
     color: #5A8ACE;
 }
 
+.followed {
+    background-color: #60C029;
+    border:1px solid #60C029;
+    color: white;
+}
+
 .userDescription {
 	font-size: 0.7em;
 	margin-bottom: 10px;
