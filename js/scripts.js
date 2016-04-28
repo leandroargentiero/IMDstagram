@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    init();
+    function init(){
     $('.btnFollow').click(function(){
         $.ajax({
                         type : 'POST',
@@ -8,8 +10,9 @@ $(document).ready(function(){
                         {
                             console.log(data);
                             console.log("succes!")
-                            $(".btnFollow").addClass(data);
-                            $(".btnFollow").html("Volgend");
+                            $(".btnFollow").attr("class", "btnUnfollow");
+                            $(".btnUnfollow").html("Volgend");
+                            init();
                         }
                     });
                     return false;
@@ -24,10 +27,13 @@ $(document).ready(function(){
                         {
                             console.log(data);
                             console.log("succes!")
-                            $(".btnFollow").addClass(data);
+                            $(".btnUnfollow").attr("class", "btnFollow");
                             $(".btnFollow").html("Volgen");
+                            init();
                         }
                     });
                     return false;
     });
+};
+
 });

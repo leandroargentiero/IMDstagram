@@ -24,8 +24,7 @@ if(!empty($_GET)){
     $getFollowInfo->bindValue(":targetUserID", $targetUserID);
     $getFollowInfo->execute();
     $count = $getFollowInfo->rowCount();
-    echo $count;
-    if($count == 1){
+    if($count > 0){
         $btnClass = "btnUnfollow";
         $btnText = "Volgend";
     }
