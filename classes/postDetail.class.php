@@ -59,10 +59,28 @@ class postDetail{
                                  WHERE userID = :userID");
         $avatarLocation->bindValue(':userID', $userID['imageUserID']);
         $avatarLocation->execute();
-        $result= $avatarLocation->fetch(PDO::FETCH_ASSOC);
+        $result = $avatarLocation->fetch(PDO::FETCH_ASSOC);
 
         return $result;
+    }
 
+    public function getUsername(){
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getUserID = $conn->prepare("
+                                    SELECT imageUserID
+                                    FROM posts
+                                    WHERE imageID = :imageID");
+        $getUserID->bindValue(':imageID', $this->m_iImageID );
+        $getUserID->execute();
+        $userID = $getUserID->fetch(PDO::FETCH_ASSOC);
 
+        $username = $conn->prepare("SELECT username
+                                    FROM users
+                                    WHERE userID = :userID");
+        $username->bindValue(':userID', $userID['imageUserID']);
+        $username->execute();
+        $result = $username->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 }
