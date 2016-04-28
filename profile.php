@@ -7,17 +7,35 @@ if(!empty($_GET)){
     
     $userID = $_GET['userID'];
     $_SESSION['targetUserID'] = $_GET['userID'];
+
     // Profielinformatie ophalen
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
     $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID = :userID");
     $getProfile->bindValue(':userID', $userID);
     $getProfile->execute();
     $profileInfo = $getProfile->fetch(PDO::FETCH_ASSOC);
+
+    // informatie over follows
+    // following
+    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+    $getFollowings = $conn->prepare("select * from follows where requestUserID = :requestUserID");
+    $getFollowings->bindValue(":requestUserID", $_GET['userID']);
+    $getFollowings->execute();
+    $followingCount = $getFollowings->rowCount();
+    
+    // followers
+    $targetUserID = $_SESSION['targetUserID'];
+    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+    $getFollows = $conn->prepare("select * from follows where targetUserID = :targetUserID");
+    $getFollows->bindValue(":targetUserID", $targetUserID);
+    $getFollows->execute();
+    $followCount = $getFollows->rowCount();
     
     
     // volg ik dit account al?
     $targetUserID = $_SESSION['targetUserID'];
     $requestUserID = $_SESSION['userID'];
+
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
     $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID = :targetUserID");
     $getFollowInfo->bindValue(":requestUserID", $requestUserID);
@@ -53,13 +71,15 @@ else {
     $avatar = $_SESSION['avatar'];
     $userID = $_SESSION['userID'];
 }
-// get feed:
+// get feed & postCount
 // users -> getFeed(userID);
 $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
     $statement = $conn->prepare("select * from posts where imageUserID = :userID order by timestamp desc");
     $statement->bindValue(':userID', $userID);
     $statement->execute();
     $results = $statement->fetchAll();
+    $postCount = $statement->rowCount();
+    
 
 ?><!doctype html>
 <html lang="en">
@@ -85,9 +105,9 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
             <p class="userDescription"><?php echo $bioText; ?></p>
 
             <ul class="userStats">
-                <li><span>9</span> posts</li>
-                <li><span>20</span> followers</li>
-                <li><span>25</span> following</li>
+                <li><span><?php echo $postCount; ?></span> posts</li>
+                <li><span><?php echo $followCount; ?></span> followers</li>
+                <li><span><?php echo $followingCount; ?></span> following</li>
             </ul>
 
         </div>
