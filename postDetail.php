@@ -8,6 +8,7 @@
         $post->imageID = $_GET['imageID'];
         $image = $post->getImage();
         $avatar = $post->getAvatar();
+        $username = $post->getUsername();
 
     }
 
@@ -26,6 +27,7 @@
         height: 400px;
         margin: 100px auto 0 auto;
         display: flex;
+        box-shadow: 0px 3px 10px #a5a5a6;
     }
     .innerLeft{
         width: 400px;
@@ -75,13 +77,31 @@
     .likes{
         display: inline-block;
         float: left;
-        margin: 15px 0 0 0;
+        font-size: .9em;
+        margin: 18px 0 0 0;
+        color: #7B7A7C;
     }
     .timestamp{
         display: inline-block;
-        margin: 15px 0 0 230px;
+        margin: 18px 0 0 245px;
+        font-size: .9em;
+        color: #7B7A7C;
     }
-
+    .commentFeed {
+        overflow-y: scroll;
+    }
+    .like img{
+        margin-top: 15px;
+        float: left;
+    }
+    #commentField{
+        width: 300px;
+        margin: 10px 0 0 0;
+        font-size: .8em;
+        padding: 10px 0 10px 10px;
+        border: none;
+        color: #7B7A7C;
+    }
 
 </style>
 <body>
@@ -91,19 +111,23 @@
             <div class="innerRightContainer">
                 <div class="innerRightHeader">
                     <img class="avatar" src="<?php echo $avatar['avatar']; ?>" alt="">
-                    <p class="name">Test123</p>
+                    <a href=""><p class="name"><?php echo $username['username']; ?></p></a>
                     </ul>
                 </div>
                 <div class="innerRightSecondHeader">
                     <p class="likes">146 Likes</p>
-                    <p class="timestamp">16H</p>
+                    <p class="timestamp">16h</p>
                 </div>
-                <div class="commentFeed"></div>
-                <div class="innerRightFooter">
+                <div class="commentFeed">
                     <ul>
-                        <li></li>
-                        <li></li>
+                        li
                     </ul>
+                </div>
+                <div class="innerRightFooter">
+                    <form action="" method="post">
+                        <a class="like" href="#"><img id="like" src="images/heart_blank.png" alt="like"></a>
+                        <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
+                    </form>
                 </div>
             </div>
         </div>
