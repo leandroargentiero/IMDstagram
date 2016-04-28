@@ -14,4 +14,20 @@ $(document).ready(function(){
                     });
                     return false;
     });
+    
+    $('.btnUnfollow').click(function(){
+        $.ajax({
+                        type : 'POST',
+                        url  : 'includes/unfollow.inc.php',
+                        data : $(this).serialize(),
+                        success : function(data)
+                        {
+                            console.log(data);
+                            console.log("succes!")
+                            $(".btnFollow").addClass(data);
+                            $(".btnFollow").html("Volgen");
+                        }
+                    });
+                    return false;
+    });
 });

@@ -2,21 +2,41 @@
 include_once('includes/no-session.inc.php');
 
 
-// checken wiens account geladen moet worden
+// Checken wiens account geladen moet worden
 if(!empty($_GET)){
+    
     $userID = $_GET['userID'];
     $_SESSION['targetUserID'] = $_GET['userID'];
-    // select * from users where $userID = $_GET['userID']
+    // Profielinformatie ophalen
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
     $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID = :userID");
     $getProfile->bindValue(':userID', $userID);
     $getProfile->execute();
     $profileInfo = $getProfile->fetch(PDO::FETCH_ASSOC);
-    // knop: volgen -> insert into follows
+    
+    
+    // volg ik dit account al?
+    $targetUserID = $_SESSION['targetUserID'];
+    $requestUserID = $_SESSION['userID'];
+    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+    $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID = :targetUserID");
+    $getFollowInfo->bindValue(":requestUserID", $requestUserID);
+    $getFollowInfo->bindValue(":targetUserID", $targetUserID);
+    $getFollowInfo->execute();
+    $count = $getFollowInfo->rowCount();
+    echo $count;
+    if($count == 1){
+        $btnClass = "btnUnfollow";
+        $btnText = "Volgend";
+    }
+    else {
+       $btnClass = "btnFollow";
+        $btnText = "Volgen";
+    }
+    
+    // Variabelen voor knoppen en teksten invullen.
     $bioText = $profileInfo['bio'];
     $username = $profileInfo['username'];
-    $btnText = "Volgen";
-    $btnClass = "btnFollow";
     $avatar = $profileInfo['avatar'];
     
 }
