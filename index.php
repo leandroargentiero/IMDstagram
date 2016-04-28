@@ -2,17 +2,33 @@
     include_once('includes/no-session.inc.php');
 
     // - Eerst zien wie de user volgt
-    // select * from follows where requestUserID = $_SESSION['userID']
-    // - Posts laden op basis van info uit follows
-    // select top $aantalPosts from posts where imageUserID like [a, b, c, d, ...]
-    // order by timestamp desc
-    // AJAX: $aantalPosts + 20
-
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $statement = $conn->prepare("select * from posts order by timestamp desc");
+        $statement = $conn->prepare("select targetUserID from follows where requestUserID = :requestUserID");
+        $statement->bindValue(":requestUserID", $_SESSION['userID']);
         $statement->execute();
         $rows_found = $statement->rowCount();
-        echo $rows_found;
+        $results = $statement->fetchAll();
+
+    
+    
+    // gevonden users in een array stoppen voor de select
+    $array = array();
+
+    // eigen foto's niet vergeten.
+    array_push($array, $_SESSION['userID']);
+    foreach($results as $entry){ 
+        array_push($array, $entry['targetUserID']);
+    }
+    
+    // array 'plat' maken voor de select.
+    $csa = implode(", ",$array);
+
+    // selecteren
+    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $statement = $conn->prepare('select * from posts where imageUserID in (:array) order by timestamp desc limit 20');
+        $statement->bindValue(":array", $csa);
+        $statement->execute();
+        
         $results = $statement->fetchAll();
     
 ?>
@@ -28,15 +44,15 @@
 
     <?php include_once("includes/nav.inc.php"); ?>
 
-    <div class="profileFeed">
+    
+    
+    <div class="indexFeed">
             <?php foreach($results as $post): ?>
-            <li><img src="<?php echo $post['fileLocation']; ?>" alt=""></li>
-            <?php endforeach; ?>
-        <ul>
-               
-        </ul>
-
-    </div>
+            <div class="feedPic">
+               <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                </div>
+                <?php endforeach; ?>
+        </div>
     
         <a href="upload.php" id="floatingBtn">+</a>
     <!--<a href="includes/logout.inc.php">logout</a>-->

@@ -168,8 +168,28 @@ body a {
     flex-wrap: wrap;
     justify-content: center;
     
+}
+
+.indexFeed {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
     
 }
+
+.indexFeed .feedPic {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    border: 1px solid dimgrey;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin: 10px;
+}
+
 .feedPic {
     width: 250px;
     height: 250px;
