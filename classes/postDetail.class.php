@@ -119,4 +119,10 @@ class postDetail{
         }
         return $result;
     }
+
+    public function getLikes(){
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        
+
+    }
 }
