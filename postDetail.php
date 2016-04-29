@@ -9,7 +9,7 @@
         $image = $post->getImage();
         $avatar = $post->getAvatar();
         $username = $post->getUsername();
-
+        $postTime = $post->getPostHour();
     }
 
 ?><!doctype html>
@@ -74,25 +74,30 @@
         margin: 9px 0 0 20px;
         color: #30618B;
     }
+    .innerRightSecondHeader{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
     .likes{
-        display: inline-block;
-        float: left;
         font-size: .9em;
-        margin: 18px 0 0 0;
         color: #7B7A7C;
     }
     .timestamp{
-        display: inline-block;
-        margin: 18px 0 0 245px;
         font-size: .9em;
         color: #7B7A7C;
     }
     .commentFeed {
         overflow-y: scroll;
     }
+    .innerRightFooterForm{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
     .like img{
-        margin-top: 15px;
-        float: left;
+        margin: 10px 0 0 0;
     }
     #commentField{
         width: 300px;
@@ -116,15 +121,14 @@
                 </div>
                 <div class="innerRightSecondHeader">
                     <p class="likes">146 Likes</p>
-                    <p class="timestamp">16h</p>
+                    <p class="timestamp"><?php echo $postTime ?></p>
                 </div>
                 <div class="commentFeed">
                     <ul>
-                        li
                     </ul>
                 </div>
                 <div class="innerRightFooter">
-                    <form action="" method="post">
+                    <form class="innerRightFooterForm" action="" method="post">
                         <a class="like" href="#"><img id="like" src="images/heart_blank.png" alt="like"></a>
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
