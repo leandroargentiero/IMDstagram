@@ -83,4 +83,40 @@ class postDetail{
 
         return $result;
     }
+
+    public function getPostHour(){
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $postTime = $conn->prepare("SELECT timestamp
+                                   FROM posts
+                                   WHERE imageID = :imageID");
+        $postTime->bindValue(':imageID', $this->m_iImageID);
+        $postTime->execute();
+        $postTime = $postTime->fetch(PDO::FETCH_ASSOC);
+
+        $currentTime = strtotime(date('Y-m-d H:i:s'));
+        $postedTime = strtotime($postTime['timestamp']);
+
+        $difference = $currentTime - $postedTime;
+        $days = $difference/60/60/24;
+        $hour = $difference/(60*60);
+        $minutes = (abs($difference)/60);
+
+        if(number_format($minutes, 0) < 1)
+        {
+            $result = "A moment ago";
+        }
+        elseif(number_format($hour, 0) < 1)
+        {
+            $result = number_format($minutes, 0). " minutes ago" ;
+        }
+        elseif(number_format($hour, 0) < 24)
+        {
+            $result = number_format($hour, 0)."h";
+        }
+        else
+        {
+            $result = number_format($days, 0)." days ago";
+        }
+        return $result;
+    }
 }
