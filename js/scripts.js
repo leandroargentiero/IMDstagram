@@ -34,6 +34,27 @@ $(document).ready(function(){
                     });
                     return false;
     });
+        
+    
 };
+$('.btnLoadMore').click(function(){
+    for(i=0; i<2;i++){
+        $.ajax({
+                        
+                        type : 'POST',
+                        url  : 'includes/loadmore.inc.php',
+                        data : $(this).serialize(),
+                        success : function(data)
+                        {
+                            console.log(data);
+    $('.indexFeed').append("<div class='feedPic'><img src='"+data+"' alt=''></div");
 
+                            
+                            
+                        
+                        }
+                    });}
+                    return false;
+    
+    });
 });

@@ -22,11 +22,20 @@
     
     // array 'plat' maken voor de select.
     $csa = implode(", ",$array);
+    $_SESSION['csa'] = $csa;
 
     // selecteren
+    $_SESSION['getal'] = 1;
+    $_SESSION['offset'] = 0;
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $statement = $conn->prepare('select * from posts where imageUserID in (:array) order by timestamp desc limit 20');
+        $statement = $conn->prepare("
+        select * from posts 
+        where imageUserID in (:array) 
+        order by timestamp desc 
+        limit :getal
+        ");
         $statement->bindValue(":array", $csa);
+        $statement->bindValue(':getal', (int) trim($_SESSION['getal']), PDO::PARAM_INT);
         $statement->execute();
         
         $results = $statement->fetchAll();
@@ -52,9 +61,13 @@
                <img src="<?php echo $post['fileLocation']; ?>" alt="">
                 </div>
                 <?php endforeach; ?>
+                
         </div>
+        <button class="btnLoadMore">Load More</button>
     
         <a href="upload.php" id="floatingBtn">+</a>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
     <!--<a href="includes/logout.inc.php">logout</a>-->
 </body>
 </html>

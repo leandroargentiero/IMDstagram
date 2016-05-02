@@ -204,7 +204,12 @@ body a {
 .feedPic img {
     width: 100%;
 }
-
+.btnLoadMore {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .container {
     width: 80%;
     margin: 1.5em auto 3em auto;
