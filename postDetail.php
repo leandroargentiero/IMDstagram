@@ -34,6 +34,7 @@
         height: 400px;
     }
     .innerLeft img{
+        object-fit: cover;
         width: 100%;
         height: 100%;
         background-color: gold;
@@ -60,6 +61,7 @@
 
     }
     .avatar{
+        object-fit: cover;
         height: 50px;
         width: 50px;
         border-radius: 50%;
