@@ -1,4 +1,6 @@
 <?php
+include_once ("includes/database.inc.php");
+
 /**
  * Created by PhpStorm.
  * User: Leandro
@@ -27,9 +29,9 @@ class postDetail{
     }
 
     public function getImage(){
+        global $conn;
         $result = array();
 
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("
                                     SELECT *
                                     FROM posts
@@ -44,7 +46,7 @@ class postDetail{
     }
 
     public function getAvatar(){
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $getUserID = $conn->prepare("
                                     SELECT imageUserID
                                     FROM posts
@@ -65,7 +67,7 @@ class postDetail{
     }
 
     public function getUsername(){
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $getUserID = $conn->prepare("
                                     SELECT imageUserID
                                     FROM posts
@@ -85,7 +87,7 @@ class postDetail{
     }
 
     public function getPostHour(){
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $postTime = $conn->prepare("SELECT timestamp
                                    FROM posts
                                    WHERE imageID = :imageID");
@@ -121,7 +123,7 @@ class postDetail{
     }
 
     public function getLikes(){
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         
 
     }
