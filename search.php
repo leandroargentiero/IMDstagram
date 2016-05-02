@@ -2,14 +2,14 @@
 include_once('includes/no-session.inc.php');
 
     if(isset($_GET['txtSearch'])) {
-        $searchQ = $_GET['txtSearch'];
+        $searchKeyword = $_GET['txtSearch'];
         $results = array();
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("SELECT *
                       FROM posts
                       WHERE description
                       LIKE :keywords;");
-        $statement->bindValue(':keywords', '%' . $searchQ . '%');
+        $statement->bindValue(':keywords', '%' . $searchKeyword . '%');
         $statement->execute();
 
         if($statement->rowCount() >= 1){
