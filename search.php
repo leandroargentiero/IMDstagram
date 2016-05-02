@@ -8,7 +8,8 @@ include_once('includes/database.inc.php');
         $statement = $conn->prepare("SELECT *
                       FROM posts
                       WHERE description
-                      LIKE :keywords;");
+                      LIKE :keywords
+                      ORDER BY timestamp DESC");
         $statement->bindValue(':keywords', '%' . $searchKeyword . '%');
         $statement->execute();
 
