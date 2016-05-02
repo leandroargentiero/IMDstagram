@@ -1,10 +1,10 @@
 <?php
 include_once('includes/no-session.inc.php');
+include_once('includes/database.inc.php');
 
     if(isset($_GET['txtSearch'])) {
         $searchKeyword = $_GET['txtSearch'];
         $results = array();
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("SELECT *
                       FROM posts
                       WHERE description
