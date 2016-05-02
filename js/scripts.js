@@ -38,7 +38,7 @@ $(document).ready(function(){
     
 };
 $('.btnLoadMore').click(function(){
-    for(i=0; i<2;i++){
+    for(i=0; i<20;i++){
         $.ajax({
                         
                         type : 'POST',

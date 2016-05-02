@@ -25,7 +25,7 @@
     $_SESSION['csa'] = $csa;
 
     // selecteren
-    $_SESSION['getal'] = 1;
+    $_SESSION['getal'] = 20;
     $_SESSION['offset'] = 0;
     $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("
@@ -63,7 +63,13 @@
                 <?php endforeach; ?>
                 
         </div>
-        <button class="btnLoadMore">Load More</button>
+        
+        <div class="loadMoreContainer">
+        
+            <button class="btnLoadMore">Load More</button>
+        
+        </div>
+        
     
         <a href="upload.php" id="floatingBtn">+</a>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
