@@ -64,6 +64,12 @@ body a {
 .searchBar input {
 	border: 1px solid #dddbd9;
 	border-radius: 5px;
+	height: 20px;
+	width: 180px;
+}
+#txtSearch::-webkit-input-placeholder{
+	padding-left: 0;
+	text-align: center;
 }
 
 .profileInfo {
@@ -75,6 +81,7 @@ body a {
 }
 
 .profilePhoto {
+	object-fit: cover;
 	max-width: 100px;
 	height: 100px;
 	border-radius: 100%;
@@ -165,7 +172,7 @@ body a {
 }
 .logo {
     display: block;
-    width: 80%;
+    width: 100%;
     margin: 0 auto 0 auto;
 }
 .introduction {
@@ -222,7 +229,7 @@ body a {
 	padding-left: 1em;
 }
 
-:-moz-placeholder { /* Firefox 18- */
+::-moz-placeholder { /* Firefox 18- */
 	font-family: instaRegular;
 	font-size: 1.1em;
 	padding-left: 1em;
@@ -234,7 +241,7 @@ body a {
 	padding-left: 1em;
 }
 
-:-ms-input-placeholder {  
+:-ms-input-placeholder {
 	font-family: instaRegular;
 	font-size: 1.1em;
 	padding-left: 1em;
