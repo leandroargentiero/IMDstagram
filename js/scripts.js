@@ -1,5 +1,9 @@
 $(document).ready(function(){
     init();
+    $('.btnEditProfile').click(function(){
+        console.log('click');
+   window.location.href='editProfile.php';
+})
     function init(){
     $('.btnFollow').click(function(){
         $.ajax({

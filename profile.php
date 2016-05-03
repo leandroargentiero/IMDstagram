@@ -1,6 +1,8 @@
 <?php
 include_once('includes/no-session.inc.php');
-
+include_once('classes/users.class.php');
+include_once('classes/feed.class.php');
+session_start();
 
 // Checken wiens account geladen moet worden
 if(!empty($_GET)){
@@ -9,76 +11,60 @@ if(!empty($_GET)){
     $_SESSION['targetUserID'] = $_GET['userID'];
 
     // Profielinformatie ophalen
-    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-    $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID = :userID");
-    $getProfile->bindValue(':userID', $userID);
-    $getProfile->execute();
-    $profileInfo = $getProfile->fetch(PDO::FETCH_ASSOC);
-
+    
+    $profile = new Users();
+    $profile->getProfile($userID);
+    
     // informatie over follows
     // following
-    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-    $getFollowings = $conn->prepare("select * from follows where requestUserID = :requestUserID");
-    $getFollowings->bindValue(":requestUserID", $_GET['userID']);
-    $getFollowings->execute();
-    $followingCount = $getFollowings->rowCount();
+    $profile->getFollowCount($userID);
     
     // followers
-    $targetUserID = $_SESSION['targetUserID'];
-    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-    $getFollows = $conn->prepare("select * from follows where targetUserID = :targetUserID");
-    $getFollows->bindValue(":targetUserID", $targetUserID);
-    $getFollows->execute();
-    $followCount = $getFollows->rowCount();
+    $profile->getFollowerCount($userID);
     
     
     // volg ik dit account al?
-    $targetUserID = $_SESSION['targetUserID'];
-    $requestUserID = $_SESSION['userID'];
-
-    $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-    $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID = :targetUserID");
-    $getFollowInfo->bindValue(":requestUserID", $requestUserID);
-    $getFollowInfo->bindValue(":targetUserID", $targetUserID);
-    $getFollowInfo->execute();
-    $count = $getFollowInfo->rowCount();
-    if($count > 0){
+    if($profile->followCheck()){
         $btnClass = "btnUnfollow";
         $btnText = "Volgend";
     }
     else {
-       $btnClass = "btnFollow";
-        $btnText = "Volgen";
-    }
+            $btnClass = "btnFollow";
+            $btnText = "Volgen";
+        }
     
     // Variabelen voor knoppen en teksten invullen.
-    $bioText = $profileInfo['bio'];
-    $username = $profileInfo['username'];
-    $avatar = $profileInfo['avatar'];
+    $username = $profile->Username;
+    $bioText = $profile->Bio;
+    $avatar = $profile->Image;
+    $userID = $profile->UserID;
+    
+    // get feed
+    
+    $feed = new Feed();
+    $feed->getProfileFeed($userID);
     
 }
 else {
-    // alle profielinfo zit in $_SESSION
-    // knop: profiel bewerken -> editProfile.php
+    $userID = $_SESSION['userID'];
     
-    // follows: info uit tabel 'follows'
+    // follows en profielinfo ophalen
+    $profile = new Users();
+    $profile->getProfile($userID);
+    $profile->getFollowCount($userID);
+    $profile->getFollowerCount($userID);
     
-    
-   $username = $_SESSION['user'];
     $btnText = "Profiel bewerken";
     $btnClass = "btnEditProfile";
-   $bioText = $_SESSION['bio'];
-    $avatar = $_SESSION['avatar'];
-    $userID = $_SESSION['userID'];
+    $username = $profile->Username;
+    $bioText = $profile->Bio;
+    $avatar = $profile->Image;
+    $userID = $profile->UserID;
+    
+    // get feed
+    $feed = new Feed();
+    $feed->getProfileFeed($userID);
 }
-// get feed & postCount
-// users -> getFeed(userID);
-$conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-    $statement = $conn->prepare("select * from posts where imageUserID = :userID order by timestamp desc");
-    $statement->bindValue(':userID', $userID);
-    $statement->execute();
-    $results = $statement->fetchAll();
-    $postCount = $statement->rowCount();
     
 
 ?><!doctype html>
@@ -92,7 +78,7 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
 <body>
 
     <?php include_once("includes/nav.inc.php"); ?>
-
+    
     <div class="profileInfo">
         <img class="profilePhoto" src="<?php echo $avatar; ?>" alt="profile photo">
         <div class="profileDetails">
@@ -105,9 +91,9 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
             <p class="userDescription"><?php echo $bioText; ?></p>
 
             <ul class="userStats">
-                <li><span><?php echo $postCount; ?></span> posts</li>
-                <li><span><?php echo $followCount; ?></span> followers</li>
-                <li><span><?php echo $followingCount; ?></span> following</li>
+                <li><span><?php echo $feed->PostCount; ?></span> posts</li>
+                <li><span><?php echo $profile->FollowerCount; ?></span> followers</li>
+                <li><span><?php echo $profile->FollowCount; ?></span> following</li>
             </ul>
 
         </div>
@@ -117,11 +103,16 @@ $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
     <main class="feedContainer">
 
         <div class="profileFeed">
-            <?php foreach($results as $post): ?>
+            <?php foreach($feed->Results as $post): ?>
             <div class="feedPic">
                <img src="<?php echo $post['fileLocation']; ?>" alt="">
                 </div>
                 <?php endforeach; ?>
+        </div>
+        <div class="loadMoreContainer">
+        
+            <button class="btnLoadMore">Load More</button>
+        
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
