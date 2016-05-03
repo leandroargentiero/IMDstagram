@@ -1,11 +1,6 @@
 <?php
+include_once ("includes/database.inc.php");
 
-/**
- * Created by PhpStorm.
- * User: Leandro
- * Date: 04/04/16
- * Time: 18:53
- */
 class Users{
     private $m_sEmail;
     private $m_sFullname;
@@ -113,7 +108,7 @@ class Users{
 
     public function Register()
     {
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
                                                         :username, :password)");
         $statement->bindValue(":email", $this->Email);
@@ -134,8 +129,8 @@ class Users{
     public function canLogin()
     {
         $p_password = $this->Password;
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $sql = "select userID, username, password, bio, avatar from users where username = '".$this->Username."'";
+        global $conn;
+        $sql = "select userID, username, password, avatar from users where username = '".$this->Username."'";
         $statement = $conn->prepare($sql);
         $statement->execute();
 
@@ -161,7 +156,7 @@ class Users{
     public function updateProfile()
     {
         $currentUser = $_SESSION['user'];
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
 
         $sqlUpdate =
             "UPDATE users
@@ -192,7 +187,7 @@ class Users{
         // bcrypting new password
         $password = password_hash($this->EditPassword, PASSWORD_DEFAULT, $options);
 
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $sqlUpdatePassword = "update users set password = '".$password."' where username = '".$currentUser."'";
         $statement = $conn->prepare($sqlUpdatePassword);
         $statement->execute();
@@ -215,7 +210,7 @@ class Users{
 
     public function saveAvatar()
     {
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $statement = $conn->prepare("update users set avatar = :avatar where userID = '".$_SESSION['userID']."'");
         $statement->bindValue(":avatar", $this->m_sfilePath);
         $statement->execute();
@@ -225,7 +220,7 @@ class Users{
 
     public function showAvatar()
     {
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
         $statement = $conn->prepare("select avatar from users where userID = '".$_SESSION['userID']."'");
         $statement->execute();
 

@@ -1,4 +1,6 @@
-<?php 
+<?php
+include_once ("includes/database.inc.php");
+
 class Post{
     private $m_sImage;
     private $m_sDescription;
@@ -44,8 +46,8 @@ class Post{
     }
     
     public function savePost(){
-        
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        global $conn;
+
         $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID) values (:fileLocation, :description, :imageUserID)");
         $statement->bindValue(":fileLocation", $this->m_sFilePath);
         $statement->bindValue(":description", $this->m_sDescription);

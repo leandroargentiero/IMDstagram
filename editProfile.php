@@ -167,6 +167,7 @@
             margin: -10px 0 10px 0;
         }
         .avatar{
+            object-fit: cover;
             max-width: 100px;
             height: 100px;
             border-radius: 100%;

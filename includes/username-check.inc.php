@@ -1,11 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Leandro
- * Date: 16/04/16
- * Time: 18:01
- */
-$conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+include_once ("database.inc.php");
 
 if($_POST)
 {

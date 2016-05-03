@@ -1,15 +1,16 @@
 <?php
 include_once('includes/no-session.inc.php');
+include_once('includes/database.inc.php');
 
     if(isset($_GET['txtSearch'])) {
-        $searchQ = $_GET['txtSearch'];
+        $searchKeyword = $_GET['txtSearch'];
         $results = array();
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("SELECT *
                       FROM posts
                       WHERE description
-                      LIKE :keywords;");
-        $statement->bindValue(':keywords', '%' . $searchQ . '%');
+                      LIKE :keywords
+                      ORDER BY timestamp DESC");
+        $statement->bindValue(':keywords', '%' . $searchKeyword . '%');
         $statement->execute();
 
         if($statement->rowCount() >= 1){
@@ -50,6 +51,9 @@ include_once('includes/no-session.inc.php');
     span{
         font-family: 'instaBold', 'sans-serif';
     }
+    .posts{
+        object-fit: cover;
+    }
 </style>
 <body>
 
@@ -62,7 +66,7 @@ include_once('includes/no-session.inc.php');
     <h3 class="feedback countPosts"><?php if(isset($countPosts)){echo "<span>".$countPosts."</span>"." posts";} ?></h3>
     <ul>
         <?php foreach($results as $result): ?>
-            <li><img src="<?php echo $result['fileLocation']; ?>" alt="post"></li>
+            <li><a href="postDetail.php?imageID=<?php echo $result['imageID']; ?>"><img class="posts" src="<?php echo $result['fileLocation']; ?>" alt="post"></a></li>
         <?php endforeach;?>
     </ul>
 
