@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+include_once('database.inc.php');
 
 if(!empty($_SESSION['targetUserID'])){
     $requestUserID = $_SESSION['userID'];
