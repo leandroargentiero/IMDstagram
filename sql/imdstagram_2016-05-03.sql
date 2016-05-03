@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4529
+# Version 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.42)
 # Database: imdstagram
-# Generation Time: 2016-05-03 13:20:16 +0000
+# Generation Time: 2016-05-03 13:29:39 +0000
 # ************************************************************
 
 
@@ -57,6 +57,15 @@ CREATE TABLE `follows` (
   CONSTRAINT `targetUserID` FOREIGN KEY (`targetUserID`) REFERENCES `users` (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+LOCK TABLES `follows` WRITE;
+/*!40000 ALTER TABLE `follows` DISABLE KEYS */;
+
+INSERT INTO `follows` (`followID`, `requestUserID`, `targetUserID`, `accepted`)
+VALUES
+	(1,2,1,0);
+
+/*!40000 ALTER TABLE `follows` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table images
@@ -125,7 +134,17 @@ VALUES
 	(2,'files/1_1462281453.jpg','Balloons bologna leo',NULL,1,'2016-05-03 15:17:33',NULL),
 	(3,'files/1_1462281464.jpg','Baseball leo',NULL,1,'2016-05-03 15:17:44',NULL),
 	(4,'files/1_1462281476.jpg','Zarautz leo',NULL,1,'2016-05-03 15:17:56',NULL),
-	(5,'files/1_1462281501.jpg','Park Hotel leo',NULL,1,'2016-05-03 15:18:21',NULL);
+	(5,'files/1_1462281501.jpg','Park Hotel leo',NULL,1,'2016-05-03 15:18:21',NULL),
+	(6,'files/2_1462281789.jpg','Crazy times!',NULL,2,'2016-05-03 15:23:09',NULL),
+	(7,'files/2_1462281812.jpg','De Hoorn, magical place for an outdoor party.',NULL,2,'2016-05-03 15:23:32',NULL),
+	(8,'files/2_1462281841.jpg','On the road',NULL,2,'2016-05-03 15:24:01',NULL),
+	(9,'files/2_1462281871.jpg','Will you look at that!',NULL,2,'2016-05-03 15:24:31',NULL),
+	(10,'files/2_1462281884.jpg','Great album',NULL,2,'2016-05-03 15:24:44',NULL),
+	(11,'files/2_1462281915.jpg','Sun is shining, the weather is sweet.',NULL,2,'2016-05-03 15:25:15',NULL),
+	(12,'files/2_1462281929.jpg','Come say hi!',NULL,2,'2016-05-03 15:25:29',NULL),
+	(13,'files/2_1462281941.jpg','Happy birthday!',NULL,2,'2016-05-03 15:25:41',NULL),
+	(14,'files/2_1462281975.jpg','My best picture. Yet.',NULL,2,'2016-05-03 15:26:15',NULL),
+	(15,'files/2_1462282002.jpg','Kid Ink in opdracht voor Wannabes.',NULL,2,'2016-05-03 15:26:42',NULL);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
