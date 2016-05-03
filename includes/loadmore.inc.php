@@ -1,7 +1,7 @@
 <?php 
     session_start();    
     $_SESSION['getal'] += 1;
-    $_SESSION['offset'] += 1;
+    $_SESSION['offset'] += 20;
     $csa = $_SESSION['csa'];
     $getal = $_SESSION['getal'];
     $offset = $_SESSION['offset'];
