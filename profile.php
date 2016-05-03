@@ -1,5 +1,71 @@
 <?php
 include_once('includes/no-session.inc.php');
+include_once('classes/users.class.php');
+include_once('classes/feed.class.php');
+
+// Checken wiens account geladen moet worden
+if(!empty($_GET)){
+    
+    $userID = $_GET['userID'];
+    $_SESSION['targetUserID'] = $_GET['userID'];
+
+    // Profielinformatie ophalen
+    
+    $profile = new Users();
+    $profile->getProfile($userID);
+    
+    // informatie over follows
+    // following
+    $profile->getFollowCount($userID);
+    
+    // followers
+    $profile->getFollowerCount($userID);
+    
+    
+    // volg ik dit account al?
+    if($profile->followCheck()){
+        $btnClass = "btnUnfollow";
+        $btnText = "Volgend";
+    }
+    else {
+            $btnClass = "btnFollow";
+            $btnText = "Volgen";
+        }
+    
+    // Variabelen voor knoppen en teksten invullen.
+    $username = $profile->Username;
+    $bioText = $profile->Bio;
+    $avatar = $profile->Image;
+    $userID = $profile->UserID;
+    
+    // get feed
+    
+    $feed = new Feed();
+    $feed->getProfileFeed($userID);
+    
+}
+else {
+    $userID = $_SESSION['userID'];
+    
+    // follows en profielinfo ophalen
+    $profile = new Users();
+    $profile->getProfile($userID);
+    $profile->getFollowCount($userID);
+    $profile->getFollowerCount($userID);
+    
+    $btnText = "Profiel bewerken";
+    $btnClass = "btnEditProfile";
+    $username = $profile->Username;
+    $bioText = $profile->Bio;
+    $avatar = $profile->Image;
+    $userID = $profile->UserID;
+    
+    // get feed
+    $feed = new Feed();
+    $feed->getProfileFeed($userID);
+}
+    
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -11,41 +77,44 @@ include_once('includes/no-session.inc.php');
 <body>
 
     <?php include_once("includes/nav.inc.php"); ?>
-
+    
     <div class="profileInfo">
-        <img class="profilePhoto" src="<?php echo $_SESSION['avatar']; ?>" alt="profile photo">
+        <img class="profilePhoto" src="<?php echo $avatar; ?>" alt="profile photo">
         <div class="profileDetails">
             <div class="editProfile">
-                <p class="userName"><?php echo $_SESSION['user']; ?></p>
+                <p class="userName"><?php echo $username; ?></p>
 
-                <a href="editProfile.php"><button class="btnEditProfile"> Profiel bewerken</button></a>
+                <button id="" class="<?php echo $btnClass; ?>"><?php echo $btnText; ?></button>
             </div>
 
-            <p class="userDescription">25 year old - IMD student - Leuven</p>
+            <p class="userDescription"><?php echo $bioText; ?></p>
 
             <ul class="userStats">
-                <li><span>9</span> posts</li>
-                <li><span>20</span> followers</li>
-                <li><span>25</span> following</li>
+                <li><span><?php echo $feed->PostCount; ?></span> posts</li>
+                <li><span><?php echo $profile->FollowerCount; ?></span> followers</li>
+                <li><span><?php echo $profile->FollowCount; ?></span> following</li>
             </ul>
 
         </div>
 
     </div>
 
-    <div class="profileFeed">
+    <main class="feedContainer">
 
-        <ul>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-            <li><img src="images/m8.jpg" alt="post"></li>
-        </ul>
-    </div>
+        <div class="profileFeed">
+            <?php foreach($feed->Results as $post): ?>
+            <div class="feedPic">
+               <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                </div>
+                <?php endforeach; ?>
+        </div>
+        <div class="loadMoreContainer">
+        
+            <button class="btnLoadMore">Load More</button>
+        
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

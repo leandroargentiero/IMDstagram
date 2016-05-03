@@ -121,6 +121,28 @@ body a {
 
 .btnEditProfile:hover {
 	color: #4E606A;
+    cursor: pointer;
+}
+
+.btnFollow, .btnUnfollow, .unfollowed {
+    background-color: #fbf9f7;
+	border:1px solid #719DBE;
+	font-family: 'instaLight';
+    text-transform: uppercase;
+	color: #719DBE;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+}
+.btnFollow:hover, .btnUnfollow:hover {
+    cursor: pointer;
+    color: #5A8ACE;
+}
+
+.followed, .btnUnfollow {
+    background-color: #60C029;
+    border:1px solid #60C029;
+    color: white;
 }
 
 .userDescription {
@@ -140,31 +162,76 @@ body a {
 .userStats span {
 	font-weight: bold;
 }
-
+.feedContainer {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 .profileFeed {
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
 }
 
-.profileFeed ul {
-	/*display: flex;
-	flex-wrap: wrap;
-	justify-content: center;*/
+.indexFeed {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    
 }
 
-.profileFeed ul li{
-	float: left;
-	max-width: 200px;
-	height: 200px;
-	padding: 5px 5px 5px 5px;
+.indexFeed .feedPic {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    border: 1px solid dimgrey;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    margin: 10px;
 }
 
-.profileFeed img {
-	width: 100%;
-	height: 100%;
-}
+.feedPic {
+    width: 250px;
+    height: 250px;
+    background-color: white;
+    border: 1px solid dimgrey;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin: 10px;
+    }
 
+.feedPic img {
+    width: 100%;
+}
+.btnLoadMore {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 100%;
+    border: 1px solid #30618B;
+    text-transform: uppercase;
+    font-family: 'instaRegular';
+    background-color: #fbf9f7;
+    color: #30618B;
+}
+.btnLoadMore:hover {
+    cursor: pointer;
+    font-family: 'instaBold';
+}
+.loadMoreContainer {
+    text-align: center;
+    width: 200px;
+    margin: 20px auto 20px auto;
+}
 .container {
     width: 80%;
     margin: 1.5em auto 3em auto;

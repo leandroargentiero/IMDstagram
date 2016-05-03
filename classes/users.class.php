@@ -11,6 +11,10 @@ class Users{
     private $m_sEditBio;
     private $m_sEditPassword;
     private $m_sfilePath;
+    private $m_iUserID;
+    private $m_sBio;
+    private $m_iFollowCount;
+    private $m_iFollowerCount;
 
     public function __set($p_sProperty, $p_vValue)
     {
@@ -41,6 +45,18 @@ class Users{
                 break;
             case "Image":
                 $this->m_sfilePath = $p_vValue;
+                break;
+            case "UserID":
+                $this->m_iUserID = $p_vValue;
+                break;
+            case "Bio":
+                $this->m_sBio = $p_vValue;
+                break;
+            case "FollowCount":
+                $this->m_iFollowCount = $p_vValue;
+                break;
+            case "FollowerCount":
+                $this->m_iFollowerCount = $p_vValue;
                 break;
         }
     }
@@ -75,17 +91,31 @@ class Users{
             case "Image":
                 return $this->m_sfilePath;
                 break;
+            case "UserID":
+                return $this->m_iUserID;
+                break;
+            case "Bio":
+                return $this->m_sBio;
+                break;
+            case "FollowCount":
+                return $this->m_iFollowCount;
+                break;
+            case "FollowerCount":
+                return $this->m_iFollowerCount;
+                break;
         }
     }
 
     public function Register()
     {
         global $conn;
-        $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
-                                                        :username, :password)");
+        $statement = $conn->prepare("insert into users (email, fullname, username, password, bio) values (:email, :fullname,
+                                                        :username, :password, :bio)");
         $statement->bindValue(":email", $this->Email);
         $statement->bindValue(":fullname", $this->Fullname);
         $statement->bindValue(":username", $this->Username);
+        $statement->bindValue(":bio", " ");
+
         // password options
         $options = [
             'cost'=> 12
@@ -94,6 +124,8 @@ class Users{
         $password = password_hash($this->Password, PASSWORD_DEFAULT, $options);
         $statement->bindValue(":password", $password);
         $statement->execute();
+        // insertID opvragen
+        // insert into follows: insertID volgt insertID
     }
 
     public function canLogin()
@@ -138,7 +170,6 @@ class Users{
 
         $statementUpdate = $conn->prepare(($sqlUpdate));
         $statementUpdate->execute();
-
         if(strlen(trim($this->EditUsername)) != 0)
         {
             $_SESSION['user'] = $this->EditUsername;
@@ -197,6 +228,61 @@ class Users{
         if($statement->rowCount() == 1){
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $_SESSION['avatar'] = $result['avatar'];
+        }
+    }
+    
+    public function getProfile($p_sProperty)
+    {
+        
+        $this->m_iUserID = $p_sProperty;
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID =          :userID");
+        $getProfile->bindValue(':userID', $this->UserID);
+        $getProfile->execute();
+        $profileInfo = $getProfile->fetch(PDO::FETCH_ASSOC);
+        
+        $this->UserID = $profileInfo['userID'];
+        $this->m_sBio = $profileInfo['bio'];
+        $this->m_sUsername = $profileInfo['username'];
+        $this->m_sfilePath = $profileInfo['avatar'];
+    }
+    
+    public function getFollowCount($p_sProperty){
+        $this->m_iUserID = $p_sProperty;
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getFollowings = $conn->prepare("select * from follows where requestUserID = :requestUserID");
+        $getFollowings->bindValue(":requestUserID", $this->UserID);
+        $getFollowings->execute();
+        $followingCount = $getFollowings->rowCount();
+        $this->FollowCount = $followingCount;
+    }
+    
+    public function getFollowerCount($p_sProperty){
+        $this->m_iUserID = $p_sProperty;
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getFollows = $conn->prepare("select * from follows where targetUserID = :targetUserID");
+        $getFollows->bindValue(":targetUserID", $this->UserID);
+        $getFollows->execute();
+        $followCount = $getFollows->rowCount();
+        $this->FollowerCount = $followCount;
+    }
+    
+    public function followCheck(){
+        $targetUserID = $_SESSION['targetUserID'];
+        $requestUserID = $_SESSION['userID'];
+
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID =  :targetUserID");
+        $getFollowInfo->bindValue(":requestUserID", $requestUserID);
+        $getFollowInfo->bindValue(":targetUserID", $targetUserID);
+        $getFollowInfo->execute();
+        $count = $getFollowInfo->rowCount();
+        return $count;
+        if($count > 0){
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
