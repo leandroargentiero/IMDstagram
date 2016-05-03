@@ -2,7 +2,6 @@
 include_once('includes/no-session.inc.php');
 include_once('classes/users.class.php');
 include_once('classes/feed.class.php');
-session_start();
 
 // Checken wiens account geladen moet worden
 if(!empty($_GET)){

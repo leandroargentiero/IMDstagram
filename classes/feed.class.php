@@ -1,5 +1,4 @@
 <?php
-session_start();
 class Feed {
     private $m_iUserID;
     private $m_oResults;

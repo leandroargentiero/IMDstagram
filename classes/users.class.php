@@ -109,11 +109,13 @@ class Users{
     public function Register()
     {
         global $conn;
-        $statement = $conn->prepare("insert into users (email, fullname, username, password) values (:email, :fullname,
-                                                        :username, :password)");
+        $statement = $conn->prepare("insert into users (email, fullname, username, password, bio) values (:email, :fullname,
+                                                        :username, :password, :bio)");
         $statement->bindValue(":email", $this->Email);
         $statement->bindValue(":fullname", $this->Fullname);
         $statement->bindValue(":username", $this->Username);
+        $statement->bindValue(":bio", " ");
+
         // password options
         $options = [
             'cost'=> 12
@@ -140,7 +142,6 @@ class Users{
             $hash = $currentUser['password'];
             $_SESSION['userID'] = $currentUser['userID'];
             $_SESSION['avatar'] = $currentUser['avatar'];
-            $_SESSION['bio'] = $currentUser['bio'];
 
             if ( password_verify($p_password, $hash)) {
                 return true;
@@ -258,7 +259,6 @@ class Users{
     
     public function getFollowerCount($p_sProperty){
         $this->m_iUserID = $p_sProperty;
-        $targetUserID = $_SESSION['targetUserID'];
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $getFollows = $conn->prepare("select * from follows where targetUserID = :targetUserID");
         $getFollows->bindValue(":targetUserID", $this->UserID);
