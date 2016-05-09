@@ -301,7 +301,21 @@ class Users{
     }
     
     public function followCheck(){
-       
+       $targetUserID = $_SESSION['targetUserID'];
+        $requestUserID = $_SESSION['userID'];
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID =  :targetUserID");
+        $getFollowInfo->bindValue(":requestUserID", $requestUserID);
+        $getFollowInfo->bindValue(":targetUserID", $targetUserID);
+        $getFollowInfo->execute();
+        $count = $getFollowInfo->rowCount();
+        return $count;
+        if($count > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }
