@@ -125,7 +125,12 @@
         border: none;
         color: #7B7A7C;
     }
-
+    .glyphicon-trash {
+        float: right;
+        margin-top: -25px;
+        opacity: .5;
+        cursor: pointer;
+    }
 </style>
 <body>
     <div class="postDetail">
@@ -163,6 +168,9 @@
                         <img id="heart" class="<?php echo $class ?>" src="<?php echo $source ?>" alt="like">
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
+                    
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Verwijder je foto"></span>
+                    
                 </div>
             </div>
         </div>

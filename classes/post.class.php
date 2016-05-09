@@ -56,6 +56,7 @@ class Post{
             header('Location: index.php');
         }
     }
+    
 }
 
 ?>

@@ -91,4 +91,17 @@ $(document).ready(function(){
                     return false;
     
     });
+    
+    $('.glyphicon-trash').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: 'includes/deletePost.inc.php',
+                data: $(this).serialize(),
+                success: function(data)
+                {
+                    window.location.href='index.php'; 
+                    console.log(data);
+                }
+            });
+        });
 });
