@@ -146,6 +146,7 @@ class Users{
             $currentUser = $statement->fetch(PDO::FETCH_ASSOC);
             $hash = $currentUser['password'];
             $_SESSION['userID'] = $currentUser['userID'];
+            $_SESSION['username'] = $currentUser['username'];
             $_SESSION['avatar'] = $currentUser['avatar'];
 
             if ( password_verify($p_password, $hash)) {

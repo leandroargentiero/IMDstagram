@@ -2,7 +2,7 @@
     session_start();
     include_once ("includes/nav.inc.php");
     include_once ("classes/postDetail.class.php");
-
+    $visible = "";
     if(isset($_GET['imageID'])){
         $_SESSION['imageID'] =  $_GET['imageID'];
 
@@ -26,6 +26,10 @@
             $source = "images/heart_blank.png";
             $class = "btnLike";
         }
+    }
+
+    if ($username['username'] == $_SESSION['username']){
+        $visible = "visible";
     }
 
 ?><!doctype html>
@@ -125,7 +129,16 @@
         border: none;
         color: #7B7A7C;
     }
-
+    .glyphicon-trash {
+        float: right;
+        margin-top: -25px;
+        opacity: .5;
+        cursor: pointer;
+        visibility: hidden;
+    }
+    #visible {
+        visibility: visible;
+    }
 </style>
 <body>
     <div class="postDetail">
@@ -163,6 +176,9 @@
                         <img id="heart" class="<?php echo $class ?>" src="<?php echo $source ?>" alt="like">
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
+                    
+                    <span class="glyphicon glyphicon-trash" id="<?php echo $visible; ?>" aria-hidden="true" title="Verwijder je foto"></span>
+                    
                 </div>
             </div>
         </div>
