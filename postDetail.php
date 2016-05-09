@@ -4,14 +4,28 @@
     include_once ("classes/postDetail.class.php");
 
     if(isset($_GET['imageID'])){
+        $_SESSION['imageID'] =  $_GET['imageID'];
+
         $post = new postDetail();
         $post->imageID = $_GET['imageID'];
         $image = $post->getImage();
         $avatar = $post->getAvatar();
         $username = $post->getUsername();
         $postTime = $post->getPostHour();
+        $likeCount = $post->getLikes();
 
-        $_SESSION['imageID'] = $_GET['imageID'];
+        $likeCheck = $post->likeCheck();
+
+        if($likeCheck)
+        {
+            $source = "images/heart_filled.png";
+            $class = "btnUnlike";
+        }
+        else
+        {
+            $source = "images/heart_blank.png";
+            $class = "btnLike";
+        }
     }
 
 ?><!doctype html>
@@ -100,7 +114,7 @@
         flex-direction: row;
         align-items: center;
     }
-    .like img{
+    #heart{
         margin: 10px 0 0 0;
     }
     #commentField{
@@ -124,7 +138,20 @@
                     </ul>
                 </div>
                 <div class="innerRightSecondHeader">
-                    <p class="likes">146 Likes</p>
+                    <p class="likes"><?php
+                                       if($likeCount == 0) {
+                                           echo "No likes yet";
+                                       }
+                                       elseif($likeCount == 1)
+                                       {
+                                           echo $likeCount." Like";
+                                       }
+                                       else
+                                       {
+                                           echo $likeCount." Likes";
+                                       }
+                                     ?>
+                    </p>
                     <p class="timestamp"><?php echo $postTime ?></p>
                 </div>
                 <div class="commentFeed">
@@ -133,7 +160,7 @@
                 </div>
                 <div class="innerRightFooter">
                     <form class="innerRightFooterForm" action="" method="post">
-                        <a class="like-btn" href="#"><img id="blank-heart" src="images/heart_blank.png" alt="like"></a>
+                        <img id="heart" class="<?php echo $class ?>" src="<?php echo $source ?>" alt="like">
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
                 </div>
