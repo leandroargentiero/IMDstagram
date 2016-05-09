@@ -10,6 +10,8 @@
         $avatar = $post->getAvatar();
         $username = $post->getUsername();
         $postTime = $post->getPostHour();
+
+        $_SESSION['imageID'] = $_GET['imageID'];
     }
 
 ?><!doctype html>
@@ -131,7 +133,7 @@
                 </div>
                 <div class="innerRightFooter">
                     <form class="innerRightFooterForm" action="" method="post">
-                        <a class="like" href="#"><img id="like" src="images/heart_blank.png" alt="like"></a>
+                        <a class="like-btn" href="#"><img id="blank-heart" src="images/heart_blank.png" alt="like"></a>
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
                 </div>
@@ -139,4 +141,6 @@
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
 </html>
