@@ -100,7 +100,6 @@ $(document).ready(function(){
                 success: function(data)
                 {
                     window.location.href='index.php'; 
-                    console.log(data);
                 }
             });
         });

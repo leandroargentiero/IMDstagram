@@ -8,9 +8,10 @@
     $imageID = $_SESSION['imageID'];
     
     
-    $statement = $conn->prepare("delete from posts where imageID = :imageID");
+    $statement = $conn->prepare("delete from posts where imageID = :imageID and imageUserID = :userID");
 
     $statement->bindValue(":imageID", $imageID);
+    $statement->bindValue(":userID", $userID);
     $statement->execute();
     
     

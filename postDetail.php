@@ -2,7 +2,7 @@
     session_start();
     include_once ("includes/nav.inc.php");
     include_once ("classes/postDetail.class.php");
-
+    $visible = "";
     if(isset($_GET['imageID'])){
         $_SESSION['imageID'] =  $_GET['imageID'];
 
@@ -27,6 +27,10 @@
             $class = "btnLike";
         }
     }
+echo $_SESSION['username'];
+if ($username['username'] == $_SESSION['username']){
+    $visible = "visible";
+}
 
 ?><!doctype html>
 <html lang="en">
@@ -130,6 +134,10 @@
         margin-top: -25px;
         opacity: .5;
         cursor: pointer;
+        visibility: hidden;
+    }
+    #visible {
+        visibility: visible;
     }
 </style>
 <body>
@@ -169,7 +177,7 @@
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
                     
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true" title="Verwijder je foto"></span>
+                    <span class="glyphicon glyphicon-trash" id="<?php echo $visible; ?>" aria-hidden="true" title="Verwijder je foto"></span>
                     
                 </div>
             </div>
