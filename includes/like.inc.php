@@ -23,10 +23,7 @@ if(!empty($likeReceiverID)){
     $statement->bindValue(':likeSenderID', $likeSenderID);
     $statement->bindValue(':likeReceiverID', $likeReceiverID);
     $statement->execute();
-    if($statement->execute()){
-        console.log("send");
-        echo "liked";
-    };
 }
+
 
 
