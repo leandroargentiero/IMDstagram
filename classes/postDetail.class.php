@@ -124,7 +124,33 @@ class postDetail{
 
     public function getLikes(){
         global $conn;
-        
 
+        $likeCount = $conn->prepare("SELECT likeImageID
+                                     FROM likes
+                                     WHERE likeImageID = :likeImageID");
+        $likeCount->bindValue(":likeImageID", $this->m_iImageID);
+        $likeCount->execute();
+
+        $result = $likeCount->rowCount();
+
+        return $result;
+    }
+
+    public function likeCheck(){
+        global $conn;
+        // likeImageID
+        $likeImageID = $_SESSION['imageID'];
+        // likeSenderID
+        $likeSenderID = $_SESSION['userID'];
+
+        $likeCheck = $conn->prepare("SELECT *
+                                     FROM likes
+                                     WHERE likeImageID = $likeImageID AND likeSenderID = $likeSenderID");
+        $likeCheck->execute();
+
+        if($likeCheck->rowCount() == 1)
+        {
+            return true;
+        }
     }
 }
