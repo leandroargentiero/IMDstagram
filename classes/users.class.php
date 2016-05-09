@@ -105,7 +105,7 @@ class Users{
                 break;
         }
     }
-
+    
     public function Register()
     {
         global $conn;
@@ -125,9 +125,14 @@ class Users{
         $statement->bindValue(":password", $password);
         $statement->execute();
         // insertID opvragen
+        
+        $_SESSION['userID'] = $statement->insert_id;
+            
         // insert into follows: insertID volgt insertID
+        
+        
     }
-
+   
     public function canLogin()
     {
         $p_password = $this->Password;
@@ -153,6 +158,30 @@ class Users{
         }
 
     }
+    
+    public function followSelf(){
+          $requestUserID = $_SESSION['userID'];
+        $_SESSION['targetUserID'] = $_SESSION['userID'];
+        
+         global $conn;
+        $targetUserID = $_SESSION['targetUserID'];
+        $requestUserID = $_SESSION['userID'];
+
+        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
+        $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID =  :targetUserID");
+        $getFollowInfo->bindValue(":requestUserID", $requestUserID);
+        $getFollowInfo->bindValue(":targetUserID", $targetUserID);
+        $getFollowInfo->execute();
+        $count = $getFollowInfo->rowCount();
+        if($count == 0){
+            
+            $insertFollow = $conn->prepare('insert into follows (requestUserID, targetUserID) values (:requestUserID, :targetUserID)');
+            $insertFollow->bindValue(':requestUserID', $requestUserID);
+            $insertFollow->bindValue(':targetUserID', $targetUserID);
+            $insertFollow->execute();
+        }
+        
+    }
 
     public function updateProfile()
     {
@@ -176,6 +205,8 @@ class Users{
         }
 
     }
+    
+    
 
     public function updatePassword()
     {
@@ -233,7 +264,7 @@ class Users{
     
     public function getProfile($p_sProperty)
     {
-        
+        global $conn;
         $this->m_iUserID = $p_sProperty;
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID =          :userID");
@@ -248,6 +279,7 @@ class Users{
     }
     
     public function getFollowCount($p_sProperty){
+        global $conn;
         $this->m_iUserID = $p_sProperty;
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $getFollowings = $conn->prepare("select * from follows where requestUserID = :requestUserID");
@@ -258,6 +290,7 @@ class Users{
     }
     
     public function getFollowerCount($p_sProperty){
+        global $conn;
         $this->m_iUserID = $p_sProperty;
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $getFollows = $conn->prepare("select * from follows where targetUserID = :targetUserID");
@@ -268,22 +301,7 @@ class Users{
     }
     
     public function followCheck(){
-        $targetUserID = $_SESSION['targetUserID'];
-        $requestUserID = $_SESSION['userID'];
-
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID =  :targetUserID");
-        $getFollowInfo->bindValue(":requestUserID", $requestUserID);
-        $getFollowInfo->bindValue(":targetUserID", $targetUserID);
-        $getFollowInfo->execute();
-        $count = $getFollowInfo->rowCount();
-        return $count;
-        if($count > 0){
-            return true;
-        }
-        else {
-            return false;
-        }
+       
     }
 
 }

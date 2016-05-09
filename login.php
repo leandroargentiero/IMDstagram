@@ -1,5 +1,6 @@
 <?php
     session_start();
+
     include_once ("classes/users.class.php");
 
     if(!empty($_POST)){
@@ -13,6 +14,7 @@
 
         if($users->canLogin()){
             $_SESSION['user'] = $username;
+            $users->followSelf();
             header('Location: index.php');
         }
         else
@@ -20,6 +22,7 @@
             $error = "Your username or password was incorrect.";
         }
     }
+    
 ?><!DOCTYPE html>
 <html lang="en">
 

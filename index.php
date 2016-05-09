@@ -1,9 +1,11 @@
 <?php
     include_once('includes/no-session.inc.php');
+
     include_once('classes/feed.class.php');
     $userID = $_SESSION['userID'];
     $feed = new Feed();
     $feed->getFeed($userID);
+    
 ?>
 <!doctype html>
 <html lang="en">

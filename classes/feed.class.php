@@ -38,7 +38,7 @@ class Feed {
         // - Eerst zien wie de user volgt
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("select targetUserID from follows where requestUserID = :requestUserID");
-        $statement->bindValue(":requestUserID", $_SESSION['userID']);
+        $statement->bindValue(":requestUserID", $this->m_iUserID);
         $statement->execute();
         $rows_found = $statement->rowCount();
         $results = $statement->fetchAll();
@@ -53,27 +53,26 @@ class Feed {
         foreach($results as $entry){ 
             array_push($array, $entry['targetUserID']);
         }
-    
+        
         // array 'plat' maken voor de select.
-        $csa = implode(", ",$array);
+        $csa = implode(",",$array);
         $_SESSION['csa'] = $csa;
-
         // selecteren
         $_SESSION['getal'] = 20;
         $_SESSION['offset'] = 20;
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $statement = $conn->prepare("
             select * from posts 
-            where imageUserID in (:array) 
+            where imageUserID in (select targetUserID from follows where requestUserID = :requestUserID)
             order by timestamp desc 
             limit :getal
             ");
-        $statement->bindValue(":array", $csa);
+        /* $statement->bindParam(':array', $csa); */
+        $statement->bindValue(":requestUserID", $this->m_iUserID);
         $statement->bindValue(':getal', (int) trim($_SESSION['getal']), PDO::PARAM_INT);
         $statement->execute();
         
         $results = $statement->fetchAll();
-        
         $this->m_oResults = $results;
     }
     
