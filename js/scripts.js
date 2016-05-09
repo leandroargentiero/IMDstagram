@@ -38,6 +38,38 @@ $(document).ready(function(){
             });
             return false;
         });
+
+        $('.btnLike').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: 'includes/like.inc.php',
+                data: $(this).serialize(),
+                success: function(data)
+                {
+                    console.log(data);
+                    $(".btnLike").attr("class", "btnUnlike");
+                    $("#heart").attr("src", "images/heart_filled.png");
+                    init();
+                }
+            });
+            return false;
+        });
+
+        $('.btnUnlike').click(function(){
+            $.ajax({
+                type: 'POST',
+                url: 'includes/unlike.inc.php',
+                data: $(this).serialize(),
+                success: function(data)
+                {
+                    console.log(data);
+                    $(".btnUnlike").attr("class", "btnLike");
+                    $("#heart").attr("src", "images/heart_blank.png");
+                    init();
+                }
+            });
+            return false;
+        });
     }
     $('.btnLoadMore').click(function(){
     for(i=0; i<20;i++){
@@ -58,18 +90,5 @@ $(document).ready(function(){
                     });}
                     return false;
     
-    });
-
-    $('.like-btn').click(function(){
-        $.ajax({
-            type: 'POST',
-            url: 'includes/like.inc.php',
-            data: $(this).serialize(),
-            success: function(data)
-            {
-                console.log(data);
-            }
-        });
-        return false;
     });
 });
