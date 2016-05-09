@@ -27,10 +27,10 @@
             $class = "btnLike";
         }
     }
-echo $_SESSION['username'];
-if ($username['username'] == $_SESSION['username']){
-    $visible = "visible";
-}
+
+    if ($username['username'] == $_SESSION['username']){
+        $visible = "visible";
+    }
 
 ?><!doctype html>
 <html lang="en">
