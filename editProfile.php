@@ -70,6 +70,11 @@
             }
         }
     }
+
+    // PRIVACY SETTINGS
+
+    $privacySetting = "openbaar";
+    $privacyUitleg = "Dit wil zeggen dat je posts zichtbaar zijn voor iedereen die je account kan vinden."
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -251,9 +256,13 @@
                     echo "<p class='messageUpdateError'>$messageEmptySubmit</p>";
                 }
                 ?>
-
+                
                 <input class="submitEdit" name="update" type="submit" value="Gegevens wijzigen">
             </form>
+            <h1>Privacy</h1>
+            <button class="<?php echo $privacySetting; ?>"><?php echo $privacySetting; ?></button>
+            <p>Je account is momenteel <strong><?php echo $privacySetting; ?></strong>. <?php echo $privacyUitleg; ?></p>
+            
 
         </div>
     </div>

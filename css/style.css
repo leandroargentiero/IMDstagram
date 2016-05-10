@@ -53,6 +53,7 @@ body {
     font-family: Montserrat, sans-serif;
 	background-color: #fbf9f7;
 	color: #4E606A;
+    margin-bottom: 30px;
 }
 body a {
 	text-decoration: none;
@@ -403,4 +404,24 @@ footer a{
 }
 footer span{
 	color: #818380;
+}
+
+p {
+margin-top : 15px;
+font-size: .8em;
+}
+button {
+    cursor: pointer;
+}
+.openbaar {
+    background-color: #fbf9f7;
+	border:1px solid #60C029;
+	font-family: 'instaLight';
+	color: #60C029;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+}
+.openbaar:hover {
+    font-family: 'instaBold';
 }
