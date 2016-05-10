@@ -13,7 +13,7 @@
         $username = $post->getUsername($_GET['imageID']);
         $postTime = $post->getPostHour($_GET['imageID']);
         $likeCount = $post->getLikes($_GET['imageID']);
-        $userID = $post->getUserID();
+        $userID = $post->getUserID($_GET['imageID']);
 
         $likeCheck = $post->likeCheck();
 
