@@ -157,8 +157,9 @@ class postDetail{
         }
     }
 
-    public function getUserID(){
+    public function getUserID($p_sProperty){
         global $conn;
+        $this->m_iImageID = $p_sProperty;
         $getUserID = $conn->prepare("
                                     SELECT imageUserID
                                     FROM posts
