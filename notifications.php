@@ -72,11 +72,14 @@
                       echo $profileInfo->Username; 
                         
                       ?>
-                    </a> wil je volgen. <span class="glyphicon glyphicon-ok"></span>
-                  <span class="glyphicon glyphicon-remove"></span>
+                    </a> wil je volgen. 
+                    <span class="glyphicon glyphicon-ok" value="<?php $notification['requestUserID']; ?>"></span>
+                    <span class="glyphicon glyphicon-remove" value="<?php $notification['requestUserID']; ?>"></span>
               </div>
             
     <?php endforeach; ?>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -8,6 +8,39 @@ $(document).ready(function(){
         window.location.href='notifications.php';
     });
     function init(){
+        $('.glyphicon-ok').click(function(){
+             console.log('click');
+             /*
+            $.ajax({
+                            type : 'POST',
+                            url  : 'includes/follow.inc.php',
+                            data : $(this).serialize(),
+                            success : function(data)
+                            {
+                                console.log(data);
+                                init();
+                            }
+            });
+            */
+            return false;
+        });
+         $('.glyphicon-remove').click(function(){
+             console.log('click');
+             /*
+            $.ajax({
+                            type : 'POST',
+                            url  : 'includes/follow.inc.php',
+                            data : $(this).serialize(),
+                            success : function(data)
+                            {
+                                console.log(data);
+                                init();
+                            }
+            });
+            */
+            return false;
+        });
+        
         $('.btnFollow').click(function(){
             $.ajax({
                             type : 'POST',
