@@ -24,12 +24,14 @@
     <div class="indexFeed">
             <?php foreach($feed->Results as $post): ?>
                 <div class="feedNav">
-                    <img class="feedNavPic" src="<?php
+                    <a href="profile.php?userID=<?php echo $post['imageUserID']; ?>">
+                        <img class="feedNavPic" src="<?php
                         $avatar = new postDetail();
                         $avatar = $avatar->getAvatar($post['imageID']);
                         echo $avatar['avatar'];
-                    ?>" alt="">
-                    <a href="#" class="feedNavUsername">
+                        ?>" alt="">
+                    </a>
+                    <a href="profile.php?userID=<?php echo $post['imageUserID']; ?>" class="feedNavUsername">
                         <h2>
                             <?php
                                 $username = new postDetail();
