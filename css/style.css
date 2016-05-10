@@ -26,6 +26,12 @@ cursor: pointer;
 .glyphicon-bell:before {
   content: "\e123";
 }
+.glyphicon-ok:before {
+  content: "\e013";
+}
+.glyphicon-remove:before {
+  content: "\e014";
+}
 @font-face {
     font-family: 'instaThin';
     src: url('../fonts/Montserrat-Hairline.otf');

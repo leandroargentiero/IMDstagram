@@ -62,7 +62,8 @@
     <?php foreach($notifications->Results as $notification): ?>
             
               <div class="notifList">
-                  <a href=""><?php $profileInfo->getProfile($notification['requestUserID']); echo $profileInfo->Username; ?></a> wil je volgen.
+                  <a href="profile.php?userID=<?php echo $notification['requestUserID']; ;?>"><?php $profileInfo->getProfile($notification['requestUserID']); echo $profileInfo->Username; ?></a> wil je volgen. <span class="glyphicon glyphicon-ok"></span>
+                  <span class="glyphicon glyphicon-remove"></span>
               </div>
             
     <?php endforeach; ?>
