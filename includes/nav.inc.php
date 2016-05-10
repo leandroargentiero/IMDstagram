@@ -6,6 +6,6 @@
                 <span><input id="txtSearch" type="text" name="txtSearch" placeholder="Search" required></span>
             </form>
         </div>
-        <a href="profile.php"><h2><?php echo $_SESSION['user']; ?></h2></a>
+        <a class="headerUsername" href="profile.php"><h2><?php echo $_SESSION['user']; ?></h2></a>
     </div>
 </div>
