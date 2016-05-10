@@ -38,6 +38,35 @@ $(document).ready(function(){
             });
             return false;
         });
+        $('.openbaar').click(function(){
+            $.ajax({
+                            type : 'POST',
+                            url  : 'includes/private.inc.php',
+                            data : $(this).serialize(),
+                            success : function(data)
+                            {
+                                $(".openbaar").attr("class", data);
+                                $(".private").html("Privé");
+                                init();
+                            }
+            });
+            return false;
+        });
+        
+        $('.private').click(function(){
+            $.ajax({
+                            type : 'POST',
+                            url  : 'includes/openbaar.inc.php',
+                            data : $(this).serialize(),
+                            success : function(data)
+                            {
+                                $(".private").attr("class", data);
+                                $(".openbaar").html("Openbaar");
+                                init();
+                            }
+            });
+            return false;
+        });
 
         $('.btnLike').click(function(){
             $.ajax({

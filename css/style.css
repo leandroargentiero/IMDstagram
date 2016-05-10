@@ -421,7 +421,23 @@ button {
 	padding:4px 4px 4px 4px;
 	font-size: 0.6em;
 	border-radius: 5%;
+    text-transform: capitalize;
 }
 .openbaar:hover {
     font-family: 'instaBold';
+}
+
+.private {
+    background-color: #fbf9f7;
+	border:1px solid #ce4844;
+	font-family: 'instaLight';
+	color: #ce4844;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+    text-transform: capitalize;
+}
+
+.private:hover {
+   font-family: 'instaBold'; 
 }
