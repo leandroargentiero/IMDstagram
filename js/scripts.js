@@ -4,6 +4,9 @@ $(document).ready(function(){
         console.log('click');
         window.location.href='editProfile.php';
     });
+    $('.glyphicon-bell').click(function(){
+        window.location.href='notifications.php';
+    });
     function init(){
         $('.btnFollow').click(function(){
             $.ajax({

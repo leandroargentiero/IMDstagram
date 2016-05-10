@@ -12,12 +12,19 @@
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-
+cursor: pointer;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.glyphicon-bell {
+    opacity: 1;
+    color: #dddbd9;
+}
 .glyphicon-trash:before {
   content: "\e020";
+}
+.glyphicon-bell:before {
+  content: "\e123";
 }
 @font-face {
     font-family: 'instaThin';
@@ -93,7 +100,10 @@ body a {
 	padding-left: 0;
 	text-align: center;
 }
-
+#notifTitle{
+    font-size: 1.5em;
+    text-align: center;
+}
 .profileInfo {
 	width: 50%;
 	height: 150px;

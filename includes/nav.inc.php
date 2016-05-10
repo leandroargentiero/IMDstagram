@@ -7,5 +7,6 @@
             </form>
         </div>
         <a href="profile.php"><h2><?php echo $_SESSION['user']; ?></h2></a>
+        <span class="glyphicon glyphicon-bell"></span>
     </div>
 </div>
