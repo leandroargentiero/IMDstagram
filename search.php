@@ -1,6 +1,7 @@
 <?php
 include_once('includes/no-session.inc.php');
 include_once('includes/database.inc.php');
+include_once('classes/postDetail.class.php');
 
     if(isset($_GET['txtSearch'])) {
         $searchKeyword = $_GET['txtSearch'];
@@ -51,25 +52,54 @@ include_once('includes/database.inc.php');
     span{
         font-family: 'instaBold', 'sans-serif';
     }
-    .posts{
+    .posts {
         object-fit: cover;
+        height: 300px;
+        width: 300px;
+        margin: 20px;
+    }
+    .searchResults{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 80%;
+        margin: 0 auto 0 auto;
     }
 </style>
 <body>
 
 <?php include_once("includes/nav.inc.php"); ?>
 
-<div class="profileFeed">
+<div class="searchFeed">
     <h1 class="feedback errorMessage"><?php if(isset($errorMessage)){ echo $errorMessage;} ?></h1>
 
     <h2 class="feedback searchKeywords"><?php if(isset($countPosts)){echo $_GET['txtSearch'];} ?></h2>
     <h3 class="feedback countPosts"><?php if(isset($countPosts)){echo "<span>".$countPosts."</span>"." posts";} ?></h3>
-    <ul>
+    <div class="searchResults">
         <?php foreach($results as $result): ?>
-            <li><a href="postDetail.php?imageID=<?php echo $result['imageID']; ?>"><img class="posts" src="<?php echo $result['fileLocation']; ?>" alt="post"></a></li>
+            <a href="postDetail.php?imageID=<?php echo $result['imageID']; ?>">
+                <div class="feedBox">
+                    <img src="<?php echo $result['fileLocation']; ?>" alt="">
+                     <div class="overlay">
+                        <div class="likes">
+                            <img class="overlay-icon"src="images/white_heart.png" alt="">
+                            <p>
+                                <?php
+                                $likes = new postDetail();
+                                $likecount = $likes->getLikes($result['imageID']);
+                                echo $likecount;
+                                ?>
+                            </p>
+                        </div>
+                        <div class="comments">
+                            <img class="overlay-icon" src="images/comments.png" alt="">
+                            <p>0</p>
+                        </div>
+                     </div>
+                </div>
+            </a>
         <?php endforeach;?>
-    </ul>
-
+    </div>
 </div>
 
 <a href="upload.php" id="floatingBtn">+</a>
