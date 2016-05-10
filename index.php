@@ -1,10 +1,12 @@
 <?php
     include_once('includes/no-session.inc.php');
-
     include_once('classes/feed.class.php');
+    include_once('classes/postDetail.class.php');
+
     $userID = $_SESSION['userID'];
     $feed = new Feed();
     $feed->getFeed($userID);
+
     
 ?>
 <!doctype html>
@@ -19,22 +21,42 @@
 
     <?php include_once("includes/nav.inc.php"); ?>
 
-    
-    
     <div class="indexFeed">
             <?php foreach($feed->Results as $post): ?>
-            <div class="feedPic">
-               <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                <div class="feedNav">
+                    <img class="feedNavPic" src="<?php
+                        $avatar = new postDetail();
+                        $avatar = $avatar->getAvatar($post['imageID']);
+                        echo $avatar['avatar'];
+                    ?>" alt="">
+                    <a href="#" class="feedNavUsername">
+                        <h2>
+                            <?php
+                                $username = new postDetail();
+                                $username = $username->getUsername($post['imageID']);
+                                echo $username['username'];
+                            ?>
+                        </h2>
+                    </a>
+                    <p class="feedNavTimestamp">
+                        <?php
+                            $timestamp = new postDetail();
+                            $timestamp = $timestamp->getPostHour($post['imageID']);
+                            echo $timestamp;
+                        ?>
+                    </p>
                 </div>
-                <?php endforeach; ?>
-                
-        </div>
+                <div class="feedPic">
+                    <a href="postDetail.php?imageID=<?php echo $post['imageID']; ?>">
+                        <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                    </a>
+                </div>
+            <?php endforeach; ?>
+    </div>
         
-        <div class="loadMoreContainer">
-        
-            <button class="btnLoadMore">Load More</button>
-        
-        </div>
+    <div class="loadMoreContainer">
+        <button class="btnLoadMore">Load More</button>
+    </div>
         
     
         <a href="upload.php" id="floatingBtn">+</a>
