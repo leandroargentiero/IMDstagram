@@ -21,6 +21,22 @@ $(document).ready(function(){
             });
             return false;
         });
+        
+        $('.btnFollowPrivate').click(function(){
+            $.ajax({
+                            type : 'POST',
+                            url  : 'includes/followPrivate.inc.php',
+                            data : $(this).serialize(),
+                            success : function(data)
+                            {
+                                console.log(data);
+                                console.log("succes!");
+                                $(".btnFollowPrivate").html("Aangevraagd");
+                                init();
+                            }
+            });
+            return false;
+        });
 
         $('.btnUnfollow').click(function(){
             $.ajax({
@@ -38,6 +54,24 @@ $(document).ready(function(){
             });
             return false;
         });
+        
+         $('.btnPrivateRequested').click(function(){
+            $.ajax({
+                            type : 'POST',
+                            url  : 'includes/cancelRequest.inc.php',
+                            data : $(this).serialize(),
+                            success : function(data)
+                            {
+                                console.log(data);
+                                console.log("succes!");
+                                $(".btnPrivateRequested").attr("class", "btnFollowPrivate");
+                                $(".btnFollowPrivate").html("Volgen");
+                                init();
+                            }
+            });
+            return false;
+        });
+        
         $('.openbaar').click(function(){
             $.ajax({
                             type : 'POST',
@@ -47,6 +81,8 @@ $(document).ready(function(){
                             {
                                 $(".openbaar").attr("class", data);
                                 $(".private").html("Privé");
+                                $("#privacySetting").html("Privé");
+                                $("#privacyUitleg").html("Dit wil zeggen dat je posts onzichtbaar zijn, behalve voor mensen die jij goedkeurt.");
                                 init();
                             }
             });
@@ -62,6 +98,8 @@ $(document).ready(function(){
                             {
                                 $(".private").attr("class", data);
                                 $(".openbaar").html("Openbaar");
+                                $("#privacySetting").html("Openbaar");
+                                $("#privacyUitleg").html("Dit wil zeggen dat je posts zichtbaar zijn voor iedereen die je account kan vinden.")
                                 init();
                             }
             });

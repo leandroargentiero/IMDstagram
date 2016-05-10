@@ -146,7 +146,7 @@ body a {
     cursor: pointer;
 }
 
-.btnFollow, .btnUnfollow, .unfollowed {
+.btnFollow, .btnFollowPrivate, .btnUnfollow, .btnPrivateRequested, .unfollowed {
     background-color: #fbf9f7;
 	border:1px solid #719DBE;
 	font-family: 'instaLight';
@@ -156,7 +156,7 @@ body a {
 	font-size: 0.6em;
 	border-radius: 5%;
 }
-.btnFollow:hover, .btnUnfollow:hover {
+.btnFollow:hover, .btnFollowPrivate:hover, btnPrivateRequested:hover, .btnUnfollow:hover {
     cursor: pointer;
     color: #5A8ACE;
 }

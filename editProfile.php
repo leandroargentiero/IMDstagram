@@ -74,7 +74,8 @@
     // PRIVACY SETTINGS
 
     $privacySetting = "openbaar";
-    $privacyUitleg = "Dit wil zeggen dat je posts zichtbaar zijn voor iedereen die je account kan vinden."
+    $privacyUitleg = "Dit wil zeggen dat je posts zichtbaar zijn voor iedereen die je account kan vinden.";
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -262,7 +263,9 @@
             </form>
             <h1>Privacy</h1>
             <button class="<?php echo $privacySetting; ?>"><?php echo $privacySetting; ?></button>
-            <p>Je account is momenteel <strong><?php echo $privacySetting; ?></strong>. <?php echo $privacyUitleg; ?></p>
+            <p>Je account is momenteel <strong id="privacySetting"><?php echo $privacySetting; ?></strong>.</p>
+             
+            <p id="privacyUitleg"> <?php echo $privacyUitleg; ?></p>
             
 
         </div>
