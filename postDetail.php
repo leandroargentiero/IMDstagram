@@ -9,10 +9,11 @@
         $post = new postDetail();
         $post->imageID = $_GET['imageID'];
         $image = $post->getImage();
-        $avatar = $post->getAvatar();
-        $username = $post->getUsername();
-        $postTime = $post->getPostHour();
-        $likeCount = $post->getLikes();
+        $avatar = $post->getAvatar($_GET['imageID']);
+        $username = $post->getUsername($_GET['imageID']);
+        $postTime = $post->getPostHour($_GET['imageID']);
+        $likeCount = $post->getLikes($_GET['imageID']);
+        $userID = $post->getUserID();
 
         $likeCheck = $post->likeCheck();
 
@@ -133,8 +134,8 @@
         <div class="innerRight">
             <div class="innerRightContainer">
                 <div class="innerRightHeader">
-                    <img class="avatar" src="<?php echo $avatar['avatar']; ?>" alt="">
-                    <a href=""><p class="name"><?php echo $username['username']; ?></p></a>
+                    <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><img class="avatar" src="<?php echo $avatar['avatar']; ?>" alt=""></a>
+                    <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><p class="name"><?php echo $username['username']; ?></p></a>
                     </ul>
                 </div>
                 <div class="innerRightSecondHeader">
