@@ -112,6 +112,29 @@
     }
     .commentFeed {
         overflow-y: scroll;
+        background-color: red;
+    }
+
+
+    ul.commentFeed-holder{
+        background-color: #3E90D9;
+        margin: 10px 5px 0 5px;
+        height: 100px;
+    }
+
+    .commentFeed-items{
+        background-color: #60C029;
+        margin-top: 5px;
+
+    }
+
+    .comment-text{
+        margin-left: 8px;
+    }
+
+    .comment-username{
+        font-weight: bold;
+        color: #06365F;
     }
     .innerRightFooterForm{
         display: flex;
@@ -147,7 +170,7 @@
             <div class="innerRightContainer">
                 <div class="innerRightHeader">
                     <img class="avatar" src="<?php echo $avatar['avatar']; ?>" alt="">
-                    <a href=""><p class="name"><?php echo $username['username']; ?></p></a>
+                    <a href="profile.php"><p class="name"><?php echo $username['username']; ?></p></a>
                     </ul>
                 </div>
                 <div class="innerRightSecondHeader">
@@ -168,13 +191,19 @@
                     <p class="timestamp"><?php echo $postTime ?></p>
                 </div>
                 <div class="commentFeed">
-                    <ul>
+                    <ul class="commentFeed-holder">
+                        <?php $comments = array("a", "b", "c", "d"); ?>
+                            <?php foreach( $comments as $key => $comment): ?>
+                            <li class="commentFeed-items" id="_1"><span class="comment-username">kennymng</span><span class="comment-text">je foto is lelijk.</span></li>
+                            <?php endforeach; ?>
+
                     </ul>
                 </div>
                 <div class="innerRightFooter">
-                    <form class="innerRightFooterForm" action="" method="post">
+                    <form id="commentForm" class="innerRightFooterForm" action="" method="post">
                         <img id="heart" class="<?php echo $class ?>" src="<?php echo $source ?>" alt="like">
-                        <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
+                        <input id="commentField" type="textarea" name="commentField" placeholder="Add a comment...">
+                        <input id="comment-btn-submit" type="submit" style="position: absolute; left: -9999px"/>
                     </form>
                     
                     <span class="glyphicon glyphicon-trash" id="<?php echo $visible; ?>" aria-hidden="true" title="Verwijder je foto"></span>
@@ -185,5 +214,8 @@
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="js/scripts.js"></script>
+<script src="js/scripts.js">
+
+
+</script>
 </html>

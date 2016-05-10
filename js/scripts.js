@@ -103,4 +103,24 @@ $(document).ready(function(){
                 }
             });
         });
+
+
+
+   $('#comment-btn-submit').click( function(){
+       var text = $('#commentField').val();
+
+       if (text.length > 0){
+           console.log(text);
+       }
+       else {
+           console.log("textarea is empty");
+       }
+
+
+       var text = $('#commentField').val("");
+       return false;
+
+   });
+
+
 });
