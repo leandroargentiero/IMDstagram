@@ -24,6 +24,47 @@ if(!empty($_GET)){
     
     
     // volg ik dit account al?
+    
+    
+    // Variabelen voor knoppen en teksten invullen.
+    $username = $profile->Username;
+    $bioText = $profile->Bio;
+    $avatar = $profile->Image;
+    $userID = $profile->UserID;
+    $private = $profile->Privacy;
+    
+    // Checken of de user private is of niet.
+    if($private == "yes"){
+
+        // User is private, dus eerst checken of de feed getoond mag worden.
+        if($profile->followCheck()){
+            // gevolgd? feed tonen.
+            $btnClass = "btnUnfollow";
+            $btnText = "Volgend";
+            $feed = new Feed();
+            $feed->getProfileFeed($userID); 
+        }
+        else {
+        
+            if($profile->privateFollowCheck()){
+                // aanvraag al verstuurd
+                 $btnClass = "btnPrivateRequested";
+                $btnText = "Aangevraagd";
+            }
+            else {
+                // als hij nog niet gevolgd wordt, geen feed, wel boodschap.
+                $btnClass = "btnFollowPrivate";
+                $btnText = "Volgen";
+            }
+            $privacyMessage = "Sorry, deze gebruiker is privé. Je kan pas de posts zien als je verzoek is goedgekeurd.";
+        }
+    }
+    else {
+        // FEED OPHALEN
+    $feed = new Feed();
+    $feed->getProfileFeed($userID); 
+        
+        // Checken of deze gebruiker al gevolgd wordt.
     if($profile->followCheck()){
         $btnClass = "btnUnfollow";
         $btnText = "Volgend";
@@ -31,18 +72,10 @@ if(!empty($_GET)){
     else {
             $btnClass = "btnFollow";
             $btnText = "Volgen";
-        }
+    }
+        
+    }
     
-    // Variabelen voor knoppen en teksten invullen.
-    $username = $profile->Username;
-    $bioText = $profile->Bio;
-    $avatar = $profile->Image;
-    $userID = $profile->UserID;
-    
-    // get feed
-    
-    $feed = new Feed();
-    $feed->getProfileFeed($userID);
     
 }
 else {
@@ -103,6 +136,8 @@ else {
     <main class="feedContainer">
 
         <div class="profileFeed">
+
+               <span class="privacyMessage"><?php echo $privacyMessage; ?></span>
                 <?php foreach($feed->Results as $post): ?>
                     <a href="postDetail.php?imageID=<?php echo $post['imageID']; ?>">
                         <div class="feedBox">

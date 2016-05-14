@@ -70,6 +70,12 @@
             }
         }
     }
+
+    // PRIVACY SETTINGS
+
+    $privacySetting = "openbaar";
+    $privacyUitleg = "Dit wil zeggen dat je posts zichtbaar zijn voor iedereen die je account kan vinden.";
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -78,6 +84,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
     <script type="text/javascript">
         $(document).ready(function()
         {
@@ -251,9 +258,15 @@
                     echo "<p class='messageUpdateError'>$messageEmptySubmit</p>";
                 }
                 ?>
-
+                
                 <input class="submitEdit" name="update" type="submit" value="Gegevens wijzigen">
             </form>
+            <h1>Privacy</h1>
+            <button class="<?php echo $privacySetting; ?>"><?php echo $privacySetting; ?></button>
+            <p>Je account is momenteel <strong id="privacySetting"><?php echo $privacySetting; ?></strong>.</p>
+             
+            <p id="privacyUitleg"> <?php echo $privacyUitleg; ?></p>
+            
 
         </div>
     </div>

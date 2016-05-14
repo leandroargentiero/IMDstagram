@@ -12,12 +12,25 @@
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-
+cursor: pointer;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.glyphicon-bell {
+    opacity: 1;
+    color: #dddbd9;
+}
 .glyphicon-trash:before {
   content: "\e020";
+}
+.glyphicon-bell:before {
+  content: "\e123";
+}
+.glyphicon-ok:before {
+  content: "\e013";
+}
+.glyphicon-remove:before {
+  content: "\e014";
 }
 @font-face {
     font-family: 'instaThin';
@@ -53,6 +66,7 @@ body {
     font-family: Montserrat, sans-serif;
 	background-color: #FAFAFA;
 	color: #4E606A;
+    margin-bottom: 30px;
 }
 body a {
 	text-decoration: none;
@@ -96,10 +110,13 @@ body a {
 	padding-left: 0;
 	text-align: center;
 }
+#notifTitle{
+    font-size: 1.5em;
+    text-align: center;
+}
 .headerUsername{
 	font-size: 1.3em;
 }
-
 .profileInfo {
 	width: 50%;
 	height: 150px;
@@ -151,7 +168,7 @@ body a {
     cursor: pointer;
 }
 
-.btnFollow, .btnUnfollow, .unfollowed {
+.btnFollow, .btnFollowPrivate, .btnUnfollow, .btnPrivateRequested, .unfollowed {
     background-color: #fbf9f7;
 	border:1px solid #719DBE;
 	font-family: 'instaLight';
@@ -161,7 +178,7 @@ body a {
 	font-size: 0.6em;
 	border-radius: 5%;
 }
-.btnFollow:hover, .btnUnfollow:hover {
+.btnFollow:hover, .btnFollowPrivate:hover, btnPrivateRequested:hover, .btnUnfollow:hover {
     cursor: pointer;
     color: #5A8ACE;
 }
@@ -456,4 +473,66 @@ footer a{
 }
 footer span{
 	color: #818380;
+}
+
+p {
+margin-top : 15px;
+font-size: .8em;
+}
+button {
+    cursor: pointer;
+}
+.openbaar {
+    background-color: #fbf9f7;
+	border:1px solid #60C029;
+	font-family: 'instaLight';
+	color: #60C029;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+    text-transform: capitalize;
+}
+.openbaar:hover {
+    font-family: 'instaBold';
+}
+
+.private {
+    background-color: #fbf9f7;
+	border:1px solid #ce4844;
+	font-family: 'instaLight';
+	color: #ce4844;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+    text-transform: capitalize;
+}
+
+.private:hover {
+   font-family: 'instaBold'; 
+}
+.notifList {
+    max-width: 400px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 20px;
+    display: flex;
+}
+.notifList p {
+    margin-left: 10px;
+    font-size: 1em;
+    padding: 20px 20px 0px 20px;
+}
+.notifImg {
+    width: 100px;
+    height: 100px;
+}
+.notifList img {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.notifList span {
+    padding-left: 10px;
+    padding-top: 35px;
 }

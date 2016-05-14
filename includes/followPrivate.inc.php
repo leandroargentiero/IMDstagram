@@ -1,16 +1,16 @@
 <?php 
 session_start();
 include_once('database.inc.php');
+
 if(!empty($_SESSION['targetUserID'])){
     $requestUserID = $_SESSION['userID'];
     $targetUserID = $_SESSION['targetUserID'];
-    $statement = $conn->prepare('delete from follows where requestUserID = :requestUserID and targetUserID = :targetUserID');
+    $statement = $conn->prepare('insert into followrequests (requestUserID, targetUserID) values (:requestUserID, :targetUserID)');
     $statement->bindValue(':requestUserID', $requestUserID);
     $statement->bindValue(':targetUserID', $targetUserID);
-    $statement->execute();
     if($statement->execute()){
         console.log("send");
-        echo "unfollowed";
+        echo "followed";
     };
 }
 ?>
