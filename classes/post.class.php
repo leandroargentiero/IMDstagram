@@ -5,6 +5,7 @@ class Post{
     private $m_sImage;
     private $m_sDescription;
     private $m_sFilePath;
+    private $m_sLocation;
     
     public function __set($p_sProperty, $p_vValue)
     {
@@ -14,6 +15,9 @@ class Post{
                 break;
             case "Description":
                 $this->m_sDescription = $p_vValue;
+                break;
+            case "Location":
+                $this->m_sLocation = $p_vValue;
                 break;
         }
     }
@@ -26,6 +30,9 @@ class Post{
                 break;
             case "Description":
                 return $this->m_sDescription;
+                break;
+            case "Location":
+                return $this->m_sLocation;
                 break;
         }
     }
@@ -48,10 +55,11 @@ class Post{
     public function savePost(){
         global $conn;
 
-        $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID) values (:fileLocation, :description, :imageUserID)");
+        $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID, location) values (:fileLocation, :description, :imageUserID, :location)");
         $statement->bindValue(":fileLocation", $this->m_sFilePath);
         $statement->bindValue(":description", $this->m_sDescription);
         $statement->bindValue(":imageUserID", $_SESSION['userID']);
+        $statement->bindValue(":location", $this->m_sLocation);
         if ($statement->execute()){
             header('Location: index.php');
         }
