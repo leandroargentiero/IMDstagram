@@ -60,7 +60,7 @@ class Post{
     public function savePost(){
         global $conn;
         $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID, filter,location)
-                                     values (:fileLocation, :description, :imageUserID, :location, :filter)");
+                                     values (:fileLocation, :description, :imageUserID, :filter, :location)");
         $statement->bindValue(":fileLocation", $this->m_sFilePath);
         $statement->bindValue(":description", $this->m_sDescription);
         $statement->bindValue(":imageUserID", $_SESSION['userID']);
