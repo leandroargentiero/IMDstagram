@@ -9,19 +9,18 @@ $(document).ready(function(){
     });
     function init(){
         $('.glyphicon-ok').click(function(){
-             console.log('click');
-             /*
+            console.log('click');
+            var requestUserID = $(this).attr("value");
             $.ajax({
                             type : 'POST',
-                            url  : 'includes/follow.inc.php',
-                            data : $(this).serialize(),
+                            url  : 'includes/acceptFollow.inc.php',
+                            data : {aanvraag: requestUserID},
                             success : function(data)
                             {
-                                console.log(data);
-                                init();
+                                
                             }
             });
-            */
+            $(this).parent().hide();
             return false;
         });
          $('.glyphicon-remove').click(function(){

@@ -61,20 +61,20 @@
     
     <?php foreach($notifications->Results as $notification): ?>
             
-              <div class="notifList">
-                    <img src="<?php $profileInfo->getProfile($notification['requestUserID']); 
-                      echo $profileInfo->Image; ?> " alt="" class="profilePhoto">
+              <div class="notifList" value="<?php echo $notification['requestUserID']; ?>">
+                    <div class="notifImg"><img src="<?php $profileInfo->getProfile($notification['requestUserID']); 
+                      echo $profileInfo->Image; ?> " alt="" class="profilePhoto"></div>
                    
-                    <a href="profile.php?userID=<?php echo $notification['requestUserID']; ;?>">
+                    <p><a href="profile.php?userID=<?php echo $notification['requestUserID']; ;?>">
                       <?php 
                       
                       $profileInfo->getProfile($notification['requestUserID']); 
                       echo $profileInfo->Username; 
                         
                       ?>
-                    </a> wil je volgen. 
-                    <span class="glyphicon glyphicon-ok" value="<?php $notification['requestUserID']; ?>"></span>
-                    <span class="glyphicon glyphicon-remove" value="<?php $notification['requestUserID']; ?>"></span>
+                    </a> wil je volgen. </p>
+                    <span class="glyphicon glyphicon-ok" value="<?php echo $notification['requestUserID']; ?>"></span>
+                    <span class="glyphicon glyphicon-remove" value="<?php echo $notification['requestUserID']; ?>"></span>
               </div>
             
     <?php endforeach; ?>
