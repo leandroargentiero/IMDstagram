@@ -22,6 +22,7 @@ else
         $p->moveImage();
         $p->Description = $_POST['desc'];
         $p->Filter = $_POST['filter'];
+        $p->Location = $_POST['location'];
         $p->savePost();
         
 
@@ -80,6 +81,9 @@ else
                         <option value="xpro2">xpro2</option>
                     </select>
 
+                    <input type="file" name="file" id="fileUpload" />
+                    <input type="hidden" name="location" id="location" value="">
+
                     <label for="description">Description:</label>
                      <br>
                       <textarea id="descriptionbox" rows="5" cols="40" name="desc" id="comment"></textarea>
@@ -93,9 +97,35 @@ else
                 }
                 ?>
                 </form>
+              
             </div>
         </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
     <script src="js/scripts.js"></script>
+
+    <script>
+       $(document).ready(function(){
+            if ("geolocation" in navigator) {
+                /* geolocation is available */
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lng = position.coords.longitude; 
+                    var lat = position.coords.latitude; 
+                    
+                    $.getJSON("http://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&sensor=true", function(data){
+                        console.log(data["results"][1]["formatted_address"]);
+                        $("#location").attr("value", data["results"][1]["formatted_address"]);
+                    });
+                    
+                    
+                });
+            } 
+            else {
+                /* geolocation IS NOT available */
+            }
+       }) 
+    
+    </script>
+
     </html>
