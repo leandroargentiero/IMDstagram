@@ -21,6 +21,7 @@ else
         $p = new Post();
         $p->moveImage();
         $p->Description = $_POST['desc'];
+        $p->Location = $_POST['location'];
         $p->savePost();
         
 
