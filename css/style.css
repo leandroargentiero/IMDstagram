@@ -96,8 +96,11 @@ body a {
 	margin-right: auto;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
+}
+#notificationIcon{
+	margin-left: -180px;
 }
 .searchBar input {
 	border: 1px solid #dddbd9;
@@ -655,7 +658,29 @@ select{
 	border-bottom: 1px solid #dddbd9;
 
 }
+.commentFeed ul {
+	padding: 10px 10px 10px 0;
+}
+.commentFeed ul li{
+	font-family: 'instaRegular', 'sans-serif';
+	font-size: .8em;
+	color: black;
+	margin: 0 0 5px 0;
+}
+.commentFeed ul li span{
+	font-family: 'instaBold', 'sans-serif';
+	color: #30618B;
+}
 .avatar{
+	object-fit: cover;
+	height: 50px;
+	width: 100px;
+	border-radius: 50%;
+	float: left;
+	display: inline-block;
+	margin: -10px 0 0 0;
+}
+.avatarPostDetail{
 	object-fit: cover;
 	height: 50px;
 	width: 50px;
@@ -713,4 +738,81 @@ select{
 }
 #visible {
 	visibility: visible;
+}
+.editContainer {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.editContainer h1 {
+	color: #06365F;
+	font-family: 'instaRegular', 'sans-serif';
+	font-size: 1.3em;
+	margin-bottom: 15px;
+	margin-top: 30px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #dddbd9;
+}
+.editContainer form {
+	margin-bottom: 50px;
+}
+
+.editContainer label {
+	width: 150px;
+	display: inline-block;
+	font-size: 0.8em;
+}
+.editContainer input {
+	margin-bottom: 10px;
+	width: 250px;
+	border-radius: 5px;
+	border: 1px solid #dddbd9;
+}
+.formDetails select, textarea {
+	margin-bottom: 10px;
+	border-radius: 5px;
+	width: 250px;
+	border: 1px solid #dddbd9;
+}
+
+.formDetails textarea {
+	vertical-align: top;
+}
+.messageUpdate{
+	font-family: 'instaBold', 'sans-serif';
+	font-size: .7em;
+	color: #00D062;
+	margin: 20px 0 0 0;
+}
+.messageUpdateError{
+	font-family: 'instaBold', 'sans-serif';
+	font-size: .7em;
+	margin: 20px 0 0 0;
+	color: #FE3554;
+}
+#availability{
+	display: block;
+	font-size: .7em;
+	margin: -10px 0 10px 0;
+}
+.avatar{
+	object-fit: cover;
+	max-width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	margin: 20px 35px 0 20px;
+	float: left;
+}
+.formUpload{
+	display: flex;
+	flex-direction: column;
+	margin-top: 80px;
+}
+.formUpload label{
+	margin-bottom:1em;
+}
+.formUpload input[type="submit"]{
+	font-family: instaLight;
+	width: 10%;
+	font-size: .8em;
 }
