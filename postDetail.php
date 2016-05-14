@@ -13,6 +13,7 @@
         $postTime = $post->getPostHour($_GET['imageID']);
         $likeCount = $post->getLikes($_GET['imageID']);
         $userID = $post->getUserID($_GET['imageID']);
+        $description = $post->getDescription($_GET['imageID']);
 
         $likeCheck = $post->likeCheck($_GET['imageID']);
         if($likeCheck)
@@ -50,7 +51,7 @@
         <div class="innerRight">
             <div class="innerRightContainer">
                 <div class="innerRightHeader">
-                    <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><img class="avatar" src="<?php echo $avatar['avatar']; ?>" alt=""></a>
+                    <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><img class="avatarPostDetail" src="<?php echo $avatar['avatar']; ?>" alt=""></a>
                     <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><p class="name"><?php echo $username['username']; ?></p></a>
                     </ul>
                 </div>
@@ -74,6 +75,7 @@
                 </div>
                 <div class="commentFeed">
                     <ul>
+                        <li><span><?php echo $username['username']." "; ?></span><?php echo$description['description']; ?></li>
                     </ul>
                 </div>
                 <div class="innerRightFooter">
