@@ -12,10 +12,10 @@ if($_POST)
 
     if($count>0)
     {
-        echo "<span style='color:#FE3554;'>Gebruikersnaam reeds in gebruik</span>";
+        echo "<span style='color:#FE3554;'>Username already in use</span>";
     }
     else
     {
-        echo "<span style='color:#00D062;'>Beschikbaar</span>";
+        echo "<span style='color:#00D062;'>Available</span>";
     }
 }
