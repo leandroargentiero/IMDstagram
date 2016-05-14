@@ -2,6 +2,7 @@
 include_once('includes/no-session.inc.php');
 include_once('classes/users.class.php');
 include_once('classes/feed.class.php');
+include_once('classes/postDetail.class.php');
 
 // Checken wiens account geladen moet worden
 if(!empty($_GET)){
@@ -97,7 +98,7 @@ else {
     $feed = new Feed();
     $feed->getProfileFeed($userID);
 }
-    
+
 
 ?><!doctype html>
 <html lang="en">
@@ -135,11 +136,30 @@ else {
     <main class="feedContainer">
 
         <div class="profileFeed">
-           <span class="privacyMessage"><?php echo $privacyMessage; ?></span>
-            <?php foreach($feed->Results as $post): ?>
-            <div class="feedPic">
-               <img src="<?php echo $post['fileLocation']; ?>" alt="">
-                </div>
+
+               <span class="privacyMessage"><?php echo $privacyMessage; ?></span>
+                <?php foreach($feed->Results as $post): ?>
+                    <a href="postDetail.php?imageID=<?php echo $post['imageID']; ?>">
+                        <div class="feedBox">
+                            <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                            <div class="overlay">
+                                <div class="likes">
+                                    <img class="overlay-icon"src="images/white_heart.png" alt="">
+                                    <p>
+                                        <?php
+                                            $likes = new postDetail();
+                                            $likecount = $likes->getLikes($post['imageID']);
+                                            echo $likecount;
+                                        ?>
+                                    </p>
+                                </div>
+                                <div class="comments">
+                                    <img class="overlay-icon" src="images/comments.png" alt="">
+                                    <p>0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
         </div>
         <div class="loadMoreContainer">

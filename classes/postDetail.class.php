@@ -45,8 +45,9 @@ class postDetail{
         }
     }
 
-    public function getAvatar(){
+    public function getAvatar($p_sProperty){
         global $conn;
+        $this->m_iImageID = $p_sProperty;
         $getUserID = $conn->prepare("
                                     SELECT imageUserID
                                     FROM posts
@@ -66,8 +67,9 @@ class postDetail{
         return $result;
     }
 
-    public function getUsername(){
+    public function getUsername($p_sProperty){
         global $conn;
+        $this->m_iImageID = $p_sProperty;
         $getUserID = $conn->prepare("
                                     SELECT imageUserID
                                     FROM posts
@@ -86,8 +88,9 @@ class postDetail{
         return $result;
     }
 
-    public function getPostHour(){
+    public function getPostHour($p_sProperty){
         global $conn;
+        $this->m_iImageID = $p_sProperty;
         $postTime = $conn->prepare("SELECT timestamp
                                    FROM posts
                                    WHERE imageID = :imageID");
@@ -122,9 +125,9 @@ class postDetail{
         return $result;
     }
 
-    public function getLikes(){
+    public function getLikes($p_sProperty){
         global $conn;
-
+        $this->m_iImageID = $p_sProperty;
         $likeCount = $conn->prepare("SELECT likeImageID
                                      FROM likes
                                      WHERE likeImageID = :likeImageID");
@@ -152,5 +155,21 @@ class postDetail{
         {
             return true;
         }
+    }
+
+    public function getUserID($p_sProperty){
+        global $conn;
+        $this->m_iImageID = $p_sProperty;
+        $getUserID = $conn->prepare("
+                                    SELECT imageUserID
+                                    FROM posts
+                                    WHERE imageID = :imageID");
+        $getUserID->bindValue(':imageID', $this->m_iImageID );
+        $getUserID->execute();
+        $userID = $getUserID->fetch(PDO::FETCH_ASSOC);
+
+        $result = $userID;
+
+        return $result;
     }
 }
