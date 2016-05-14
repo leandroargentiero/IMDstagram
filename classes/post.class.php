@@ -59,16 +59,12 @@ class Post{
     
     public function savePost(){
         global $conn;
-        $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID, filter)
-                                     values (:fileLocation, :description, :imageUserID, :filter)");
+        $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID, filter,location)
+                                     values (:fileLocation, :description, :imageUserID, :location, :filter)");
         $statement->bindValue(":fileLocation", $this->m_sFilePath);
         $statement->bindValue(":description", $this->m_sDescription);
         $statement->bindValue(":imageUserID", $_SESSION['userID']);
         $statement->bindValue(":filter", $this->m_sFilter);
-        $statement = $conn->prepare("insert into posts (fileLocation, description, imageUserID, location) values (:fileLocation, :description, :imageUserID, :location)");
-        $statement->bindValue(":fileLocation", $this->m_sFilePath);
-        $statement->bindValue(":description", $this->m_sDescription);
-        $statement->bindValue(":imageUserID", $_SESSION['userID']);
         $statement->bindValue(":location", $this->m_sLocation);
         if ($statement->execute()){
             header('Location: index.php');
