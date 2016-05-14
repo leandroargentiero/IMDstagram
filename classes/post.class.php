@@ -61,7 +61,7 @@ class Post{
         $statement->bindValue(":imageUserID", $_SESSION['userID']);
         $statement->bindValue(":location", $this->m_sLocation);
         if ($statement->execute()){
-            // header('Location: index.php');
+            header('Location: index.php');
         }
     }
     
