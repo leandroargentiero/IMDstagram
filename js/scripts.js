@@ -140,38 +140,6 @@ $(document).ready(function(){
             });
             return false;
         });
-
-        $('.btnLike').click(function(){
-            $.ajax({
-                type: 'POST',
-                url: 'includes/like.inc.php',
-                data: $(this).serialize(),
-                success: function(data)
-                {
-                    console.log(data);
-                    $(".btnLike").attr("class", "btnUnlike");
-                    $("#heart").attr("src", "images/heart_filled.png");
-                    init();
-                }
-            });
-            return false;
-        });
-
-        $('.btnUnlike').click(function(){
-            $.ajax({
-                type: 'POST',
-                url: 'includes/unlike.inc.php',
-                data: $(this).serialize(),
-                success: function(data)
-                {
-                    console.log(data);
-                    $(".btnUnlike").attr("class", "btnLike");
-                    $("#heart").attr("src", "images/heart_blank.png");
-                    init();
-                }
-            });
-            return false;
-        });
     }
     $('.btnLoadMore').click(function(){
     for(i=0; i<20;i++){
@@ -205,4 +173,42 @@ $(document).ready(function(){
                 }
             });
         });
+
+    $('.likeHeart').on('click', function(){
+        console.log('clicked');
+
+        var imageID = $(this).attr("value");
+
+        if($(this).is('.btnLike')){
+            console.log('liked');
+            $.ajax({
+                type: 'POST',
+                url: 'includes/like.inc.php',
+                data: {nieuweLike: imageID},
+                success: function(data)
+                {
+                    console.log(data);
+                }
+            });
+            $(this).attr("src", "images/heart_filled.png");
+            $(this).attr("class", "likeHeart btnUnlike");
+            return false;
+        }
+        else
+        {
+            console.log('unliked');
+            $.ajax({
+                type: 'POST',
+                url: 'includes/unlike.inc.php',
+                data: {nieuweLike: imageID},
+                success: function(data)
+                {
+                    console.log(data);
+                }
+            });
+            $(this).attr("src", "images/heart_blank.png");
+            $(this).attr("class", "likeHeart btnlike");
+            return false;
+        }
+    });
 });

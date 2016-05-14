@@ -1,22 +1,18 @@
 <?php
-    session_start();
+    include_once ("includes/no-session.inc.php");
     include_once ("includes/nav.inc.php");
     include_once ("classes/postDetail.class.php");
     $visible = "";
     if(isset($_GET['imageID'])){
-        $_SESSION['imageID'] =  $_GET['imageID'];
-
         $post = new postDetail();
-        $post->imageID = $_GET['imageID'];
-        $image = $post->getImage();
+        $image = $post->getImage($_GET['imageID']);
         $avatar = $post->getAvatar($_GET['imageID']);
         $username = $post->getUsername($_GET['imageID']);
         $postTime = $post->getPostHour($_GET['imageID']);
         $likeCount = $post->getLikes($_GET['imageID']);
         $userID = $post->getUserID($_GET['imageID']);
 
-        $likeCheck = $post->likeCheck();
-
+        $likeCheck = $post->likeCheck($_GET['imageID']);
         if($likeCheck)
         {
             $source = "images/heart_filled.png";
@@ -153,6 +149,7 @@
                 </div>
                 <div class="innerRightSecondHeader">
                     <p class="likes"><?php
+
                                        if($likeCount == 0) {
                                            echo "No likes yet";
                                        }
@@ -174,7 +171,8 @@
                 </div>
                 <div class="innerRightFooter">
                     <form class="innerRightFooterForm" action="" method="post">
-                        <img id="heart" class="<?php echo $class ?>" src="<?php echo $source ?>" alt="like">
+                        <img id="heart" class="likeHeart <?php echo $class ?>" src="<?php echo $source ?>" alt="like"
+                        value="<?php echo $_GET['imageID']; ?>">
                         <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
                     </form>
                     

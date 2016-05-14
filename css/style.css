@@ -91,7 +91,7 @@ body a {
 }
 
 .headerContent{
-	width: 70%;
+	width: 78%;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
@@ -264,22 +264,25 @@ body a {
 	height: 60px;
 	width: 600px;
 	background-color: #FFFFFF;
-	margin: 0 0 3px 0;
-	border: 1px solid #dddbd9;
+	border: 1px solid #EDEEEE;
 }
 .feedNavPic{
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
 	margin: 0 0 0 10px;
+	object-fit: cover;
 }
 .feedNavUsername{
 	margin: 0 0 0 10px;
+	font-size: .8em;
 }
 .feedNavTimestamp{
+	font-family: 'instaRegular', 'sans-serif';
 	margin-left: auto;
 	margin-right: 10px;
 	font-size: .8em;
+	color: #A5A9BF;
 }
 
 .indexFeed {
@@ -296,12 +299,59 @@ body a {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0 50px 0;
-	border: 1px solid #dddbd9;
+    margin: 0 0 0 0;
+	border: 1px solid #EDEEEE;
+	overflow: hidden;
+	margin: 3px 0 0 0;
 }
 .feedPic img {
     width: 100%;
+	max-height: 100%;
 }
+.feedFooter{
+	height: 100%;
+	width: 600px;
+	border: 1px solid #EDEEEE;
+	margin: 1px 0 50px 0;
+	background-color: white;
+}
+.feedFooterTop{
+	border-bottom: 1px solid #EDEEEE;
+	width: 530px;
+	margin: 0 auto 0 auto;
+	padding: 10px 0 10px 0;
+}
+.feedFooterTop p{
+	font-size: .9em;
+}
+.feedFooterTop ul li{
+	margin: 10px 0 0 0;
+	font-size: .8em;
+	color: #30618B;
+	font-family: 'instaBold', 'sans-serif';
+}
+.feedFooterTop ul li span{
+	color: #000000;
+	font-family: 'instaRegular', 'sans-serif';
+}
+.feedFooterBottom{
+	width: 530px;
+	margin: 0 auto 0 auto;
+	padding: 20px 0 20px 0;
+}
+.feedFooterHeart{
+	float: left;
+}
+
+#commentField{
+	width: 300px;
+	margin: 10px 0 0 0;
+	font-size: .8em;
+	padding: 10px 0 10px 10px;
+	border: none;
+	color: #7B7A7C;
+}
+
 .btnLoadMore {
     width: 100px;
     height: 100px;

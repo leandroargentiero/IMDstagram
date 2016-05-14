@@ -28,8 +28,9 @@ class postDetail{
         }
     }
 
-    public function getImage(){
+    public function getImage($p_sProperty){
         global $conn;
+        $this->m_iImageID = $p_sProperty;
         $result = array();
 
         $statement = $conn->prepare("
@@ -139,16 +140,15 @@ class postDetail{
         return $result;
     }
 
-    public function likeCheck(){
+    public function likeCheck($p_sProperty){
         global $conn;
-        // likeImageID
-        $likeImageID = $_SESSION['imageID'];
+        $this->m_iImageID = $p_sProperty;
         // likeSenderID
         $likeSenderID = $_SESSION['userID'];
 
         $likeCheck = $conn->prepare("SELECT *
                                      FROM likes
-                                     WHERE likeImageID = $likeImageID AND likeSenderID = $likeSenderID");
+                                     WHERE likeImageID = $this->m_iImageID AND likeSenderID = $likeSenderID");
         $likeCheck->execute();
 
         if($likeCheck->rowCount() == 1)
@@ -171,5 +171,18 @@ class postDetail{
         $result = $userID;
 
         return $result;
+    }
+
+    public function getDescription ($p_sProperty){
+        global $conn;
+        $this->m_iImageID = $p_sProperty;
+        $getDescription = $conn->prepare("SELECT description
+                                          FROM posts
+                                          WHERE imageID = :imageID");
+        $getDescription->bindValue(':imageID', $this->m_iImageID );
+        $getDescription->execute();
+        $description = $getDescription->fetch(PDO::FETCH_ASSOC);
+
+        return $description;
     }
 }

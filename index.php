@@ -6,8 +6,6 @@
     $userID = $_SESSION['userID'];
     $feed = new Feed();
     $feed->getFeed($userID);
-
-    
 ?>
 <!doctype html>
 <html lang="en">
@@ -53,6 +51,64 @@
                         <img src="<?php echo $post['fileLocation']; ?>" alt="">
                     </a>
                 </div>
+                <div class="feedFooter">
+                    <div class="feedFooterTop">
+                        <p>
+                            <?php
+                                $likeCounter = new postDetail();
+                                $likes = $likeCounter->getLikes($post['imageID']);
+                                if($likes == 0) {
+                                    echo "No likes yet";
+                                }
+                                elseif($likes == 1)
+                                {
+                                    echo $likes." Like";
+                                }
+                                else
+                                {
+                                    echo $likes." Likes";
+                                }
+                            ?>
+                        </p>
+                        <ul class="description">
+                            <li>
+                                <a href="profile.php?userID=<?php echo $post['imageUserID']; ?>"><?php echo $username['username']; ?></a>
+                                <span>
+                                    <?php
+                                        $description = new postDetail();
+                                        $imageDescription = $description->getDescription($post['imageID']);
+                                        echo $imageDescription['description'];
+                                    ?>
+                                </span>
+                            </li>
+                        </ul>
+                        </h1>
+                    </div>
+                    <div class="feedFooterBottom">
+                        <?php
+                        $like = new postDetail();
+
+                        $likeCheck = $like->likeCheck($post['imageID']);
+
+                        if($likeCheck)
+                        {
+                            $source = "images/heart_filled.png";
+                            $class = "btnUnlike";
+                        }
+                        else
+                        {
+                            $source = "images/heart_blank.png";
+                            $class = "btnLike";
+                        }
+
+                        ?>
+                        <form class="feedFooterBottomForm" action="" method="post">
+                            <img class="likeHeart <?php echo $class; ?>" src="<?php echo $source; ?>" alt="like"
+                                 value="<?php echo $post['imageID'] ?>">
+                            <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
+                        </form>
+                    </div>
+                </div>
             <?php endforeach; ?>
     </div>
         
@@ -62,8 +118,8 @@
         
     
         <a href="upload.php" id="floatingBtn">+</a>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="js/scripts.js"></script>
     <!--<a href="includes/logout.inc.php">logout</a>-->
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="js/scripts.js"></script>
 </html>
