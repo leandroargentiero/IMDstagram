@@ -211,4 +211,27 @@ $(document).ready(function(){
             return false;
         }
     });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#uploadPreview').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#fileUpload").change(function(){
+        readURL(this);
+        $( "#figureUploadPreview" ).slideDown( "slow" );
+        $( "#dropdownFilters" ).slideDown( "slow" );
+        $( "#dropdownFiltersLabel" ).slideDown( "slow" );
+    });
+    $('#dropdownFilters').change(function(){
+        var selectedValue = $('#dropdownFilters option:selected').val();
+        $('#figureUploadPreview').attr("class", selectedValue);
+    });
 });

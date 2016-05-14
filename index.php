@@ -14,6 +14,7 @@
     <title>Imdstagram</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css">
 </head>
 <body>
 
@@ -48,7 +49,9 @@
                 </div>
                 <div class="feedPic">
                     <a href="postDetail.php?imageID=<?php echo $post['imageID']; ?>">
-                        <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                        <figure class="<?php echo $post['filter']; ?>">
+                            <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                        </figure>
                     </a>
                 </div>
                 <div class="feedFooter">
