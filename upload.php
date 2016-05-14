@@ -80,8 +80,7 @@ else
                         <option value="willow">willow</option>
                         <option value="xpro2">xpro2</option>
                     </select>
-
-                    <input type="file" name="file" id="fileUpload" />
+                    
                     <input type="hidden" name="location" id="location" value="">
 
                     <label for="description">Description:</label>
