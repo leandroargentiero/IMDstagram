@@ -188,6 +188,7 @@ $(document).ready(function(){
     }
 
    $('#comment-btn-submit').click( function(){
+       console.log("comment");
        var _comment = $('#commentField').val();
        var _userID = $("#userID").val();
        var _userName = $("#userName").val();
@@ -199,32 +200,19 @@ $(document).ready(function(){
 
            $.ajax({
                type: 'POST',
-               url: 'includes/comment_insert.php',
-               data: $(this).serialize(),
+               url: 'includes/comment.inc.php',
+               data: {newComment: _comment},
                succes: function(data)
-               {
-                   commentInsert();
+               {   
+                  
                }
-
-           })
-
-
+               
+           });
        }
-
-
        var _comment = $('#commentField').val("");
        return false;
 
    });
-
-
-
-
-
-
-
-
-
 
     $('.likeHeart').on('click', function(){
         console.log('clicked');
