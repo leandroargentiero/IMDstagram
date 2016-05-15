@@ -2,15 +2,14 @@
 session_start();
 include_once ("database.inc.php");
 
-// likeImageID
-$likeImageID = $_SESSION['imageID'];
+$likeImageID = $_POST['nieuweLike'];
 // likeSenderID
 $likeSenderID = $_SESSION['userID'];
 
 $getReceiverID = $conn->prepare("SELECT imageUserID
                                  FROM posts
                                  WHERE imageID = :imageID");
-$getReceiverID->bindValue(":imageID", $_SESSION['imageID']);
+$getReceiverID->bindValue(":imageID", $likeImageID);
 $getReceiverID->execute();
 $result = $getReceiverID->fetch(PDO::FETCH_ASSOC);
 // likeReceiverID

@@ -25,12 +25,12 @@
                 $updateProfile->EditBio = $editBio;
                 $updateProfile->updateProfile();
 
-                $messageUpdate = "Je gegevens werden succesvol gewijzigd.";
+                $messageUpdate = "Your information was successfully updated.";
 
             }
             else
             {
-                $messageEmptySubmit = "Er werden geen gegevens gewijzigd. Probeer opnieuw!";
+                $messageEmptySubmit = "We could not change your information. Try again!";
             }
 
             if(strlen(trim($newPassword)) != 0 and strlen(trim($confirmNewPassword)) != 0)
@@ -40,11 +40,11 @@
                     $updatePassword->EditPassword = $confirmNewPassword;
                     $updatePassword->updatePassword();
                     
-                    $passwordSucces = "Jouw wachtwoord werd succesvol gewijzigd.";
+                    $passwordSucces = "Your password was successfully changed.";
                 }
                 else
                 {
-                    $passwordError = "Woops, wachtwoorden komen niet overeen. Probeer opnieuw!";
+                    $passwordError = "Woops, passwords do not match. Try again!";
                 }
             }
         }
@@ -56,10 +56,10 @@
                 switch($_FILES["file"]["error"])
                 {
                     case 1:
-                        $errorImage = "U mag maximaal 2MB opladen.";
+                        $errorImage = "We are sorry. Your file is too big(Max. 2mb)";
                         break;
                     default:
-                        $errorImage = "Sorry, uw upload kon niet worden verwerkt.";
+                        $errorImage = "Woops, uploading failed.";
                 }
             }
             else
@@ -70,6 +70,12 @@
             }
         }
     }
+
+    // PRIVACY SETTINGS
+
+    $privacySetting = "Public";
+    $privacyUitleg = "This means that anyone can see your posts.";
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -78,6 +84,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
     <script type="text/javascript">
         $(document).ready(function()
         {
@@ -109,85 +116,6 @@
 
         });
     </script>
-    <style>
-        .editContainer {
-            width: 70%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .editContainer h1 {
-            color: #06365F;
-            font-family: 'instaRegular', 'sans-serif';
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            margin-top: 30px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #dddbd9;
-        }
-        .editContainer form {
-            margin-bottom: 50px;
-        }
-
-        .editContainer label {
-            width: 150px;
-            display: inline-block;
-            font-size: 0.8em;
-        }
-        .editContainer input {
-            margin-bottom: 10px;
-            width: 250px;
-            border-radius: 5px;
-            border: 1px solid #dddbd9;
-        }
-        .formDetails select, textarea {
-            margin-bottom: 10px;
-            border-radius: 5px;
-            width: 250px;
-            border: 1px solid #dddbd9;
-        }
-
-        .formDetails textarea {
-            vertical-align: top;
-        }
-        .messageUpdate{
-            font-family: 'instaBold', 'sans-serif';
-            font-size: .7em;
-            color: #00D062;
-            margin: 20px 0 0 0;
-        }
-        .messageUpdateError{
-            font-family: 'instaBold', 'sans-serif';
-            font-size: .7em;
-            margin: 20px 0 0 0;
-            color: #FE3554;
-        }
-        #availability{
-            display: block;
-            font-size: .7em;
-            margin: -10px 0 10px 0;
-        }
-        .avatar{
-            object-fit: cover;
-            max-width: 100px;
-            height: 100px;
-            border-radius: 100%;
-            margin: 20px 35px 0 20px;
-            float: left;
-        }
-        .formUpload{
-            display: flex;
-            flex-direction: column;
-            margin-top: 80px;
-        }
-        .formUpload label{
-            margin-bottom:1em;
-        }
-        .formUpload input[type="submit"]{
-            font-family: instaLight;
-            width: 10%;
-            font-size: .8em;
-        }
-    </style>
 </head>
 <body>
     <?php include_once("includes/nav.inc.php"); ?>
@@ -251,9 +179,15 @@
                     echo "<p class='messageUpdateError'>$messageEmptySubmit</p>";
                 }
                 ?>
-
+                
                 <input class="submitEdit" name="update" type="submit" value="Gegevens wijzigen">
             </form>
+            <h1>Privacy</h1>
+            <button class="<?php echo $privacySetting; ?>"><?php echo $privacySetting; ?></button>
+            <p>Your profile is:  <strong id="privacySetting"><?php echo $privacySetting; ?></strong>.</p>
+             
+            <p id="privacyUitleg"> <?php echo $privacyUitleg; ?></p>
+            
 
         </div>
     </div>

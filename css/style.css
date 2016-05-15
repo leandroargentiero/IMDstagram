@@ -12,12 +12,25 @@
   font-style: normal;
   font-weight: normal;
   line-height: 1;
-
+cursor: pointer;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.glyphicon-bell {
+    opacity: 1;
+    color: #dddbd9;
+}
 .glyphicon-trash:before {
   content: "\e020";
+}
+.glyphicon-bell:before {
+  content: "\e123";
+}
+.glyphicon-ok:before {
+  content: "\e013";
+}
+.glyphicon-remove:before {
+  content: "\e014";
 }
 @font-face {
     font-family: 'instaThin';
@@ -51,8 +64,9 @@
 }
 body {
     font-family: Montserrat, sans-serif;
-	background-color: #fbf9f7;
+	background-color: #FAFAFA;
 	color: #4E606A;
+    margin-bottom: 30px;
 }
 body a {
 	text-decoration: none;
@@ -60,12 +74,15 @@ body a {
 }
 
 .headerProfile {
-	height: 35px;
+	height: 45px;
 	background-color: white;
 	color: #2065a2;
 	font-size: 0.7em;
 	padding: 10px 10px 10px 10px;
 	border-bottom: 1px solid #dddbd9;
+	margin: 0 0 30px 0;
+	display: flex;
+	align-items: center;
 }
 
 .headerProfile img {
@@ -74,25 +91,35 @@ body a {
 }
 
 .headerContent{
-	width: 50%;
+	width: 78%;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
-	justify-content: space-between;
+	flex-direction: row;
+	justify-content: space-around;
 	align-items: center;
 }
-
+#notificationIcon{
+	margin-left: -180px;
+}
 .searchBar input {
 	border: 1px solid #dddbd9;
-	border-radius: 5px;
-	height: 20px;
-	width: 180px;
+	border-radius: 30px;
+	width: 200px;
+	background-color: #FAFAFA;
+	padding: 8px;
 }
 #txtSearch::-webkit-input-placeholder{
 	padding-left: 0;
 	text-align: center;
 }
-
+#notifTitle{
+    font-size: 1.5em;
+    text-align: center;
+}
+.headerUsername{
+	font-size: 1.3em;
+}
 .profileInfo {
 	width: 50%;
 	height: 150px;
@@ -126,7 +153,6 @@ body a {
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
-
 }
 
 .btnEditProfile {
@@ -145,7 +171,7 @@ body a {
     cursor: pointer;
 }
 
-.btnFollow, .btnUnfollow, .unfollowed {
+.btnFollow, .btnFollowPrivate, .btnUnfollow, .btnPrivateRequested, .unfollowed {
     background-color: #fbf9f7;
 	border:1px solid #719DBE;
 	font-family: 'instaLight';
@@ -155,7 +181,7 @@ body a {
 	font-size: 0.6em;
 	border-radius: 5%;
 }
-.btnFollow:hover, .btnUnfollow:hover {
+.btnFollow:hover, .btnFollowPrivate:hover, btnPrivateRequested:hover, .btnUnfollow:hover {
     cursor: pointer;
     color: #5A8ACE;
 }
@@ -190,12 +216,77 @@ body a {
     text-align: center;
 }
 .profileFeed {
-    width: 100%;
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 90%;
+	margin: 0 auto 0 auto;
+}
+.feedBox{
+	position: relative;
+	margin: 20px;
+	height: 300px;
+	width: 300px;
+}
+.feedBox img{
+	object-fit: cover;
+	height: 300px;
+	width: 300px;
+}
+.overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.feedBox:hover .overlay{
+	display: block;
+	background: rgba(0, 0, 0, .6);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.overlay img{
+	width: 30px;
+	height: 27px;
+	margin: 0 0 10px 0;
+}
+.overlay div{
+	margin: 25px;
+}
+.overlay p{
+	color: white;
+}
+.feedNav{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	height: 60px;
+	width: 600px;
+	background-color: #FFFFFF;
+	border: 1px solid #EDEEEE;
+}
+.feedNavPic{
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	margin: 0 0 0 10px;
+	object-fit: cover;
+}
+.feedNavUsername{
+	margin: 0 0 0 10px;
+	font-size: .8em;
+}
+.feedNavTimestamp{
+	font-family: 'instaRegular', 'sans-serif';
+	margin-left: auto;
+	margin-right: 10px;
+	margin-top: -2px;
+	font-size: .8em;
+	color: #A5A9BF;
 }
 
 .indexFeed {
@@ -204,34 +295,67 @@ body a {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-    
 }
-
 .indexFeed .feedPic {
-    width: 500px;
+    width: 600px;
     height: 500px;
     background-color: white;
-    border: 1px solid dimgrey;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    margin: 10px;
+    margin: 0 0 0 0;
+	border: 1px solid #EDEEEE;
+	overflow: hidden;
+	margin: 3px 0 0 0;
 }
-
-.feedPic {
-    width: 250px;
-    height: 250px;
-    background-color: white;
-    border: 1px solid dimgrey;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin: 10px;
-    }
-
 .feedPic img {
     width: 100%;
+	max-height: 100%;
 }
+.feedFooter{
+	height: 100%;
+	width: 600px;
+	border: 1px solid #EDEEEE;
+	margin: 1px 0 50px 0;
+	background-color: white;
+}
+.feedFooterTop{
+	border-bottom: 1px solid #EDEEEE;
+	width: 530px;
+	margin: 0 auto 0 auto;
+	padding: 10px 0 10px 0;
+}
+.feedFooterTop p{
+	font-size: .9em;
+}
+.feedFooterTop ul li{
+	margin: 10px 0 0 0;
+	font-size: .8em;
+	color: #30618B;
+	font-family: 'instaBold', 'sans-serif';
+}
+.feedFooterTop ul li span{
+	color: #000000;
+	font-family: 'instaRegular', 'sans-serif';
+}
+.feedFooterBottom{
+	width: 530px;
+	margin: 0 auto 0 auto;
+	padding: 20px 0 20px 0;
+}
+.feedFooterHeart{
+	float: left;
+}
+
+#commentField{
+	width: 300px;
+	margin: 10px 0 0 0;
+	font-size: .8em;
+	padding: 10px 0 10px 10px;
+	border: none;
+	color: #7B7A7C;
+}
+
 .btnLoadMore {
     width: 100px;
     height: 100px;
@@ -403,4 +527,292 @@ footer a{
 }
 footer span{
 	color: #818380;
+}
+
+p {
+margin-top : 15px;
+font-size: .8em;
+}
+button {
+    cursor: pointer;
+}
+.openbaar {
+    background-color: #fbf9f7;
+	border:1px solid #60C029;
+	font-family: 'instaLight';
+	color: #60C029;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+    text-transform: capitalize;
+}
+.openbaar:hover {
+    font-family: 'instaBold';
+}
+
+.private {
+    background-color: #fbf9f7;
+	border:1px solid #ce4844;
+	font-family: 'instaLight';
+	color: #ce4844;
+	padding:4px 4px 4px 4px;
+	font-size: 0.6em;
+	border-radius: 5%;
+    text-transform: capitalize;
+}
+
+.private:hover {
+   font-family: 'instaBold'; 
+}
+.notifList {
+    max-width: 400px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-top: 20px;
+    display: flex;
+}
+.notifList p {
+    margin-left: 10px;
+    font-size: 1em;
+    padding: 20px 20px 0px 20px;
+}
+.notifImg {
+    width: 100px;
+    height: 100px;
+}
+.notifList img {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.notifList span {
+    padding-left: 10px;
+    padding-top: 35px;
+}
+#figureUploadPreview{
+	margin: 0;
+	width: 350px;
+	height: 350px;
+	display: none;
+}
+figure{
+	margin: 0;
+}
+#uploadPreview{
+	display: block;
+	width: 350px;
+	height: 350px;
+	object-fit: cover;
+}
+select{
+	display: block;
+}
+#dropdownFiltersLabel{
+	margin: 20px 0 0 0;
+	display: none;
+}
+#dropdownFilters{
+	display: none;
+	margin: 10px 0 20px 0;
+}
+#descriptionbox{
+	width: 340px;
+}
+.postDetail{
+	background-color: grey;
+	width: 900px;
+	height: 400px;
+	margin: 100px auto 0 auto;
+	display: flex;
+	box-shadow: 0px 3px 10px #a5a5a6;
+}
+.innerLeft{
+	width: 600px;
+	height: 400px;
+}
+.innerLeft img{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	background-color: gold;
+}
+.innerRight{
+	width: 400px;
+	height: 400px;
+	background-color: white;
+}
+.innerRightContainer{
+	padding: 2em;
+}
+.innerRightHeader{
+	height: 50px;
+	border-bottom: 1px solid #dddbd9;
+}
+.innerRightSecondHeader{
+	height: 50px;
+	border-bottom: 1px solid #dddbd9;
+}
+.innerRight .commentFeed{
+	height: 200px;
+	border-bottom: 1px solid #dddbd9;
+
+}
+.commentFeed ul {
+	padding: 10px 10px 10px 0;
+}
+.commentFeed ul li{
+	font-family: 'instaRegular', 'sans-serif';
+	font-size: .8em;
+	color: black;
+	margin: 0 0 5px 0;
+}
+.commentFeed ul li span{
+	font-family: 'instaBold', 'sans-serif';
+	color: #30618B;
+}
+.avatar{
+	object-fit: cover;
+	height: 50px;
+	width: 100px;
+	border-radius: 50%;
+	float: left;
+	display: inline-block;
+	margin: -10px 0 0 0;
+}
+.avatarPostDetail{
+	object-fit: cover;
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	float: left;
+	display: inline-block;
+	margin: -10px 0 0 0;
+}
+.name{
+	font-family: 'instaBold', 'sans-serif';
+	font-size: .9em;
+	display: inline-block;
+	margin: 9px 0 0 20px;
+	color: #30618B;
+}
+.innerRightSecondHeader{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.likes{
+	font-size: .9em;
+	color: #7B7A7C;
+}
+.timestamp{
+	font-size: .9em;
+	color: #7B7A7C;
+}
+.commentFeed {
+	overflow-y: scroll;
+}
+.innerRightFooterForm{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#heart{
+	margin: 10px 0 0 0;
+}
+#commentField{
+	width: 300px;
+	margin: 10px 0 0 0;
+	font-size: .8em;
+	padding: 10px 0 10px 10px;
+	border: none;
+	color: #7B7A7C;
+}
+.glyphicon-trash {
+	float: right;
+	margin-top: -25px;
+	opacity: .5;
+	cursor: pointer;
+	visibility: hidden;
+}
+#visible {
+	visibility: visible;
+}
+.editContainer {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.editContainer h1 {
+	color: #06365F;
+	font-family: 'instaRegular', 'sans-serif';
+	font-size: 1.3em;
+	margin-bottom: 15px;
+	margin-top: 30px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #dddbd9;
+}
+.editContainer form {
+	margin-bottom: 50px;
+}
+
+.editContainer label {
+	width: 150px;
+	display: inline-block;
+	font-size: 0.8em;
+}
+.editContainer input {
+	margin-bottom: 10px;
+	width: 250px;
+	border-radius: 5px;
+	border: 1px solid #dddbd9;
+}
+.formDetails select, textarea {
+	margin-bottom: 10px;
+	border-radius: 5px;
+	width: 250px;
+	border: 1px solid #dddbd9;
+}
+
+.formDetails textarea {
+	vertical-align: top;
+}
+.messageUpdate{
+	font-family: 'instaBold', 'sans-serif';
+	font-size: .7em;
+	color: #00D062;
+	margin: 20px 0 0 0;
+}
+.messageUpdateError{
+	font-family: 'instaBold', 'sans-serif';
+	font-size: .7em;
+	margin: 20px 0 0 0;
+	color: #FE3554;
+}
+#availability{
+	display: block;
+	font-size: .7em;
+	margin: -10px 0 10px 0;
+}
+.avatar{
+	object-fit: cover;
+	max-width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	margin: 20px 35px 0 20px;
+	float: left;
+}
+.formUpload{
+	display: flex;
+	flex-direction: column;
+	margin-top: 80px;
+}
+.formUpload label{
+	margin-bottom:1em;
+}
+.formUpload input[type="submit"]{
+	font-family: instaLight;
+	width: 10%;
+	font-size: .8em;
 }

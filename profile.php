@@ -2,6 +2,7 @@
 include_once('includes/no-session.inc.php');
 include_once('classes/users.class.php');
 include_once('classes/feed.class.php');
+include_once('classes/postDetail.class.php');
 
 // Checken wiens account geladen moet worden
 if(!empty($_GET)){
@@ -23,6 +24,47 @@ if(!empty($_GET)){
     
     
     // volg ik dit account al?
+    
+    
+    // Variabelen voor knoppen en teksten invullen.
+    $username = $profile->Username;
+    $bioText = $profile->Bio;
+    $avatar = $profile->Image;
+    $userID = $profile->UserID;
+    $private = $profile->Privacy;
+    
+    // Checken of de user private is of niet.
+    if($private == "yes"){
+
+        // User is private, dus eerst checken of de feed getoond mag worden.
+        if($profile->followCheck()){
+            // gevolgd? feed tonen.
+            $btnClass = "btnUnfollow";
+            $btnText = "Volgend";
+            $feed = new Feed();
+            $feed->getProfileFeed($userID); 
+        }
+        else {
+        
+            if($profile->privateFollowCheck()){
+                // aanvraag al verstuurd
+                 $btnClass = "btnPrivateRequested";
+                $btnText = "Aangevraagd";
+            }
+            else {
+                // als hij nog niet gevolgd wordt, geen feed, wel boodschap.
+                $btnClass = "btnFollowPrivate";
+                $btnText = "Volgen";
+            }
+            $privacyMessage = "Sorry, deze gebruiker is privé. Je kan pas de posts zien als je verzoek is goedgekeurd.";
+        }
+    }
+    else {
+        // FEED OPHALEN
+    $feed = new Feed();
+    $feed->getProfileFeed($userID); 
+        
+        // Checken of deze gebruiker al gevolgd wordt.
     if($profile->followCheck()){
         $btnClass = "btnUnfollow";
         $btnText = "Volgend";
@@ -30,18 +72,10 @@ if(!empty($_GET)){
     else {
             $btnClass = "btnFollow";
             $btnText = "Volgen";
-        }
+    }
+        
+    }
     
-    // Variabelen voor knoppen en teksten invullen.
-    $username = $profile->Username;
-    $bioText = $profile->Bio;
-    $avatar = $profile->Image;
-    $userID = $profile->UserID;
-    
-    // get feed
-    
-    $feed = new Feed();
-    $feed->getProfileFeed($userID);
     
 }
 else {
@@ -64,7 +98,7 @@ else {
     $feed = new Feed();
     $feed->getProfileFeed($userID);
 }
-    
+
 
 ?><!doctype html>
 <html lang="en">
@@ -102,10 +136,30 @@ else {
     <main class="feedContainer">
 
         <div class="profileFeed">
-            <?php foreach($feed->Results as $post): ?>
-            <div class="feedPic">
-               <img src="<?php echo $post['fileLocation']; ?>" alt="">
-                </div>
+
+               <span class="privacyMessage"><?php echo $privacyMessage; ?></span>
+                <?php foreach($feed->Results as $post): ?>
+                    <a href="postDetail.php?imageID=<?php echo $post['imageID']; ?>">
+                        <div class="feedBox">
+                            <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                            <div class="overlay">
+                                <div class="likes">
+                                    <img class="overlay-icon"src="images/white_heart.png" alt="">
+                                    <p>
+                                        <?php
+                                            $likes = new postDetail();
+                                            $likecount = $likes->getLikes($post['imageID']);
+                                            echo $likecount;
+                                        ?>
+                                    </p>
+                                </div>
+                                <div class="comments">
+                                    <img class="overlay-icon" src="images/comments.png" alt="">
+                                    <p>0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 <?php endforeach; ?>
         </div>
         <div class="loadMoreContainer">

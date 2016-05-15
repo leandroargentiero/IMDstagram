@@ -15,6 +15,7 @@ class Users{
     private $m_sBio;
     private $m_iFollowCount;
     private $m_iFollowerCount;
+    private $m_sPrivacy;
 
     public function __set($p_sProperty, $p_vValue)
     {
@@ -57,6 +58,9 @@ class Users{
                 break;
             case "FollowerCount":
                 $this->m_iFollowerCount = $p_vValue;
+                break;
+            case "Privacy":
+                $this->m_sPrivacy = $p_vValue;
                 break;
         }
     }
@@ -102,6 +106,9 @@ class Users{
                 break;
             case "FollowerCount":
                 return $this->m_iFollowerCount;
+                break;
+            case "Privacy":
+                return $this->m_sPrivacy;
                 break;
         }
     }
@@ -268,7 +275,7 @@ class Users{
         global $conn;
         $this->m_iUserID = $p_sProperty;
         $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
-        $getProfile = $conn->prepare("select userID, username, password, bio, avatar from users where userID =          :userID");
+        $getProfile = $conn->prepare("select * from users where userID = :userID");
         $getProfile->bindValue(':userID', $this->UserID);
         $getProfile->execute();
         $profileInfo = $getProfile->fetch(PDO::FETCH_ASSOC);
@@ -277,6 +284,7 @@ class Users{
         $this->m_sBio = $profileInfo['bio'];
         $this->m_sUsername = $profileInfo['username'];
         $this->m_sfilePath = $profileInfo['avatar'];
+        $this->m_sPrivacy = $profileInfo['private'];
     }
     
     public function getFollowCount($p_sProperty){
@@ -302,10 +310,28 @@ class Users{
     }
     
     public function followCheck(){
-       $targetUserID = $_SESSION['targetUserID'];
+        global $conn;
+        $targetUserID = $_SESSION['targetUserID'];
         $requestUserID = $_SESSION['userID'];
-        $conn = new PDO('mysql:host=localhost; dbname=imdstagram', 'root', 'root');
         $getFollowInfo = $conn->prepare("select * from follows where requestUserID = :requestUserID and targetUserID =  :targetUserID");
+        $getFollowInfo->bindValue(":requestUserID", $requestUserID);
+        $getFollowInfo->bindValue(":targetUserID", $targetUserID);
+        $getFollowInfo->execute();
+        $count = $getFollowInfo->rowCount();
+        return $count;
+        if($count > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public function privateFollowCheck(){
+        global $conn;
+        $targetUserID = $_SESSION['targetUserID'];
+        $requestUserID = $_SESSION['userID'];
+        $getFollowInfo = $conn->prepare("select * from followrequests where requestUserID = :requestUserID and targetUserID =  :targetUserID");
         $getFollowInfo->bindValue(":requestUserID", $requestUserID);
         $getFollowInfo->bindValue(":targetUserID", $targetUserID);
         $getFollowInfo->execute();

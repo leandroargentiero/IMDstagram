@@ -3,7 +3,7 @@ session_start();
 include_once ("database.inc.php");
 
 // likeImageID
-$likeImageID = $_SESSION['imageID'];
+$likeImageID = $_POST['nieuweLike'];
 // likeSenderID
 $likeSenderID = $_SESSION['userID'];
 
