@@ -167,6 +167,7 @@ else {
             <button class="btnLoadMore">Load More</button>
         
         </div>
+        <a href="upload.php" id="floatingBtn">+</a>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="js/scripts.js"></script>

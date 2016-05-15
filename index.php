@@ -121,7 +121,6 @@
         
     
         <a href="upload.php" id="floatingBtn">+</a>
-    <!--<a href="includes/logout.inc.php">logout</a>-->
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/scripts.js"></script>

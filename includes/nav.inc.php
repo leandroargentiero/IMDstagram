@@ -8,6 +8,6 @@
         </div>
         <a class="headerUsername" href="profile.php"><h2><?php echo $_SESSION['user']; ?></h2>
         </a><span id="notificationIcon"class="glyphicon glyphicon-bell"></span>
-
+         <a href="includes/logout.inc.php">logout</a>
     </div>
 </div>

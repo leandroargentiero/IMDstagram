@@ -100,7 +100,8 @@ body a {
 	align-items: center;
 }
 #notificationIcon{
-	margin-left: -180px;
+    position: relative;
+	margin: -100px;
 }
 .searchBar input {
 	border: 1px solid #dddbd9;
