@@ -212,6 +212,8 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="userID" value="1">
+    <input type="hidden" id="userName" value="kennymng">
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/scripts.js">

@@ -104,23 +104,53 @@ $(document).ready(function(){
             });
         });
 
+    function commentInsert(){
 
+        var t ='';
+
+        t += '<li class="commentFeed-items" id="_1">';
+        t += '<span class="comment-username">Insert User</span>';
+        t += '<span class="comment-text">New Comment</span>';
+        t += '</li>';
+
+        $('.commentFeed-holder').append(t);
+    }
 
    $('#comment-btn-submit').click( function(){
-       var text = $('#commentField').val();
+       var _comment = $('#commentField').val();
+       var _userID = $("#userID").val();
+       var _userName = $("#userName").val();
 
-       if (text.length > 0){
-           console.log(text);
+
+       if (_comment.length > 0 && _userID != null){
+           console.log(_comment + " Username " + _userName + " userID " + _userID);
+
+
+           $.ajax({
+               type: 'POST',
+               url: 'includes/comment_insert.php',
+               data: $(this).serialize(),
+               succes: function(data)
+               {
+                   commentInsert();
+               }
+
+           })
+
+
        }
-       else {
-           console.log("textarea is empty");
-       }
 
 
-       var text = $('#commentField').val("");
+       var _comment = $('#commentField').val("");
        return false;
 
    });
 
 
+
 });
+
+
+
+
+
