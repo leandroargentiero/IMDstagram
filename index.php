@@ -101,7 +101,7 @@
                                         $username = $user->Username;
                                         echo $username;
                                         ?></a>
-                                    <span class="comment-text"><?php echo $comment['commentText'] ?></span>
+                                    <span class="comment-text"><?php echo htmlspecialchars($comment['commentText']); ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
