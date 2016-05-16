@@ -1,6 +1,7 @@
 <?php
     include_once ("includes/no-session.inc.php");
     include_once ("includes/nav.inc.php");
+    include_once ("includes/comment.inc.php");
     include_once ("classes/postDetail.class.php");
     $visible = "";
     $_SESSION['imageID'] = $_GET['imageID'];
@@ -31,6 +32,8 @@
     if ($username['username'] == $_SESSION['username']){
         $visible = "visible";
     }
+
+
 
 ?><!doctype html>
 <html lang="en">
@@ -79,7 +82,7 @@
                     <ul class="commentFeed-holder">
                         <?php $comments = array("a", "b", "c", "d"); ?>
                             <?php foreach( $comments as $key => $comment): ?>
-                            <li class="commentFeed-items" id="_1"><span class="comment-username">kennymng</span><span class="comment-text">je foto is lelijk.</span></li>
+                            <li class="commentFeed-items" id="_1"><span class="comment-username"></span><span class="comment-text"><?php echo $commentText['commentText']; ?></span></li>
                             <?php endforeach; ?>
 
                     </ul>
@@ -99,7 +102,7 @@
         </div>
     </div>
     <input type="hidden" id="userID" value="1">
-    <input type="hidden" id="userName" value="kennymng">
+    <input type="hidden" id="userName" value="<?php $_SESSION['userID'] ?>">
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/scripts.js">

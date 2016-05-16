@@ -180,15 +180,15 @@ $(document).ready(function(){
         var t ='';
 
         t += '<li class="commentFeed-items" id="_1">';
-        t += '<span class="comment-username">Insert User</span>';
-        t += '<span class="comment-text">New Comment</span>';
+        t += '<span class="comment-username"></span>';
+        t += '<span class="comment-text"></span>';
         t += '</li>';
 
         $('.commentFeed-holder').append(t);
     }
 
    $('#comment-btn-submit').click( function(){
-       console.log("comment");
+
        var _comment = $('#commentField').val();
        var _userID = $("#userID").val();
        var _userName = $("#userName").val();
@@ -203,8 +203,9 @@ $(document).ready(function(){
                url: 'includes/comment.inc.php',
                data: {newComment: _comment},
                succes: function(data)
-               {   
-                  
+               {
+
+                   $('.commentFeed-holder').append("<li class='commentFeed-items' id='_1'><span class='comment-username'><?php echo $_SESSION['user']; ?></span><span class='comment-text'><?php $commentText = $_POST['newComment']; ?></span></li>")
                }
                
            });
