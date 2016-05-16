@@ -7,12 +7,12 @@
 
     if(!empty($_POST)){
         if(isset($_POST['update'])){
-            $editEmail = $_POST['editEmail'];
-            $editUsername = $_POST['editUsername'];
-            $editBio = $_POST['editBio'];
-            $_SESSION['bio'] = $_POST['editBio'];
-            $newPassword = $_POST['newPassword'];
-            $confirmNewPassword = $_POST['confirmNewPassword'];
+            $editEmail = strip_tags($_POST['editEmail']);
+            $editUsername = strip_tags($_POST['editUsername']);
+            $editBio = strip_tags($_POST['editBio']);
+            $_SESSION['bio'] = strip_tags($_POST['editBio']);
+            $newPassword = strip_tags($_POST['newPassword']);
+            $confirmNewPassword = strip_tags($_POST['confirmNewPassword']);
 
             if(strlen(trim($editEmail)) != 0 or strlen(trim($editUsername)) != 0 or strlen(trim($editBio)) != 0)
             {
