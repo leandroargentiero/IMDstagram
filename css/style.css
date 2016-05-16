@@ -662,15 +662,17 @@ select{
 .commentFeed ul {
 	padding: 10px 10px 10px 0;
 }
-.commentFeed ul li{
-	font-family: 'instaRegular', 'sans-serif';
+.commentFeed ul li a{
+	font-family: 'instaBold', 'sans-serif';
 	font-size: .8em;
-	color: black;
 	margin: 0 0 5px 0;
+	color: #30618B;
 }
 .commentFeed ul li span{
-	font-family: 'instaBold', 'sans-serif';
+	font-family: 'instaRegular', sans-serif;
 	color: #30618B;
+	font-size: .8em;
+	color: black;
 }
 .avatar{
 	object-fit: cover;
@@ -722,7 +724,7 @@ select{
 #heart{
 	margin: 10px 0 0 0;
 }
-#commentField{
+.commentField{
 	width: 300px;
 	margin: 10px 0 0 0;
 	font-size: .8em;

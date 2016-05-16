@@ -2,6 +2,7 @@
     include_once('includes/no-session.inc.php');
     include_once('classes/feed.class.php');
     include_once('classes/postDetail.class.php');
+    include_once ('classes/users.class.php');
 
     $userID = $_SESSION['userID'];
     $feed = new Feed();
@@ -14,14 +15,16 @@
     <title>Imdstagram</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css">
+    <link rel="stylesheet" href="css/cssgram.min.css">
 </head>
 <body>
 
     <?php include_once("includes/nav.inc.php"); ?>
 
     <div class="indexFeed">
+            <?php $i = 0 ?>
             <?php foreach($feed->Results as $post): ?>
+                <?php $i++ ?>
                 <div class="feedNav">
                     <a href="profile.php?userID=<?php echo $post['imageUserID']; ?>">
                         <img class="feedNavPic" src="<?php
@@ -31,7 +34,7 @@
                         ?>" alt="">
                     </a>
                     <a href="profile.php?userID=<?php echo $post['imageUserID']; ?>" class="feedNavUsername">
-                        <h2>
+                        <h2 class="name">
                             <?php
                                 $username = new postDetail();
                                 $username = $username->getUsername($post['imageID']);
@@ -73,17 +76,34 @@
                                 }
                             ?>
                         </p>
-                        <ul class="description">
-                            <li>
-                                <a href="profile.php?userID=<?php echo $post['imageUserID']; ?>"><?php echo $username['username']; ?></a>
-                                <span>
-                                    <?php
-                                        $description = new postDetail();
-                                        $imageDescription = $description->getDescription($post['imageID']);
-                                        echo $imageDescription['description'];
-                                    ?>
-                                </span>
+                        <ul class="commentsList<?php echo $i; ?>">
+                            <?php
+                                $singlePost = new postDetail();
+                                $username = $singlePost->getUsername($post['imageID']);
+                                $description = $singlePost->getDescription($post['imageID']);
+                                $comments = $singlePost->getComments($post['imageID']);
+                            ?>
+                            <input type="hidden" class="imageID<?php echo $i; ?>" value="<?php echo $post['imageID']; ?>">
+                            <input type="hidden" class="userID<?php echo $i; ?>" value="<?php echo $post['imageUserID']; ?>">
+
+                            <li><a href="profile.php?userID=<?php echo $comment['commentUserID']; ?>">
+                                    <?php echo $username['username']; ?>
+                                </a>
+                                <span class="comment-text"><?php echo $description['description']; ?></span>
                             </li>
+
+                            <?php foreach( $comments as $comment): ?>
+                                <li>
+                                    <a href="profile.php?userID=<?php echo $comment['commentUserID']; ?>">
+                                        <?php
+                                        $user = new Users();
+                                        $user->getProfile($comment['commentUserID']);
+                                        $username = $user->Username;
+                                        echo $username;
+                                        ?></a>
+                                    <span class="comment-text"><?php echo $comment['commentText'] ?></span>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                         </h1>
                     </div>
@@ -108,7 +128,9 @@
                         <form class="feedFooterBottomForm" action="" method="post">
                             <img class="likeHeart <?php echo $class; ?>" src="<?php echo $source; ?>" alt="like"
                                  value="<?php echo $post['imageID'] ?>">
-                            <input id="commentField" type="text" name="commentField" placeholder="Add a comment...">
+                            <input class="commentField commentField<?php echo $i; ?>" type="text" name="commentField" placeholder="Add a comment...">
+                            <input class="comment-btn-submit" type="submit" value="<?php echo $i; ?>"
+                            style="position: absolute; left: -9999px"/>
                         </form>
                     </div>
                 </div>
