@@ -115,7 +115,7 @@
         </div>
     </div>
     <input type="hidden" class="imageID<?php echo $i; ?>" value="<?php echo $_GET['imageID'].$i; ?>">
-    <input type="hidden" class="userID<?php echo $i; ?>" value="<?php echo $userID['imageUserID'].$i; ?>">
+    <input type="hidden" class="userID" value="<?php echo $_SESSION['userID']; ?>">
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 <script src="js/scripts.js">

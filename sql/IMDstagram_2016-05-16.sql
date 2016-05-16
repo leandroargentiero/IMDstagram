@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.42)
 # Database: IMDstagram
-# Generation Time: 2016-05-16 16:22:07 +0000
+# Generation Time: 2016-05-16 16:26:35 +0000
 # ************************************************************
 
 
@@ -45,13 +45,15 @@ INSERT INTO `comments` (`commentID`, `commentUserID`, `commentImageID`, `comment
 VALUES
 	(7,1,25,'2016-05-16 16:12:44','This one\'s my favourite! '),
 	(13,1,20,'2016-05-16 16:41:25','Forza Pouvri\n'),
-	(44,2,15,'2016-05-16 18:15:13','The crow is feeling the vibe!'),
-	(45,2,14,'2016-05-16 18:15:20','I like this one'),
-	(46,2,13,'2016-05-16 18:15:35','Congrats'),
-	(47,2,12,'2016-05-16 18:15:43','Hi there'),
-	(48,2,11,'2016-05-16 18:16:46','Sun\'s out, guns out.'),
-	(49,2,6,'2016-05-16 18:17:26','In tweede dan toch'),
-	(50,2,8,'2016-05-16 18:17:46','W O O D S');
+	(44,1,15,'2016-05-16 18:25:54','The crow is feeling the vibe!'),
+	(45,1,14,'2016-05-16 18:25:58','I like this one'),
+	(46,1,13,'2016-05-16 18:26:01','Congrats'),
+	(47,1,12,'2016-05-16 18:26:17','Hi there'),
+	(48,1,11,'2016-05-16 18:26:10','Sun\'s out, guns out.'),
+	(49,1,6,'2016-05-16 18:26:12','In tweede dan toch'),
+	(50,1,8,'2016-05-16 18:26:14','W O O D S'),
+	(51,1,10,'2016-05-16 18:26:16','jeje'),
+	(52,1,9,'2016-05-16 18:25:47','yess');
 
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
