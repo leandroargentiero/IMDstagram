@@ -84,7 +84,7 @@
                                 $comments = $singlePost->getComments($post['imageID']);
                             ?>
                             <input type="hidden" class="imageID<?php echo $i; ?>" value="<?php echo $post['imageID']; ?>">
-                            <input type="hidden" class="userID<?php echo $i; ?>" value="<?php echo $post['imageUserID']; ?>">
+                            <input type="hidden" class="userID" value="<?php echo $_SESSION['userID']; ?>">
 
                             <li><a href="profile.php?userID=<?php echo $comment['commentUserID']; ?>">
                                     <?php echo $username['username']; ?>
