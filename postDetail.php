@@ -58,7 +58,7 @@
                 <div class="innerRightHeader">
 
                     <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><img class="avatarPostDetail" src="<?php echo $avatar['avatar']; ?>" alt=""></a>
-                    <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><p class="name<?php echo $i ?>"><?php echo $username['username']; ?></p></a>
+                    <a href="profile.php?userID=<?php echo $userID['imageUserID']; ?>"><p class="name<?php echo $i ?> namePostDetail"><?php echo $username['username']; ?></p></a>
                     </ul>
                 </div>
                 <div class="innerRightSecondHeader">

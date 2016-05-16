@@ -666,7 +666,7 @@ select{
 	font-family: 'instaBold', 'sans-serif';
 	font-size: .8em;
 	margin: 0 0 5px 0;
-	color: #30618B;
+	color: #262626;
 }
 .commentFeed ul li span{
 	font-family: 'instaRegular', sans-serif;
@@ -694,10 +694,17 @@ select{
 }
 .name{
 	font-family: 'instaBold', 'sans-serif';
-	font-size: .9em;
+	font-size: 1em;
+	display: inline-block;
+	margin: 5px 0 0 5px;
+	color: #262626;
+}
+.namePostDetail{
+	font-family: 'instaBold', 'sans-serif';
+	font-size: 1em;
 	display: inline-block;
 	margin: 9px 0 0 20px;
-	color: #30618B;
+	color: #262626;
 }
 .innerRightSecondHeader{
 	display: flex;
@@ -711,7 +718,7 @@ select{
 }
 .timestamp{
 	font-size: .9em;
-	color: #7B7A7C;
+	color: #999999;
 }
 .commentFeed {
 	overflow-y: scroll;
