@@ -24,14 +24,6 @@ include_once ("database.inc.php");
 
 
 
-/*
-  Normaal gezien komt uw comment nu in de databank terecht.
-  Wat gij nu nog gaat moeten uitdokteren:
-  -comment appenden in die list met de juiste username, dus zodat dat vanaf eender welke account lukt
-  (ge kunt dat bv doen door uw $_SESSION['userID'] als value ergens in uw pagina te zetten.
-  Dan kunt ge via jquery die value oproepen voor uwe append
- *
- */
     
 
 ?>
