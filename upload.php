@@ -42,7 +42,8 @@ else
     </head>
 
     <body>
-        <div class="container">
+
+    <div class="container">
             <div class="header">
                 <a href="index.php"><img class="logo" src="images/logo.png" alt="logo instagram"></a>
             </div>

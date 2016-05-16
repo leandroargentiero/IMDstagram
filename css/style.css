@@ -92,8 +92,11 @@ body a {
 .headerProfile a {
 	color: #262626;
 }
+.headerLogout{
+	margin-right: 20px;
+}
 .headerContent{
-	width: 78%;
+	width: 80%;
 	margin-left: auto;
 	margin-right: auto;
 	display: flex;
@@ -103,7 +106,7 @@ body a {
 }
 #notificationIcon{
     position: relative;
-	margin: -100px;
+	margin-right: -170px;
 }
 
 .searchBar input {
@@ -112,6 +115,7 @@ body a {
 	width: 200px;
 	background-color: #FAFAFA;
 	padding: 8px;
+	margin-left: 50px;
 }
 #txtSearch::-webkit-input-placeholder{
 	padding-left: 0;
@@ -273,6 +277,7 @@ body a {
 	width: 600px;
 	background-color: #FFFFFF;
 	border: 1px solid #EDEEEE;
+	border-bottom: none;
 }
 .feedNavPic{
 	height: 40px;
@@ -289,9 +294,9 @@ body a {
 	font-family: 'instaRegular', 'sans-serif';
 	margin-left: auto;
 	margin-right: 10px;
-	margin-top: -2px;
+	margin-top: 3px;
 	font-size: .8em;
-	color: #A5A9BF;
+	color: #999999;
 }
 
 .indexFeed {
@@ -311,7 +316,7 @@ body a {
     margin: 0 0 0 0;
 	border: 1px solid #EDEEEE;
 	overflow: hidden;
-	margin: 3px 0 0 0;
+	margin: 0px 0 0 0;
 }
 .feedPic img {
     width: 100%;
@@ -321,7 +326,7 @@ body a {
 	height: 100%;
 	width: 600px;
 	border: 1px solid #EDEEEE;
-	margin: 1px 0 50px 0;
+	margin: 5px 0 50px 0;
 	background-color: white;
 }
 .feedFooterTop{
@@ -336,12 +341,15 @@ body a {
 .feedFooterTop ul li{
 	margin: 10px 0 0 0;
 	font-size: .8em;
-	color: #30618B;
+	color: #262626;
 	font-family: 'instaBold', 'sans-serif';
 }
 .feedFooterTop ul li span{
 	color: #000000;
 	font-family: 'instaRegular', 'sans-serif';
+}
+.feedFooterTop a{
+	color: #262626;
 }
 .feedFooterBottom{
 	width: 530px;
