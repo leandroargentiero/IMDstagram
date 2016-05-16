@@ -179,7 +179,8 @@ $(document).ready(function(){
         var _postID = $(this).val();
         var _comment = $(".commentField"+_postID).val();
         var _userID = $(".userID").val();
-        var _userName = $(".name").html();
+        var _userName = $(".username").val();
+        console.log(_userName);
         var _imageID = $(".imageID"+_postID).val();
 
         if (_comment.length > 0 && _userID != null){

@@ -89,9 +89,13 @@
                             ?>
                             <input type="hidden" class="imageID<?php echo $i; ?>" value="<?php echo $post['imageID']; ?>">
                             <input type="hidden" class="userID" value="<?php echo $_SESSION['userID']; ?>">
+                            <input type="hidden" class="username" value="<?php echo $_SESSION['username']; ?>">
 
                             <li><a href="profile.php?userID=<?php echo $comment['commentUserID']; ?>">
-                                    <?php echo $username['username']; ?>
+                                    <?php $user = new Users();
+                                    $user->getProfile($comment['commentUserID']);
+                                    $username = $user->Username;
+                                    echo $username; ?>
                                 </a>
                                 <span class="comment-text"><?php echo $description['description']; ?></span>
                             </li>
