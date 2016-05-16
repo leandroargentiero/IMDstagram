@@ -351,6 +351,21 @@ body a {
 .feedFooterTop a{
 	color: #262626;
 }
+.feedLocation{
+	height: 30px;
+	display: flex;
+	align-items: baseline;
+}
+.feedLocation h2{
+	font-family: 'instaLight', 'sans-serif';
+	font-size: .8em;
+	margin-left: 5px;
+	color: #262626;
+}
+.location-ping{
+	width: 3%;
+	height: 75%;
+}
 .feedFooterBottom{
 	width: 530px;
 	margin: 0 auto 0 auto;

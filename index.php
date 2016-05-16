@@ -59,6 +59,10 @@
                 </div>
                 <div class="feedFooter">
                     <div class="feedFooterTop">
+                        <div class="feedLocation">
+                            <img class="location-ping"src="images/location-pin.png" alt="">
+                            <h2><?php echo $post['location']; ?></h2>
+                        </div>
                         <p>
                             <?php
                                 $likeCounter = new postDetail();
