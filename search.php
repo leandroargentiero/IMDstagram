@@ -8,8 +8,11 @@ include_once('classes/postDetail.class.php');
         $results = array();
         $statement = $conn->prepare("SELECT *
                       FROM posts
-                      WHERE :keywords
-                      IN (location or description)
+                      WHERE description
+                      LIKE :keywords
+                      OR
+                      location
+                      LIKE :keywords
                       ORDER BY timestamp DESC");
         $statement->bindValue(':keywords', '%' . $searchKeyword . '%');
         $statement->execute();
