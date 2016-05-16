@@ -1,15 +1,14 @@
 <?php
-
-
+if(!isset($_SESSION)){session_start();}
 include_once ("database.inc.php");
-
-
-    
     //userID
+    $commentUserID = $_POST['userID'];
     //commentID
-    $commentUserID = $_SESSION['userID'];
-    $commentImageID = $_SESSION['imageID'];
-    $commentText = $_POST['newComment'];
+    $commentImageID = $_POST['imageID'];
+    //newComment
+    if(isset($_POST['newComment'])){
+        $commentText = $_POST['newComment'];
+    }
 
     if(!empty($commentText)) {
         $statement = $conn->prepare("INSERT INTO comments (commentUserID, commentImageID, commentText)
@@ -18,12 +17,5 @@ include_once ("database.inc.php");
         $statement->bindValue(':commentImageID', $commentImageID);
         $statement->bindValue(':commentText', $commentText);
         $statement->execute();
-
     }
-
-
-
-
-    
-
 ?>
