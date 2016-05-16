@@ -89,7 +89,9 @@ body a {
 	width: 100px;
 	height: auto;
 }
-
+.headerProfile a {
+	color: #262626;
+}
 .headerContent{
 	width: 78%;
 	margin-left: auto;
@@ -103,6 +105,7 @@ body a {
     position: relative;
 	margin: -100px;
 }
+
 .searchBar input {
 	border: 1px solid #dddbd9;
 	border-radius: 30px;
@@ -120,6 +123,7 @@ body a {
 }
 .headerUsername{
 	font-size: 1.3em;
+	color: #262626;
 }
 .profileInfo {
 	width: 50%;
@@ -503,7 +507,7 @@ input[type="file"]{
     padding-top: 20px;
     line-height: 0px;
     font-size: 1.6em;
-    background-color: #2065a2;
+    background-color: #262626;
     width: 45px;
     height: 45px;
     border: 0px;
@@ -837,6 +841,7 @@ select{
 .searchKeywords{
 	margin: 0px 0px 10px 0;
 	font-size: 1.5em;
+	color: #262626;
 }
 .countPosts{
 	margin: 0px 0px 20px 0;
