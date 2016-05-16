@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4529
+# Version 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.42)
-# Database: IMDstagram
-# Generation Time: 2016-05-16 16:22:07 +0000
+# Database: imdstagram
+# Generation Time: 2016-05-16 21:07:04 +0000
 # ************************************************************
 
 
@@ -50,10 +50,44 @@ VALUES
 	(46,2,13,'2016-05-16 18:15:35','Congrats'),
 	(47,2,12,'2016-05-16 18:15:43','Hi there'),
 	(48,2,11,'2016-05-16 18:16:46','Sun\'s out, guns out.'),
-	(49,2,6,'2016-05-16 18:17:26','In tweede dan toch'),
-	(50,2,8,'2016-05-16 18:17:46','W O O D S');
+	(49,1,6,'2016-05-16 22:37:57','In tweede dan toch'),
+	(50,2,8,'2016-05-16 18:17:46','W O O D S'),
+	(51,2,21,'2016-05-16 22:40:19','Nice symmetry!'),
+	(58,2,25,'2016-05-16 23:06:02','I agree, lovely shot.'),
+	(59,2,17,'2016-05-16 23:06:13','Where is this?'),
+	(60,2,6,'2016-05-16 23:06:30','Zwijgt.');
 
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table followrequests
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `followrequests`;
+
+CREATE TABLE `followrequests` (
+  `followID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `requestUserID` int(11) NOT NULL,
+  `targetUserID` int(11) NOT NULL,
+  PRIMARY KEY (`followID`),
+  KEY `requestUserID` (`requestUserID`),
+  KEY `targetUserID` (`targetUserID`),
+  CONSTRAINT `followrequests_ibfk_1` FOREIGN KEY (`requestUserID`) REFERENCES `users` (`userID`),
+  CONSTRAINT `followrequests_ibfk_2` FOREIGN KEY (`targetUserID`) REFERENCES `users` (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `followrequests` WRITE;
+/*!40000 ALTER TABLE `followrequests` DISABLE KEYS */;
+
+INSERT INTO `followrequests` (`followID`, `requestUserID`, `targetUserID`)
+VALUES
+	(5,2,3),
+	(21,3,2),
+	(24,1,2),
+	(25,2,1);
+
+/*!40000 ALTER TABLE `followrequests` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -82,7 +116,8 @@ VALUES
 	(7,2,2,0),
 	(8,2,3,0),
 	(10,1,1,0),
-	(141,1,2,0);
+	(141,1,2,0),
+	(142,2,1,0);
 
 /*!40000 ALTER TABLE `follows` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -216,7 +251,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`userID`, `email`, `fullname`, `username`, `password`, `private`, `bio`, `avatar`)
 VALUES
-	(1,'argentiero.leo@mail.com','Leandro Argentiero','Leandro','$2y$12$B1YDtwZvRgX/eQmKyRMM3Om1tnzntioxHamb9UOPrU03jhknPYZBy','yes','Kidnapping moments','files/1_avatar.jpg'),
+	(1,'argentiero.leo@mail.com','Leandro Argentiero','Leandro','$2y$12$B1YDtwZvRgX/eQmKyRMM3Om1tnzntioxHamb9UOPrU03jhknPYZBy','no','Kidnapping moments','files/1_avatar.jpg'),
 	(2,'diederik127@hotmail.com','Diederik Craps','Diederik','$2y$12$Jf8r7Y1sIXiUHCkJK5jn7uUQml6szHvtE8FeKYnCjupfKtC77oLmG','no','Ik ben Diederik, hoe gaat het met jou?','files/2_avatar.jpg'),
 	(3,'hallo@thomas.be','Thomas Janssens','Tommie','$2y$12$YT1LdXxWMnp8Xf6EiuQ5ieaYArJcFcE6JsUkrdrbMlEUPeXBjCq8a','no',' ',NULL);
 
