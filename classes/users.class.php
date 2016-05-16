@@ -237,8 +237,8 @@ class Users{
         // Tijdelijke locatie van de upload opvragen
         $filename = $_FILES["file"]["tmp_name"];
         // checken of het wel degelijk een afbeelding is.
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        $fileinfo = $finfo->file($filename);
+        //$finfo = new finfo(FILEINFO_MIME_TYPE);
+        //$fileinfo = $finfo->file($filename);
         // nieuwe locatie en filename aanmaken
         // files/userID_timestamp.jpg
         $m_sfilePath = "files/" . $_SESSION['userID'] . "_avatar.jpg";

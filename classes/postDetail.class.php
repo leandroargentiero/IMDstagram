@@ -185,4 +185,15 @@ class postDetail{
 
         return $description;
     }
+
+    public function getComments($p_sProperty){
+        global $conn;
+        $this->m_iImageID = $p_sProperty;
+        $getComments = $conn->prepare("SELECT * from comments where commentImageID = :imageID");
+        $getComments->bindValue(':imageID', $this->m_iImageID);
+        $getComments->execute();
+        $comments = $getComments->fetchAll();
+        return $comments;
+        $this->m_oComments = $comments;
+    }
 }
