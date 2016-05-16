@@ -107,6 +107,7 @@ else {
     <title>Imdstagram</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cssgram.min.css">
 </head>
 <body>
 
@@ -137,11 +138,13 @@ else {
 
         <div class="profileFeed">
 
-               <span class="privacyMessage"><?php echo $privacyMessage; ?></span>
+               <span class="privacyMessage"><?php if(isset($privacyMessage)){echo $privacyMessage;} ?></span>
                 <?php foreach($feed->Results as $post): ?>
                     <a href="postDetail.php?imageID=<?php echo $post['imageID']; ?>">
                         <div class="feedBox">
-                            <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                            <figure class="<?php echo $post['filter']; ?>">
+                                <img src="<?php echo $post['fileLocation']; ?>" alt="">
+                            </figure>
                             <div class="overlay">
                                 <div class="likes">
                                     <img class="overlay-icon"src="images/white_heart.png" alt="">

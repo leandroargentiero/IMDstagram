@@ -35,40 +35,8 @@ include_once('classes/postDetail.class.php');
     <title>Imdstagram</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cssgram.min.css">
 </head>
-<style>
-    .feedback{
-        font-family: 'instaRegular', 'sans-serif';
-        text-align: center;
-    }
-    .errorMessage{
-        color: #FE3554;
-        margin: 20px 0 20px 0;
-    }
-    .searchKeywords{
-        margin: 0px 0px 10px 0;
-        font-size: 1.5em;
-    }
-    .countPosts{
-        margin: 0px 0px 20px 0;
-    }
-    span{
-        font-family: 'instaBold', 'sans-serif';
-    }
-    .posts {
-        object-fit: cover;
-        height: 300px;
-        width: 300px;
-        margin: 20px;
-    }
-    .searchResults{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 80%;
-        margin: 0 auto 0 auto;
-    }
-</style>
 <body>
 
 <?php include_once("includes/nav.inc.php"); ?>
@@ -82,7 +50,9 @@ include_once('classes/postDetail.class.php');
         <?php foreach($results as $result): ?>
             <a href="postDetail.php?imageID=<?php echo $result['imageID']; ?>">
                 <div class="feedBox">
-                    <img src="<?php echo $result['fileLocation']; ?>" alt="">
+                    <figure class="<?php echo $result['filter']; ?>">
+                        <img src="<?php echo $result['fileLocation']; ?>" alt="">
+                    </figure>
                      <div class="overlay">
                         <div class="likes">
                             <img class="overlay-icon"src="images/white_heart.png" alt="">
