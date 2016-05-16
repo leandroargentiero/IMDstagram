@@ -140,6 +140,20 @@ class postDetail{
         return $result;
     }
 
+    public function countComments($p_sProperty){
+        global $conn;
+        $this->m_iImageID = $p_sProperty;
+        $countComments = $conn->prepare("SELECT commentImageID
+                                     FROM comments
+                                     WHERE commentImageID = :likeImageID");
+        $countComments->bindValue(":likeImageID", $this->m_iImageID);
+        $countComments->execute();
+
+        $result = $countComments->rowCount();
+
+        return $result;
+    }
+
     public function likeCheck($p_sProperty){
         global $conn;
         $this->m_iImageID = $p_sProperty;

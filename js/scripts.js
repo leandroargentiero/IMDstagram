@@ -208,7 +208,6 @@ $(document).ready(function(){
 
     $('.likeHeart').on('click', function(){
         console.log('clicked');
-
         var imageID = $(this).attr("value");
 
         if($(this).is('.btnLike')){

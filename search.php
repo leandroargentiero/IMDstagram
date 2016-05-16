@@ -66,7 +66,13 @@ include_once('classes/postDetail.class.php');
                         </div>
                         <div class="comments">
                             <img class="overlay-icon" src="images/comments.png" alt="">
-                            <p>0</p>
+                            <p>
+                                <?php
+                                    $comments = new postDetail();
+                                    $commentCount = $comments->countComments($result['imageID']);
+                                    echo $commentCount;
+                                ?>
+                            </p>
                         </div>
                      </div>
                 </div>

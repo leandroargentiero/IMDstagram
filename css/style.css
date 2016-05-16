@@ -390,11 +390,11 @@ body a {
     margin-left: auto;
     margin-right: auto;
     border-radius: 100%;
-    border: 1px solid #30618B;
+    border: 1px solid #262626;
     text-transform: uppercase;
     font-family: 'instaRegular';
     background-color: #fbf9f7;
-    color: #30618B;
+    color: #262626;
 }
 .btnLoadMore:hover {
     cursor: pointer;
