@@ -91,7 +91,7 @@
                             <input type="hidden" class="userID" value="<?php echo $_SESSION['userID']; ?>">
                             <input type="hidden" class="username" value="<?php echo $_SESSION['username']; ?>">
 
-                            <li><a href="profile.php?userID=<?php echo $comment['commentUserID']; ?>">
+                            <li><a href="profile.php?userID=<?php echo $post['imageUserID']; ?>">
                                     <?php echo $username['username']; ?>
                                 </a>
                                 <span class="comment-text"><?php echo $description['description']; ?></span>
