@@ -1,2 +1,3 @@
-# php1-project-imdstagram
-Project 'IMDstagram' voor het vak PHP1.
+# PHP Instagram CLONE - IMDstagram
+
+Webapp 'IMDstagram' for the course PHP1.
